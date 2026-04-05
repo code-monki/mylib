@@ -3,9 +3,34 @@
 Timestamped summaries of **discussions**, **decisions**, and **technology choices** (or explicit **deferrals**).  
 **Newest entries first.** Append new blocks after updating the “Last updated” line below.
 
-**Last updated:** 2026-04-05 19:46 UTC  
+**Last updated:** 2026-04-05 20:49 UTC  
 
 **Not legal advice** where legal topics appear; see `docs/open-source-license.md`.
+
+---
+
+## 2026-04-05 20:49 UTC — Client–server shape, DRM EPUB keywords, accessibility, ops
+
+**Summary:** Captured follow-on Ideation decisions from working session: solo vs multi-user clarified as **one product shape** (server-authoritative security); format and network deferrals tightened.
+
+**Decisions / artifacts**
+
+- **Topology:** MyLib is **client–server**. **Authentication** (and RBAC enforcement for remote use) lives on the **server**; **desktop/solo** = server **co-located** on the same machine (e.g. loopback), not reliance on **UI-only** admin hiding.
+- **Auth v1:** **Local accounts**; directory/SSO etc. deferred unless reprioritized.
+- **DRM-protected EPUB:** no full-text index without lawful content access; **user-associated keyword lists** (**separate from tags**) for discoverability when indexing is blocked.
+- **Duplicates:** **SHA-256** (or equivalent) **content digest** from the outset; merge/dedup policy details → Requirements.
+- **Accessibility:** **WCAG 2.1 Level AA** target for **shell UI** where achievable.
+- **Network:** **Minimize outbound** by default; **version / update notification** desired—**final mechanism** (privacy, opt-in, endpoints) → **Requirements / HLA**.
+- **Hosting:** Maintainer **does not** plan to operate **SaaS**; **support via GitHub**; others may self-host/fork. **Exposing** the server (e.g. **open port**) = **operator** responsibility.
+- **Formats (phasing intent):** **PDF and DOCX** likely before **full EPUB** depth; EPUB = ZIP/HTML indexing when no DRM.
+
+**Technology**
+
+- **Stack** (Electron vs Qt, etc.) still **undecided**; **client–server** accepted as **logical** architecture only.
+
+**Documentation**
+
+- Updated `docs/concept.md`, `docs/project-primer.md` (version **0.2**).
 
 ---
 
