@@ -14,7 +14,7 @@ They SHALL NOT encode architecture or implementation.
 # Software Requirements Specification (SRS)
 
 Project Name: MyLib  
-Version: 0.1 (initial draft)  
+Version: 0.2  
 Date (YYYY-MM-DD): 2026-04-06  
 Author(s): Charles McKnight (draft; maintainers may revise)  
 Status: Draft  
@@ -80,18 +80,18 @@ Stakeholders managing **large, heterogeneous** electronic document collections (
 
 ## 3.2 Definitions and Terminology
 
-| Term | Definition |
-|------|-------------|
-| **Catalog record** | The logical library entry for a document **edition**, including metadata, tags, paths or storage references, and index state. |
-| **Content digest** | A cryptographic hash (e.g. **SHA-256**) computed over document **bytes** used to detect duplicates. |
-| **Full-text index** | Derived searchable text and index structures produced from document content where lawful and technically feasible. |
-| **Keyword list** | User-supplied search terms associated with a catalog record **separate from tags**, used when a **full-text index** cannot be built without circumventing protection measures. |
-| **Library server** | The component that **authoritatively** enforces authentication, authorization, and library operations. |
-| **Shell UI** | MyLib’s own **application** user interface (not the native reader’s UI). |
-| **Native reader** | An **external** application used to **display** or **print** a document file (e.g. OS-default PDF viewer). |
-| **Operator** | A person who **deploys** and **configures** the system (may coincide with an **Administrator** user). |
-| **OCR pipeline** | Processing that derives searchable text from **image-like** or scanned page content; output quality is **variable** by input. |
-| **Tenant boundary** | The set of users and resources belonging to one **organization or household** as configured by an administrator. |
+| Term                | Definition                                                                                                                                                                     |
+| ------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Catalog record**  | The logical library entry for a document **edition**, including metadata, tags, paths or storage references, and index state.                                                  |
+| **Content digest**  | A cryptographic hash (e.g. **SHA-256**) computed over document **bytes** used to detect duplicates.                                                                            |
+| **Full-text index** | Derived searchable text and index structures produced from document content where lawful and technically feasible.                                                             |
+| **Keyword list**    | User-supplied search terms associated with a catalog record **separate from tags**, used when a **full-text index** cannot be built without circumventing protection measures. |
+| **Library server**  | The component that **authoritatively** enforces authentication, authorization, and library operations.                                                                         |
+| **Shell UI**        | MyLib’s own **application** user interface (not the native reader’s UI).                                                                                                       |
+| **Native reader**   | An **external** application used to **display** or **print** a document file (e.g. OS-default PDF viewer).                                                                     |
+| **Operator**        | A person who **deploys** and **configures** the system (may coincide with an **Administrator** user).                                                                          |
+| **OCR pipeline**    | Processing that derives searchable text from **image-like** or scanned page content; output quality is **variable** by input.                                                  |
+| **Tenant boundary** | The set of users and resources belonging to one **organization or household** as configured by an administrator.                                                               |
 
 ---
 
@@ -335,14 +335,53 @@ Stakeholders managing **large, heterogeneous** electronic document collections (
 
 ## FR-018 — Open in native reader
 
-**Description:** The system SHALL provide a **documented** means to **open** the **underlying file** (or a **server-mediated** equivalent that preserves access policy) in the **OS-appropriate native reader** for the file type, for **supported** formats.
+**Description:** The system SHALL provide a **documented** means to **open** the **underlying file** (or a **server-mediated** equivalent that preserves access policy) in the **OS-appropriate native reader** for the file type, for **supported** formats. When the user has set a **preferred reader** per FR-028, **open** SHALL honor that preference **where** the platform and security policy **allow** launching the designated application; otherwise **open** SHALL **fall back** to **documented** default behavior (e.g. **OS-registered default handler**).
 
-**Acceptance criteria:** On each supported desktop OS, user can open from MyLib and **observe** the file in an external reader; if policy **denies** access, open **fails** with **clear** reason.
+**Acceptance criteria:** On each supported desktop OS, user can open from MyLib and **observe** the file in an external reader; if policy **denies** access, open **fails** with **clear** reason. With a **valid** preferred reader configured for that type, **open** uses that reader **unless** fallback is **documented** and **explained** (e.g. missing executable).
 
 **Priority:** High  
-**Dependencies:** FR-016  
+**Dependencies:** FR-016, FR-028  
 **Constraints:** **Hand-off of search term** to reader **deferred** / optional (waiting room).  
-**Notes:** **Bytes may reach client** as part of open—**policy honesty** in operator docs (NFR).
+**Notes:** **Bytes may reach client** as part of open—**policy honesty** in operator docs (NFR). Reader choice is **client-side** preference (FR-027); **authorization** remains **server-side** (FR-012).
+
+---
+
+## FR-027 — Settings (client preferences)
+
+**Description:** The **shell UI** SHALL provide a **Settings** (or equivalently named) area where an authenticated user can **view and change client-side preferences** that **do not** substitute for or **weaken** **server-enforced** access control (FR-012, FR-016). The Settings area SHALL include at minimum the capabilities in **FR-028** and **FR-029** and SHALL be **extensible** so that **additional** **client-side** or **documented system-level** options may be added in later releases **without** a new top-level navigation paradigm.
+
+**Acceptance criteria:** User can open Settings from the shell, change a preference, **restart** the application (if required by HLA), and **observe** the change **persisted** on the **same client installation**; **forbidden** operations remain **blocked** by the server regardless of client UI state.
+
+**Priority:** High  
+**Dependencies:** FR-015  
+**Constraints:** **Server-side** administrative options (e.g. log retention FR-024) **MAY** appear in Settings **only** for users with **appropriate** roles **and** **SHALL** remain **enforced** on the server.  
+**Notes:** Exact layout (tabs vs sidebar) **TBD** DD. **Further** system-level knobs **TBD**; this FR establishes the **facility**.
+
+---
+
+## FR-028 — Preferred reader per document type
+
+**Description:** For each **document type** the product **supports for open-in-reader** in v1 (at minimum those in FR-005: **PDF** and **DOCX**), Settings (FR-027) SHALL allow the user to specify a **preferred external application** used when invoking **FR-018**, **or** to select **use platform default** / **automatic** (exact labels **TBD** UX). The mechanism **SHALL** be **documented** (e.g. **path to executable**, **OS app picker**, or **registered handler id**) **per platform** in DD **without** mandating a specific OS API herein.
+
+**Acceptance criteria:** For each v1 type, user can set **preferred**, **clear** the choice to **default**, and **open** (FR-018) reflects the choice **on a supported configuration**; invalid or missing targets produce **actionable** error **without** crashing the client.
+
+**Priority:** High  
+**Dependencies:** FR-005, FR-018, FR-027  
+**Constraints:** Some environments **MAY** only support **default handler**; product **SHALL** document **limitations**.  
+**Notes:** **EPUB** and future types **SHALL** gain the same **preference** row when those types become **supported**.
+
+---
+
+## FR-029 — Application theme
+
+**Description:** Settings (FR-027) SHALL allow the user to select a **visual theme** for the **shell UI**, including at minimum **light** and **dark** appearances. Where the **desktop platform** exposes a **system** light/dark mode, the product **SHOULD** offer a **match system** option (or equivalent).
+
+**Acceptance criteria:** User can switch themes and **observe** **shell** chrome and **documented** controls **update** accordingly; choice **persists** across restarts on the **same client** (FR-027). **Shipped** **light** and **dark** themes **SHALL** satisfy **contrast** expectations for the **shell** **per** NFR-006.
+
+**Priority:** Medium  
+**Dependencies:** FR-027  
+**Constraints:** **Native reader** appearance **out of scope**.  
+**Notes:** Custom **user-authored** themes or **third-party** theme packs **deferred** (waiting room).
 
 ---
 
@@ -363,7 +402,7 @@ Stakeholders managing **large, heterogeneous** electronic document collections (
 
 **Description:** The **shell UI** SHALL meet **WCAG 2.1 Level AA** success criteria **where applicable** to the technology stack chosen in HLA (non-web shells map to **equivalent** documented checkpoints).
 
-**Acceptance criteria:** Documented **accessibility test plan** executed; **critical** flows (login, search, open document, settings) **pass** agreed checkpoints.
+**Acceptance criteria:** Documented **accessibility test plan** executed; **critical** flows (login, search, open document, **Settings** per FR-027) **pass** agreed checkpoints.
 
 **Priority:** High  
 **Dependencies:** —  
@@ -506,6 +545,19 @@ Stakeholders managing **large, heterogeneous** electronic document collections (
 
 ---
 
+## NFR-006 — Themed shell contrast
+
+**Category:** Usability / Compliance  
+
+**Description:** For each **default** **light** and **dark** theme **shipped** with the product (FR-029), **shell UI** text and **essential** interactive controls **SHALL** meet **contrast** requirements **aligned** with **WCAG 2.1 Level AA** for **normal** and **large** text **as applicable** to the toolkit (verification method **in Test Plan**).
+
+**Measurement criteria:** **Automated** and/or **manual** contrast checks on **agreed** **representative** screens (including **Settings**) **pass** for **both** shipped themes **or** **defects** are **tracked** as **release blockers**.
+
+**Constraints:** Does **not** guarantee **custom** OS **high-contrast** modes beyond **documented** behavior.  
+**Dependencies:** FR-020, FR-029.
+
+---
+
 # 6. Deterministic–Probabilistic Requirements
 
 **Applicability:** **OCR** and **layout extraction** behave **probabilistically** with respect to input quality. **No generative-AI** product features in v1.
@@ -549,6 +601,7 @@ Stakeholders managing **large, heterogeneous** electronic document collections (
 - **File system** paths or **administrator-configured** storage locations for **document bytes**.  
 - **Operating system** services to **launch native readers** with **file** or **URI** targets.  
 - **Human users** via **shell UI** and **native readers** (external).  
+- **Client preference data** (reader choices, theme, and future Settings values) **SHALL** **persist** on the **client** **per** DD (local store, profile path, or equivalent); **synchronization** of preferences across machines **deferred** unless **specified** in HLA.  
 - **Future:** optional **update metadata** endpoint **deferred**; **no** **public application API** in v1.  
 - **No** specific **vendor** OCR, PDF, or UI framework **required** in this SRS.
 
@@ -560,6 +613,7 @@ Stakeholders managing **large, heterogeneous** electronic document collections (
 - **Full-text index** **SHALL** be **rebuildable** from **source documents** and **catalog** state **per documented** procedure (acceptable **downtime** **TBD** HLA).  
 - **Passwords:** **hashed** only (FR-023).  
 - **Audit logs:** **personal data** in some jurisdictions; **purpose limitation** and **retention** **operator-configured** (FR-024).  
+- **Client preferences** (FR-027–FR-029): **SHALL NOT** be used to store **server secrets** or to **bypass** authorization; **backup** scope **MAY** include **client** preference stores **where** operators **document** **enterprise** restore practices (solo: typically **user-local**).  
 - **Backups:** **ideal** includes **corpus + DB + index + config + logs**; **minimal** subset **documented** for operators (NFR-004).
 
 ---
@@ -576,6 +630,7 @@ Stakeholders managing **large, heterogeneous** electronic document collections (
 # 12. Security and Compliance Requirements
 
 - **Authentication** and **RBAC** per FR-015–FR-017.  
+- **Client Settings** (FR-027) **SHALL NOT** allow **elevation** of privilege or **access** to **documents** **contrary** to **server** decisions; **UI** hiding alone **is** **insufficient** for **security** on **remote** deployments (FR-012).  
 - **Transport security** for **remote** access **SHALL** be **supported** (details HLA).  
 - **Audit** optional events per FR-022 with **privacy** awareness.  
 - **Regulatory:** **Operators** responsible for **lawful processing**; product provides **controls** and **documentation**, **not legal advice**.  
@@ -598,20 +653,23 @@ Stakeholders managing **large, heterogeneous** electronic document collections (
 - **Enterprise SSO / directory** integration  
 - **i18n** beyond English  
 - **Automatic update** / **phone-home** behavior (until **specified** with **opt-in** defaults in HLA)  
-- **Server autostart** at login vs **system** boot—**configurable behavior** **required** by product goals but **exact** mechanism **deferred** to **HLA** (capture there as **non-SRS** detail)
+- **Server autostart** at login vs **system** boot—**configurable behavior** **required** by product goals but **exact** mechanism **deferred** to **HLA** (capture there as **non-SRS** detail)  
+- **User-installable / third-party visual themes** and **theme marketplace**  
+- **Sync of client preferences** across **multiple** installations or devices
 
 ---
 
 # 14. Risk Assessment
 
-| Risk | Level | Mitigation (requirements-level) |
-|------|-------|----------------------------------|
-| **Extraction/OCR inaccuracy** | **High** | §6, FR-019, FR-007 honest semantics |
-| **User expects SharePoint parity** | **Moderate** | §2.2 non-goals, operator docs |
-| **Remote access misconfiguration** | **High** | NFR-002, NFR-004, HLA hardening |
-| **Legal/DRM boundary** | **Moderate** | FR-006, FR-008b, §7 |
-| **Accessibility verification gaps** | **Moderate** | FR-020 + Test Plan |
-| **Scope creep (web/API)** | **Moderate** | §13 waiting room |
+| Risk                                | Level        | Mitigation (requirements-level)     |
+| ----------------------------------- | ------------ | ----------------------------------- |
+| **Extraction/OCR inaccuracy**       | **High**     | §6, FR-019, FR-007 honest semantics |
+| **User expects SharePoint parity**  | **Moderate** | §2.2 non-goals, operator docs       |
+| **Remote access misconfiguration**  | **High**     | NFR-002, NFR-004, HLA hardening     |
+| **Legal/DRM boundary**              | **Moderate** | FR-006, FR-026, §7                  |
+| **Accessibility verification gaps** | **Moderate** | FR-020 + Test Plan                  |
+| **Scope creep (web/API)**           | **Moderate** | §13 waiting room                    |
+| **Reader preference misconfiguration** | **Low–Moderate** | FR-028 acceptance, clear fallback |
 
 ---
 

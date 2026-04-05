@@ -9,6 +9,18 @@ Timestamped summaries of **discussions**, **decisions**, and **technology choice
 
 ---
 
+## 2026-04-06 (later) — SRS v0.2: Settings, reader preferences, theme
+
+**Summary:** Extended [`../srs.md`](../srs.md) with **FR-027** (Settings facility, extensible), **FR-028** (preferred external reader per supported document type with platform-default fallback), **FR-029** (light/dark theme, **match system** where feasible). **NFR-006** ties shipped themes to **WCAG 2.1 AA** contrast for the shell. **FR-018** updated to honor reader preferences. **Waiting room:** third-party theme packs, preference sync across devices.
+
+**Decisions**
+
+- **None** beyond adopting draft requirement text pending review.
+
+**Documentation:** [`../srs.md`](../srs.md).
+
+---
+
 ## 2026-04-06 — SRS initial draft (`srs.md` v0.1)
 
 **Summary:** Added **[`../srs.md`](../srs.md)** as **draft** SRS (**FR-001–FR-026**, **NFR-001–NFR-005**), derived from **`concept.md`** and **`project-primer.md`**. **Phase gate** in SRS **§16** records **not** ready for Architecture until **review**, **RTM**, and **human approval**. **PDF/DOCX** mandatory for v1; **EPUB** and several items remain **waiting room**.
