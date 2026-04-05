@@ -3,9 +3,22 @@
 Timestamped summaries of **discussions**, **decisions**, and **technology choices** (or explicit **deferrals**).  
 **Newest entries first.** Append new blocks after updating the “Last updated” line below.
 
-**Last updated:** 2026-04-05 21:15 UTC  
+**Last updated:** 2026-04-05 21:30 UTC  
 
 **Not legal advice** where legal topics appear; see `docs/open-source-license.md`.
+
+---
+
+## 2026-04-05 21:30 UTC — SignPath for non-Apple release signing
+
+**Summary:** Document **SignPath** as the **planned** path for **official** Windows/Linux (non-Apple) **signed release** binaries; clarify **source builds** may be **unsigned**; **Apple** remains a **separate** pipeline.
+
+**Decisions**
+
+- **OSS-appropriate:** Signing is for **published release artifacts** and user trust—not a requirement for **license** or **building from source**.
+- **CI:** Integrate **SignPath** (or successor/equivalent) **as applicable** per platform; details **TBD** in release/HLA work.
+
+**Documentation:** `docs/concept.md`, `docs/project-primer.md` (v**0.5**).
 
 ---
 

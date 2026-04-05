@@ -19,7 +19,7 @@ Project Name: MyLib
 Initiation Date (YYYY-MM-DD): 2026-04-03  
 Author(s): Charles McKnight
 Lifecycle Phase: Ideation  
-Version: 0.4  
+Version: 0.5  
 RTM Scaffold Created? No  
 
 ---
@@ -95,7 +95,7 @@ Outcomes describe **results**, not system structure.
   **Copyright and DRM:** product should **not** center on **circumventing** technical protection measures. **Privacy:** **minimal** account data; **audit logs** may be sensitive; **operator responsibility** for lawful processing. **Disclaimer and license** to be **lawyer-reviewed** when public.
 
 - **Operational environment**  
-  **User-specified storage** (local or **remote server** for multi-user). **Network exposure** (e.g. opening a **port** for remote clients) is the **operator’s** choice and responsibility. **Maintainer** does not anticipate operating a **hosted SaaS**; **community support** via **GitHub**; **others** may self-host or fork. **Offline/sync deferred.** **Distribution** envisioned via **GitHub Pages** (presence) and **GitHub Releases** (binaries); **dual installer** lines anticipated—**solo** (client + co-located server) vs **server/self-hosted multi-user** (details in HLA/release). **macOS signing/notarization** via **Apple Developer Program** (not App Store initially); **other platforms** signing (e.g. **SignPath-class**) **separate** from Apple pipeline.
+  **User-specified storage** (local or **remote server** for multi-user). **Network exposure** (e.g. opening a **port** for remote clients) is the **operator’s** choice and responsibility. **Maintainer** does not anticipate operating a **hosted SaaS**; **community support** via **GitHub**; **others** may self-host or fork. **Offline/sync deferred.** **Distribution** envisioned via **GitHub Pages** (presence) and **GitHub Releases** (binaries); **dual installer** lines anticipated—**solo** (client + co-located server) vs **server/self-hosted multi-user** (details in HLA/release). **macOS signing/notarization** via **Apple Developer Program** (not App Store initially). **Official** Windows/Linux (non-Apple) release binaries: **SignPath** (or equivalent) **as applicable**, via **CI**—**separate** from Apple; **source builds** may remain **unsigned**.
 
 ---
 
@@ -105,7 +105,7 @@ Outcomes describe **results**, not system structure.
   **Desktop:** Windows, macOS, Linux. **English** UI/docs first; **i18n** later. **Web client, public API, scripting** deferred. **Symbolic links** unlikely in v1. **Numeric performance SLAs** deferred.
 
 - **Resource constraints**  
-  **Open-source** maintenance; **signing/notarization** and **release** pipelines are **real costs** but **not** treated as blockers.
+  **Open-source** maintenance; **signing/notarization** (Apple + **SignPath** or similar for non-Apple **release** artifacts) and **release** pipelines are **real costs** but **not** treated as blockers.
 
 - **Timeline constraints**  
   None fixed in this primer.

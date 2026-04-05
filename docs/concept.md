@@ -131,7 +131,7 @@ Electronic documents appear in many formats, some proprietary or layout-heavy. A
 - **Distribution:** e.g. **GitHub Pages** (or similar) for **project presence** and links; **installers and binaries** typically attached to **GitHub Releases** rather than stored as large blobs in the git tree.
 - **Installers (intent):** expect **two** distribution lines—**(1) solo / single-user** (bundled **client + co-located server**, friendly defaults) and **(2) server / self-hosted multi-user** (server-oriented install plus **client** builds or same client pointed at remote host). Exact packaging **TBD** in HLA/release engineering.
 - **macOS:** **Apple Developer Program** for **signing and notarization**; **not** initially targeting **Mac App Store** distribution.
-- **Windows / Linux signing:** e.g. **SignPath** or comparable workflows where applicable (**Apple notarization remains a separate pipeline**).
+- **Windows / Linux (and other non-Apple) signing:** **SignPath** is the **intended** service for **official release binaries** published by the project (**Authenticode** / platform-appropriate signing **as applicable**), integrated with **CI** (e.g. GitHub Actions) where possible. **Apple** pipelines remain **separate** (SignPath does **not** replace **notarization**). **Building from source** may produce **unsigned** artifacts—that is normal for OSS; **signed** installers are a **release hygiene** choice for distributed downloads, not a license requirement.
 - **Automatic updates** (“Check for updates”): e.g. **Sparkle** on native macOS stacks, or **stack-native** updaters (e.g. Electron ecosystem); **not yet decided**.
 
 ---
@@ -154,6 +154,7 @@ Electronic documents appear in many formats, some proprietary or layout-heavy. A
 - **Updater** mechanism per platform and **version-notification** flow (**minimal outbound** vs **update checks**—final in **Requirements / HLA**).
 - **Server autostart:** login vs boot, **service** vs **user session**, and per-OS packaging (**Requirements / HLA**).
 - **Format phasing:** likely **PDF and DOCX** before **EPUB** complexity; **DRM EPUB** uses **keywords** path when indexing blocked.
+- **Release signing:** **SignPath** (or equivalent) **CI** integration for **non-Apple** official binaries—**mechanics TBD** (does not affect **source-only** users).
 
 ---
 
