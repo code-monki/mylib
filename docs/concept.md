@@ -3,6 +3,8 @@
 Structured Ideation record (template-aligned): [Project Primer](project-primer.md).  
 Timestamped discussion and decisions: [Discussion log](discussion-log.md).
 
+**Lifecycle (this cycle):** **Ideation** closed **2026-04-05**—authorization to proceed to **Requirements** recorded in [Project Primer §12 — Gate Declaration](project-primer.md#12-gate-declaration). Further discovery may still trigger **phase rollback** under lifecycle governance.
+
 ## Overview
 
 MyLib addresses the need to manage a **large corpus** of electronic documents in **heterogeneous formats** (including PDF, word-processing formats such as DOCX, and EPUB). It aims to provide a **unified library**: consistent **cataloging**, **metadata**, **full-text search**, **tag-based filtering**, and **access control**, while **display and printing** are delegated to **native reader applications** where practical so rendering fidelity and reader-specific features (including bookmarks) stay with those tools.

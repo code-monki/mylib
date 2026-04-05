@@ -3,9 +3,22 @@
 Timestamped summaries of **discussions**, **decisions**, and **technology choices** (or explicit **deferrals**).  
 **Newest entries first.** Append new blocks after updating the “Last updated” line below.
 
-**Last updated:** 2026-04-05 21:30 UTC  
+**Last updated:** 2026-04-05 21:45 UTC  
 
 **Not legal advice** where legal topics appear; see `docs/open-source-license.md`.
+
+---
+
+## 2026-04-05 21:45 UTC — Ideation gate: authorized to Requirements
+
+**Summary:** Project owner **closed Ideation for this cycle** and **authorized** advancement to the **Requirements** phase, with explicit acceptance that **unknowns remain** and **rollback** remains possible per lifecycle bootstrap.
+
+**Decisions**
+
+- **Gate:** `docs/project-primer.md` **§12** completed (**Charles McKnight**, **2026-04-05**). **Primer version → 1.0**; **lifecycle phase** noted as **Requirements** (Ideation closed).
+- **RTM scaffold** still **not** created—appropriate when **SRS / traceability** work begins.
+
+**Documentation:** `docs/concept.md` (lifecycle note); `docs/project-primer.md`; this log.
 
 ---
 

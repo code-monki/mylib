@@ -18,8 +18,8 @@ This primer defines intent. It does not authorize architecture or implementation
 Project Name: MyLib  
 Initiation Date (YYYY-MM-DD): 2026-04-03  
 Author(s): Charles McKnight
-Lifecycle Phase: Ideation  
-Version: 0.5  
+Lifecycle Phase: Requirements (Ideation closed for this cycle; 2026-04-05)  
+Version: 1.0  
 RTM Scaffold Created? No  
 
 ---
@@ -249,12 +249,14 @@ If any condition is unmet, **remain in Ideation**.
 
 Approved to Proceed to Requirements Phase:
 
-Name:  
-Role:  
-Date:  
-Signature (if applicable):  
+**Name:** Charles McKnight  
+**Role:** Project owner / author  
+**Date (YYYY-MM-DD):** 2026-04-05  
+**Signature (if applicable):** *Recorded in repository (electronic authorization).*  
 
-Version incremented upon approval.
+**Note:** Ideation is closed **for now** on a **best-efforts** basis. Material discoveries later may require **rollback or rework** per `AI-Bootstrap/02-governance/00-lifecycle-bootstrap.md` (scope, requirements, or architecture changes).
+
+Version incremented upon approval (**primer 1.0**).
 
 ---
 
