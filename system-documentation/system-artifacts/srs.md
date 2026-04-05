@@ -14,9 +14,9 @@ They SHALL NOT encode architecture or implementation.
 # Software Requirements Specification (SRS)
 
 Project Name: MyLib  
-Version: 0.8.1  
-Date (YYYY-MM-DD): 2026-04-10  
-**Last revised (UTC):** 2026-04-10  
+Version: 0.9  
+Date (YYYY-MM-DD): 2026-04-11  
+**Last revised (UTC):** 2026-04-11  
 Author(s): Charles McKnight (draft; maintainers may revise)  
 Status: Draft  
 Project Primer Version Reference: 1.0 (`_process/project-primer.md`)  
@@ -124,9 +124,9 @@ Stakeholders managing **large, heterogeneous** electronic document collections (
 
 ## FR-002 — Metadata fields
 
-**Description:** The system SHALL support **metadata fields** including at least: **title**, **creator/author**, **language** (if known), **publisher**, **date** (publication or acquisition as applicable), **description/abstract**, and **series** (where applicable), aligned with **Dublin Core–inspired** practice.
+**Description:** The system SHALL support metadata fields including at least: **title**; **creator/author**; **language** (if known); **publisher**; **publication date** (when known—SHALL remain **optional** or **empty** when the source or operator does not supply it); **acquisition date** (when the record entered the library—SHALL be **tracked** with documented semantics, e.g. **system-set on first successful import** with optional **administrator correction** per DD); **description/abstract**; and **series** (where applicable), aligned with Dublin Core–inspired practice.
 
-**Acceptance criteria:** Each field can be **viewed and edited** (subject to RBAC) on a catalog record; values **persist** across sessions.
+**Acceptance criteria:** Each field can be viewed and edited (subject to RBAC) on a catalog record; values persist across sessions. Publication date can be absent without blocking catalog completeness rules in FR-040 except where DD states otherwise; acquisition date behavior (auto vs editable) is verified per DD.
 
 **Priority:** High  
 **Dependencies:** FR-001  
@@ -150,14 +150,14 @@ Stakeholders managing **large, heterogeneous** electronic document collections (
 
 ## FR-004 — Deliberate import
 
-**Description:** The system SHALL support **user-initiated import** of files via **explicit UI action** (e.g. menu and file selection dialog). **Silent** bulk directory ingestion **without user initiation** is **not** required in v1.
+**Description:** The system SHALL support **administrator-initiated import** of files via explicit UI action (e.g. menu and file selection dialog). Only users holding an **administrator** role (or a documented **import-equivalent** permission evaluated server-side per FR-017) SHALL be allowed to perform import. **Solo deployment (FR-014):** the interactive user SHALL be the administrator established at bootstrap (FR-032) or otherwise hold that role so import remains available without a separate account. Silent bulk directory ingestion without explicit user initiation is not required in v1.
 
-**Acceptance criteria:** User selects one or more files; system creates or updates catalog records per other FRs; user receives **clear completion or error** feedback.
+**Acceptance criteria:** An administrator completes import and receives clear completion or error feedback; a non-administrator receives denial at the server boundary (and consistent UI) when attempting import. Solo install path still satisfies import per FR-014 acceptance.
 
 **Priority:** High  
-**Dependencies:** FR-001, FR-010  
+**Dependencies:** FR-001, FR-010, FR-017, FR-032  
 **Constraints:** —  
-**Notes:** Bulk import with **review queue** is **deferred** (waiting room).
+**Notes:** Bulk import with review queue is deferred (waiting room).
 
 ---
 
@@ -228,27 +228,31 @@ Stakeholders managing **large, heterogeneous** electronic document collections (
 
 ## FR-010 — Duplicate detection (digest)
 
-**Description:** On import, the system SHALL compute a **content digest** (default: **SHA-256** of file bytes) and, when a **candidate duplicate** exists (same digest), **warn** the user and **require an explicit choice** before completing the import. **Silent** skip, merge, or replace **without user confirmation** is **prohibited** as default behavior.
+**Description:** On import, the system SHALL compute a **content digest** (default: SHA-256 of file bytes) and, when a candidate duplicate exists (same digest value under the same algorithm), warn the actor and require an explicit choice before completing the import. Silent skip, merge, or replace without user confirmation is prohibited as default behavior. The system SHALL maintain a **durable store** of digest values **and** the **algorithm identifier** used for each stored digest (per catalog association documented in DD) so duplicate detection and integrity checks remain consistent across restarts; DD SHALL define retention, migration when the default algorithm changes, and whether multiple algorithms may coexist temporarily.
 
-**Acceptance criteria:** Duplicate-byte scenario produces **blocking confirmation** with at least **cancel** and **import as separate record** (additional options **MAY** be offered); **no silent** default resolution.
+**Acceptance criteria:** Duplicate-byte scenario produces blocking confirmation with at least cancel and import as separate record (additional options MAY be offered); no silent default resolution. After restart, digest records persist and duplicate detection still recognizes prior imports per DD.
 
 **Priority:** High  
 **Dependencies:** FR-004  
 **Constraints:** —  
-**Notes:** Exact option set beyond minimum **TBD** in design; must satisfy **no silent** rule.
+**Notes:** Exact option set beyond minimum TBD in design; must satisfy no silent rule.
 
 ---
 
 ## FR-011 — Missing file detection and relink
 
-**Description:** When the **underlying file** for a catalog record is **missing** (deleted, moved, or unreadable path), the system SHALL **detect** this state, **notify** the user, and offer a **controlled relink** path (e.g. file dialog) to associate a **new** path. The system SHALL **not** silently rebind to arbitrary files on disk.
+**Description:** When the underlying file for a catalog record is missing (deleted, moved, or unreadable path), the system SHALL detect this state and SHALL NOT silently rebind to arbitrary files on disk.
 
-**Acceptance criteria:** Simulated missing file yields **visible** notification and **successful relink** after user selects valid replacement; without relink, record shows **documented** degraded state.
+**Solo deployment (FR-014):** The system SHALL notify the interactive user and SHALL offer a controlled relink path (e.g. file dialog) to associate a new path, subject to server enforcement (FR-013).
+
+**Multi-user deployment (FR-015):** Default behavior SHALL notify users with **administrator** role (or a documented **corpus-maintenance** / equivalent role per FR-017) of the affected record(s) so they may remediate (relink, restore from backup, or remove per policy). Non-administrator users SHALL receive a documented degraded-access indication for affected records where applicable; whether they are offered relink is **policy in DD** (default: administrators drive remediation).
+
+**Acceptance criteria:** **Solo:** Simulated missing file yields visible notification to the user and successful relink after valid replacement; without relink, documented degraded state. **Multi-user:** Simulated missing file yields administrator-visible notification (and audit per FR-026 where enabled); non-admin behavior matches DD; server API denies inconsistent relink or access per FR-013 and FR-017.
 
 **Priority:** High  
-**Dependencies:** FR-001  
+**Dependencies:** FR-001, FR-017  
 **Constraints:** —  
-**Notes:** —
+**Notes:** Notification channels (in-app only vs optional email—TBD DD/HLA) SHALL be documented for multi-user defaults.
 
 ---
 
@@ -274,7 +278,7 @@ Stakeholders managing **large, heterogeneous** electronic document collections (
 **Priority:** High  
 **Dependencies:** —  
 **Constraints:** —  
-**Notes:** Solo loopback remains subject to same **server-side** enforcement in process.
+**Notes:** Solo loopback remains subject to same server-side enforcement in process. **Authorization** for import (FR-004) and for missing-file remediation UI (FR-011) SHALL be decided server-side per FR-017 so client modification cannot bypass policy.
 
 ---
 
@@ -609,22 +613,29 @@ For **each** **category** **on** **each** **component** **(client** **vs** **ser
 
 ## FR-038 — Search query semantics and results
 
-**Description:** **Full-text** **search** **(FR-007)** **SHALL** **implement** **documented** **v1** **query** **semantics** **including** **all** **of** **the** **following:**
+**Description:** Full-text search (FR-007) SHALL implement documented v1 query semantics including all of the following:
 
-1. **Implicit** **conjunction:** **Whitespace-separated** **bare** **terms** **(outside** **quotes** **and** **outside** **explicit** **operators)** **combine** **with** **logical** **AND** **by** **default.**  
-2. **Boolean** **operators:** **The** **query** **language** **SHALL** **support** **explicit** **`AND`,** **`OR`,** **and** **`NOT`.** **DD** **SHALL** **define** **spelling,** **whether** **those** **keywords** **are** **case-sensitive** **or** **accepted** **case-insensitively,** **and** **tokenization** **(including** **how** **they** **interact** **with** **quoted** **phrases** **and** **bare** **terms)** **so** **users** **can** **express** **disjunction** **and** **negation** **without** **workarounds.**  
-3. **Phrase** **search:** **Double-quoted** **strings** **SHALL** **denote** **phrase** **units** **matched** **as** **contiguous** **text** **per** **index** **capabilities** **(documented** **limitations** **e.g.** **stemming,** **word** **breaks).**  
-4. **Grouping:** **Parentheses** **`(`** **`)`** **SHALL** **group** **subexpressions** **so** **that** **precedence** **is** **unambiguous** **for** **nested** **boolean** **and** **phrase** **combinations.**  
-5. **Grammar** **and** **precedence:** **DD** **SHALL** **publish** **a** **normative** **grammar** **(e.g.** **BNF** **or** **equivalent)** **including** **operator** **precedence** **and** **associativity** **where** **parentheses** **are** **omitted,** **and** **SHALL** **define** **interaction** **between** **phrases,** **operators,** **and** **implicit** **AND.**
+1. **Implicit conjunction:** Whitespace-separated bare terms (outside quotes and outside explicit operators) combine with logical AND by default.
 
-**Matching** **SHALL** **be** **case-insensitive** **for** **basic** **Latin** **(other** **scripts** **per** **DD).** **Records** **matched** **only** **via** **keyword** **lists** **(FR-009)** **SHALL** **participate** **in** **queries** **per** **documented** **rules** **consistent** **with** **the** **same** **grammar** **where** **applicable.** **Search** **results** **SHALL** **support** **documented** **sort** **and** **pagination** **consistent** **with** **FR-037** **where** **applicable.** **Fielded** **or** **metadata-only** **query** **syntax** **beyond** **full-text** **and** **keywords** **is** **optional** **for** **v1** **and** **SHALL** **be** **specified** **in** **DD** **if** **shipped.**
+2. **Boolean operators:** The query language SHALL support explicit AND, OR, and NOT. DD SHALL define spelling, whether those keywords are case-sensitive or accepted case-insensitively, and tokenization (including how they interact with quoted phrases and bare terms).
 
-**Acceptance criteria:** **Golden** **query** **fixtures** **in** **Test** **Plan** **validate** **implicit** **AND,** **explicit** **`AND`/`OR`/`NOT`,** **double-quoted** **phrases,** **parenthesized** **grouping** **(including** **at** **least** **one** **nested** **case),** **case** **behavior** **for** **Latin,** **and** **keyword-only** **hits** **(FR-009);** **malformed** **queries** **(e.g.** **unbalanced** **parentheses,** **empty** **phrases)** **fail** **with** **user-visible,** **actionable** **feedback** **without** **server** **fault.**
+3. **Phrase search:** Double-quoted strings denote phrase units matched as contiguous text per index capabilities (documented limitations, e.g. stemming or word breaks).
+
+4. **Grouping:** Parentheses `(` `)` group subexpressions so precedence is unambiguous for nested boolean and phrase combinations. The grammar SHALL support **nested groups** that mix phrases and operators in any documented order, including but not limited to representative forms such as:
+   - `("Phrase A" AND "Phrase B") NOT ("Phrase C" OR "Phrase D")`
+   - `(term1 AND term2) NOT (term3 AND term4)`  
+   and other permutations that combine grouped **OR**/**AND**/**NOT** over phrases and bare terms. DD MAY impose documented limits (e.g. maximum expression depth or query length) provided behavior remains deterministic and user-visible when limits are exceeded.
+
+5. **Grammar and precedence:** DD SHALL publish a normative grammar (e.g. BNF or equivalent) including operator precedence and associativity where parentheses are omitted, and SHALL define interaction between phrases, operators, and implicit AND.
+
+Matching SHALL be case-insensitive for basic Latin (other scripts per DD). Records matched only via keyword lists (FR-009) SHALL participate in queries per documented rules consistent with the same grammar where applicable. Search results SHALL support documented sort and pagination consistent with FR-037 where applicable. Fielded or metadata-only query syntax beyond full-text and keywords is optional for v1 and SHALL be specified in DD if shipped.
+
+**Acceptance criteria:** Golden query fixtures in the Test Plan validate implicit AND, explicit AND/OR/NOT, double-quoted phrases, parenthesized grouping with **at least two** nested structures, **including** one fixture structurally similar to `("Phrase A" AND "Phrase B") NOT ("Phrase C" OR "Phrase D")` and one similar to `(term1 AND term2) NOT (term3 AND term4)` (exact literals per Test Plan), case behavior for Latin text, and keyword-only hits (FR-009). Malformed queries (e.g. unbalanced parentheses, empty phrases) fail with user-visible, actionable feedback without server fault.
 
 **Priority:** High  
 **Dependencies:** FR-007, FR-009  
 **Constraints:** —  
-**Notes:** **Relevance** **ranking** **algorithm** **TBD** **DD** **(deterministic** **tie-break** **required** **for** **tests).** **Latin** **case** **behavior** **for** **search** **terms** **(item** **5** **and** **matching** **paragraph)** **is** **distinct** **from** **boolean** **keyword** **case** **rules** **(item** **2).**
+**Notes:** Relevance ranking algorithm TBD in DD (deterministic tie-break required for tests). Latin case behavior for search *terms* is distinct from boolean *keyword* case rules (items 2 and 5).
 
 ---
 
@@ -716,12 +727,12 @@ For **each** **category** **on** **each** **component** **(client** **vs** **ser
 
 **Category:** Usability / Compliance  
 
-**Description:** The project SHALL publish **operator documentation** describing **backup scope** (corpus, database, index, configuration, logs), **security boundaries**, and **privacy-relevant** data flows **at a conceptual level** sufficient for **informed deployment**. The **admin** **guide** **SHALL** **cover** **first-run** **bootstrap** **(FR-032)**, **user** **and** **role** **administration** **(FR-031)**, **password** **composition** **policy** **as** **deployed** **(FR-033)**, **session** **and** **lockout** **policy** **(FR-034,** **FR-035)**, **TLS** **and** **certificate** **handling** **(NFR-009)**, **library** **storage** **roots** **(FR-036)**, **index** **rebuild** **(FR-039)**, **and** **time** **synchronization** **expectations** **(§8)**. It **SHALL** **identify** **default** **locations** **(or** **discovery** **method)** **for** **audit** **(FR-026)**, **operational**, **and** **diagnostic** **logs** **(FR-029)** **on** **each** **supported** **platform**, **summarize** **what** **each** **log** **family** **may** **contain**, **and** **reference** **retention**/**rollover** **controls** **(FR-028,** **FR-029)** **and** **jurisdictional** **considerations** **(NFR-008)**.
+**Description:** The project SHALL publish **operator documentation** describing **backup scope** (corpus, database, index, configuration, logs), **security boundaries**, and **privacy-relevant** data flows **at a conceptual level** sufficient for **informed deployment**. The admin guide SHALL cover first-run bootstrap (FR-032), user and role administration (FR-031), **import authorization** (administrator-only default per FR-004), **content digest persistence and algorithm identifiers** (FR-010), **missing-file detection and administrator notification defaults** (FR-011), password composition policy as deployed (FR-033), session and lockout policy (FR-034, FR-035), TLS and certificate handling (NFR-009), library storage roots (FR-036), index rebuild (FR-039), and time synchronization expectations (§8). It **SHALL** **identify** **default** **locations** **(or** **discovery** **method)** **for** **audit** **(FR-026)**, **operational**, **and** **diagnostic** **logs** **(FR-029)** **on** **each** **supported** **platform**, **summarize** **what** **each** **log** **family** **may** **contain**, **and** **reference** **retention**/**rollover** **controls** **(FR-028,** **FR-029)** **and** **jurisdictional** **considerations** **(NFR-008)**.
 
 **Measurement criteria:** **Reviewer** can answer: what to back up, what is logged, **where** **each** **log** **type** **resides**, **how** **to** **tune** **retention**/**rollover**, **and** where **secrets** live—using **only** shipped docs.
 
 **Constraints:** Complements **NFR-007** (end-user / day-to-day documentation); **admin** vs **end-user** material **MAY** share a **Help** shell but **SHALL** remain **discernible** (e.g. separate sections or guides).  
-**Dependencies:** `system-documentation/user-documentation/` (e.g. admin guide); stubs **to be** expanded for release; **FR-026**–**FR-029** **(logging** **and** **retention);** **FR-031,** **FR-032,** **FR-034,** **FR-035,** **FR-036,** **FR-039;** **NFR-009** **(TLS).**
+**Dependencies:** `system-documentation/user-documentation/` (e.g. admin guide); stubs to be expanded for release; FR-004, FR-010, FR-011; FR-026–FR-029 (logging and retention); FR-031, FR-032, FR-034, FR-035, FR-036, FR-039; NFR-009 (TLS).
 
 ---
 
@@ -755,7 +766,7 @@ For **each** **category** **on** **each** **component** **(client** **vs** **ser
 
 **Category:** Usability / Maintainability  
 
-**Description:** The product SHALL ship **end-user documentation** in **English** (FR-025), comprising at minimum: **(a)** a **User manual** describing **primary** **shell** workflows—including **catalog** **browse** **(FR-037)**, **search** **semantics** **at** **user** **level** **(FR-007,** **FR-038)**, **metadata/tags**, **validation** **and** **edit** **conflicts** **(FR-040,** **FR-041)**, **open in native reader** **(FR-019)** **and** **reader** **preferences** **(FR-021)**, **Settings** **(FR-020)**, **password** **change** **(FR-033)**, **logout** **and** **session** **behavior** **summary** **(FR-035)**, **client** **operational**/**diagnostic** **logging** **controls** **and** **default** **log** **locations** **(FR-029)**, **and** **RBAC-visible** **behavior** **(e.g.** **denied** **access** **and** **tenant** **visibility)**—and **(b)** a **Quick-start guide** sufficient for a **new** user to **install or connect** the client, **complete** **or** **skip** **bootstrap** **per** **role** **(FR-032)**, **authenticate** if required, and **import** at least **one** document **successfully**. Source **MAY** be maintained under **`system-documentation/user-documentation/`** (or successor path) and **SHALL** be **packaged** or **published** with **releases** **per** HLA (e.g. **HTML**, **PDF**, **Markdown** bundle—**exact** formats **TBD**).
+**Description:** The product SHALL ship end-user documentation in English (FR-025), comprising at minimum: **(a)** a User manual describing primary shell workflows—including catalog browse (FR-037); search semantics at user level (FR-007, FR-038); metadata and tags including **publication date** and **acquisition date** where shown (FR-002); validation and edit conflicts (FR-040, FR-041); **that document import is restricted to administrators** (or documented import permission) and how solo users satisfy that role (FR-004, FR-014, FR-032); missing-file or degraded-access behavior for the reader’s role (FR-011); open in native reader (FR-019) and reader preferences (FR-021); Settings (FR-020); password change (FR-033); logout and session behavior summary (FR-035); client operational/diagnostic logging controls and default log locations (FR-029); and RBAC-visible behavior (e.g. denied access and tenant visibility)—and **(b)** a Quick-start guide sufficient for a new user to install or connect the client, complete or skip bootstrap per role (FR-032), authenticate if required, and **as a user who may perform import** (administrator in typical solo or multi-user setups per FR-004), import at least one document successfully. Source MAY be maintained under `system-documentation/user-documentation/` (or successor path) and SHALL be packaged or published with releases per HLA (e.g. HTML, PDF, Markdown bundle—exact formats TBD).
 
 The **shell UI** SHALL provide a **user-discoverable** **Help** affordance (e.g. **Help** menu, **toolbar**, or **Settings** link—**TBD** DD) that **reaches** the **Quick-start** and **User manual** for the **running** **product version** (e.g. **opens** bundled content in an **embedded** viewer, **local** help window, or **system** browser—**not** mandated herein).
 
@@ -763,7 +774,7 @@ The **shell UI** SHALL provide a **user-discoverable** **Help** affordance (e.g.
 
 **Constraints:** **Searchable** **full** in-app help **index**, **context-sensitive** (F1) help, and **very large** manual **browse/search** **UX** are **deferred** to **§13** unless **implemented** **early** via a **chosen** component. A **pre-built** help **component** or **viewer** **MAY** be used **provided** **licenses** are **compatible** with **Apache-2.0** distribution (or **clearly** **optional**), **security** posture is **acceptable**, and **accessibility** (FR-024) **obligations** are **met** for the **help** surface.
 
-**Dependencies:** FR-025; FR-024; FR-029; FR-033, FR-035, FR-037, FR-038, FR-040, FR-041; NFR-004, NFR-008 (operator docs **distinct** but **may** **cross-link**).
+**Dependencies:** FR-002, FR-004, FR-011, FR-025; FR-024; FR-029; FR-033, FR-035, FR-037, FR-038, FR-040, FR-041; NFR-004, NFR-008 (operator docs distinct but may cross-link).
 
 ---
 
@@ -909,6 +920,7 @@ The **shell UI** SHALL provide a **user-discoverable** **Help** affordance (e.g.
 | -------------------------------------- | ---------------- | ----------------------------------- |
 | **Extraction/OCR inaccuracy**          | **High**         | §6, FR-023, FR-007 honest semantics |
 | **Search query parsing / user expectation** | **Moderate**  | FR-038 normative grammar, golden fixtures, NFR-007 |
+| **Non-administrator expects to import** | **Low–Moderate** | FR-004, NFR-007, RBAC messaging   |
 | **User expects SharePoint parity**     | **Moderate**     | §2.2 non-goals, operator docs       |
 | **Remote access misconfiguration**     | **High**         | NFR-002, NFR-004, NFR-009, HLA     |
 | **Credential / session abuse**         | **High**         | FR-034, FR-035, NFR-009, FR-033     |
@@ -924,13 +936,13 @@ The **shell UI** SHALL provide a **user-discoverable** **Help** affordance (e.g.
 
 # 15. Traceability Readiness Declaration
 
-- **FR-001**–**FR-041** and **NFR-001**–**NFR-009** **assigned** in this revision: **Yes**  
-- **Acceptance criteria** present per item: **Yes** (subject to refinement)  
-- **Architecture** embedded: **Avoided** (no stack mandates)  
-- **RTM:** **Not yet** populated — **SHALL** be created **before** implementation phase per **LIFECYCLE.md**  
-- **Waiting room** separated: **Yes**  
-- **Probabilistic** bounds for OCR: **Yes** (§6)  
-- **FR** **numerical** **order** **matches** **document** **headers** **(§4** **index):** **Yes** **as** **of** **Last** **revised**
+- **FR-001–FR-041** and **NFR-001–NFR-009** assigned in this revision: **Yes**
+- **Acceptance criteria** present per item: **Yes** (subject to refinement)
+- **Architecture** embedded: **Avoided** (no stack mandates)
+- **RTM:** Not yet populated — SHALL be created before implementation phase per **LIFECYCLE.md**
+- **Waiting room** separated: **Yes**
+- **Probabilistic** bounds for OCR: **Yes** (§6)
+- **FR numerical order matches document headers (§4 index): Yes as of Last revised**
 
 ---
 
@@ -938,13 +950,13 @@ The **shell UI** SHALL provide a **user-discoverable** **Help** affordance (e.g.
 
 Confirm readiness to proceed to **High-Level Architecture**:
 
-- Requirements stable? **Partial** — **revision** **0.8.1** **(2026-04-10)** **aligns** **§11** **with** **FR-041** **and** **clarifies** **FR-038** **operator** **case** **/** **tokenization** **in** **DD;** **further** **stakeholder** **pass** **recommended** **before** **Architecture**  
-- NFRs measurable? **Partial** — **NFR-001** **gates** **on** **Test** **Plan**; **NFR-009** **on** **security** **checklist**  
-- Scope boundaries explicit? **Yes**  
-- Traceability scaffold prepared? **No** — **RTM** next  
-- Human approval granted? **No** — **required** **after** **final** **SRS** **review** **and** **RTM** **draft**  
+- **Requirements stable?** **Partial** — revision **0.9** (2026-04-11) updates **FR-002** (publication/acquisition dates), **FR-004** (admin-only import), **FR-010** (digest persistence), **FR-011** (solo vs multi-user missing file), **FR-013** Notes, **FR-038** (nested query examples); stakeholder pass still recommended before Architecture
+- **NFRs measurable?** **Partial** — **NFR-001** gates on Test Plan; **NFR-009** on security checklist
+- **Scope boundaries explicit?** **Yes**
+- **Traceability scaffold prepared?** **No** — RTM next
+- **Human approval granted?** **No** — required after final SRS review and RTM draft
 
-**Action:** Remain in **Requirements** until **RTM** **draft**, **any** **targeted** **SRS** **tweaks**, and **recorded** **human** **approval** **to** **Architecture** **per** **LIFECYCLE.md**.
+**Action:** Remain in **Requirements** until RTM draft, any targeted SRS tweaks, and recorded human approval to Architecture per **LIFECYCLE.md**.
 
 ---
 

@@ -3,11 +3,19 @@
 Timestamped summaries of **discussions**, **decisions**, and **technology choices** (or explicit **deferrals**).  
 **Newest entries first.** Append new blocks after updating the “Last updated” line below.
 
-**Last updated:** 2026-04-10 (SRS v0.8.1 §11 / FR-038) UTC  
+**Last updated:** 2026-04-11 (SRS v0.9 metadata, import, digest, missing-file, search) UTC  
 
 **Not legal advice** where legal topics appear; see [`open-source-license.md`](open-source-license.md).
 
-**Archival** **note:** **Log** **entries** **dated** **before** **2026-04-07** **may** **cite** **superseded** **FR** **numbers** **from** **SRS** **revisions** **prior** **to** **v0.6;** **the** **current** **[`../srs.md`](../srs.md)** **section** **headers** **are** **authoritative** **for** **IDs.**
+**Archival note:** Log entries dated before 2026-04-07 may cite superseded FR numbers from SRS revisions prior to v0.6; the current [`../srs.md`](../srs.md) section headers are authoritative for IDs.
+
+---
+
+## 2026-04-11 — SRS v0.9: FR-002/004/010/011/038; NFR-004/007; §15–§16 readability
+
+**Summary:** **FR-002** — separate **publication date** (optional) and **acquisition date** (tracked, import semantics in DD). **FR-004** — import **administrator-only** (import-equivalent permission in DD); solo via bootstrap admin (FR-032); deps FR-017, FR-032. **FR-010** — **durable digest store** + **algorithm identifier**; migration in DD. **FR-011** — **solo** relink UX; **multi-user** default **notify administrators** for remediation, non-admin degraded per DD; FR-013 Notes tie server-side auth. **FR-038** — explicit **nested** query examples and acceptance fixtures. **NFR-004** / **NFR-007** updated. **§15–§16** bullets use **phrase-level** bolding (reduce per-word noise).
+
+**Documentation:** [`../srs.md`](../srs.md).
 
 ---
 
