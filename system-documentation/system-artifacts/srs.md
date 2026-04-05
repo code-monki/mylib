@@ -14,7 +14,7 @@ They SHALL NOT encode architecture or implementation.
 # Software Requirements Specification (SRS)
 
 Project Name: MyLib  
-Version: 0.3  
+Version: 0.4  
 Date (YYYY-MM-DD): 2026-04-06  
 Author(s): Charles McKnight (draft; maintainers may revise)  
 Status: Draft  
@@ -375,13 +375,13 @@ Stakeholders managing **large, heterogeneous** electronic document collections (
 
 ## FR-029 — Application theme
 
-**Description:** Settings (FR-027) SHALL allow the user to select a **visual theme** for the **shell UI**, including at minimum **light** and **dark** appearances. Where the **desktop platform** exposes a **system** light/dark mode, the product **SHOULD** offer a **match system** option (or equivalent).
+**Description:** Settings (FR-027) SHALL allow the user to select a **visual theme** for the **shell UI**, including at minimum these **shipped** defaults: **(a)** **light**, **(b)** **dark**, and **(c)** a **warm sepia** theme (e.g. **sepia-tinted** chrome and **parchment-like** **background** tones). Where the **desktop platform** exposes a **system** light/dark mode, the product **SHOULD** offer a **match system** option (or equivalent) **that maps** to **light** or **dark** **only** (sepia remains an **explicit** user choice unless **documented** otherwise in DD).
 
-**Acceptance criteria:** User can switch themes and **observe** **shell** chrome and **documented** controls **update** accordingly; choice **persists** across restarts on the **same client** (FR-027). **Shipped** **light** and **dark** themes **SHALL** satisfy **contrast** expectations for the **shell** **per** NFR-006.
+**Acceptance criteria:** User can switch among **light**, **dark**, and **warm sepia** and **observe** **shell** chrome and **documented** controls **update** accordingly; choice **persists** across restarts on the **same client** (FR-027). **All** **shipped** themes in **(a)–(c)** **SHALL** satisfy **contrast** for **shell** text and **essential** controls **per** NFR-006—**including** when **warm sepia** uses a **parchment-style** **background**, **foreground** (text, icons, borders) **SHALL** be **chosen** so **WCAG 2.1 Level AA** **contrast** **obligations** are **met** on **representative** surfaces.
 
 **Priority:** Medium  
 **Dependencies:** FR-027  
-**Constraints:** **Native reader** appearance **out of scope**.  
+**Constraints:** **Native reader** appearance **out of scope**. **Decorative** parchment **texture** **MAY** be **subtle** **provided** **legibility** and **NFR-006** **still** **pass**.  
 **Notes:** Custom **user-authored** themes or **third-party** theme packs **deferred** (waiting room).
 
 ---
@@ -550,11 +550,11 @@ Stakeholders managing **large, heterogeneous** electronic document collections (
 
 **Category:** Usability / Compliance  
 
-**Description:** For each **default** **light** and **dark** theme **shipped** with the product (FR-029), **shell UI** text and **essential** interactive controls **SHALL** meet **contrast** requirements **aligned** with **WCAG 2.1 Level AA** for **normal** and **large** text **as applicable** to the toolkit (verification method **in Test Plan**).
+**Description:** For **each** **shipped** **shell** theme in **FR-029**—**light**, **dark**, and **warm sepia** (including **parchment-style** **backgrounds** where used)—**shell UI** text and **essential** interactive controls **SHALL** meet **contrast** requirements **aligned** with **WCAG 2.1 Level AA** for **normal** and **large** text **as applicable** to the toolkit (verification method **in Test Plan**). **Non-text** contrast for **UI** components **SHALL** follow **the same conformance target** **where** **WCAG 2.1** **applies** to **non-text** content **per** agreed **test** mapping.
 
-**Measurement criteria:** **Automated** and/or **manual** contrast checks on **agreed** **representative** screens (including **Settings**) **pass** for **both** shipped themes **or** **defects** are **tracked** as **release blockers**.
+**Measurement criteria:** **Automated** and/or **manual** contrast checks on **agreed** **representative** screens (including **Settings** and **theme** **switching**) **pass** for **all** **shipped** themes **or** **defects** are **tracked** as **release blockers**.
 
-**Constraints:** Does **not** guarantee **custom** OS **high-contrast** modes beyond **documented** behavior.  
+**Constraints:** Does **not** guarantee **custom** OS **high-contrast** modes beyond **documented** behavior. **Parchment** or **textured** **backgrounds** **MUST NOT** **excuse** **sub-AA** **contrast** for **primary** reading and **control** **labels**.  
 **Dependencies:** FR-020, FR-029.
 
 ---

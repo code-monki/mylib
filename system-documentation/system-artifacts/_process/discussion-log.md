@@ -9,6 +9,14 @@ Timestamped summaries of **discussions**, **decisions**, and **technology choice
 
 ---
 
+## 2026-04-06 — SRS v0.4: warm sepia / parchment default theme
+
+**Summary:** **FR-029** now **requires** a **shipped** **warm sepia** theme (**parchment-style** **background** allowed). **NFR-006** **contrast** **applies** to **all** **shipped** themes **including** sepia—**no** **WCAG** **waivers** for **decorative** **backgrounds**.
+
+**Documentation:** [`../srs.md`](../srs.md).
+
+---
+
 ## 2026-04-06 — SRS v0.3: NFR-007 end-user docs and Help
 
 **Summary:** Added **NFR-007** (user manual, quick-start, **Help** affordance to version-matched docs; packaging **TBD** HLA). **Searchable** help index and **context-sensitive** help in **waiting room**; **pre-built** help components allowed if license/a11y OK. **NFR-004** clarified vs end-user docs; **§2.2**, **FR-020**, **§14** updated.
