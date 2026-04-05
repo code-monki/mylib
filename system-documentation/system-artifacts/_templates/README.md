@@ -12,9 +12,11 @@ These files are aligned with the **`04-templates/`** pack (system + project scaf
 
 ## System templates (promote to `system-artifacts/`)
 
+**MyLib already has a draft SRS:** [`../srs.md`](../srs.md). Use the row below only for **new** work or a **blank** scaffold.
+
 | Template | Suggested filename when promoted | Phase (see LIFECYCLE) |
 |----------|----------------------------------|------------------------|
-| [srs.md](srs.md) | `srs.md` | Requirements |
+| [srs.md](srs.md) (blank scaffold) | `srs.md` | Requirements |
 | [hla.md](hla.md) | `hla.md` | High-Level Architecture |
 | [dd.md](dd.md) | `dd.md` | Detailed Design |
 | [test-plan.md](test-plan.md) | `test-plan.md` | Test planning |
