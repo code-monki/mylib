@@ -14,7 +14,7 @@ They SHALL NOT encode architecture or implementation.
 # Software Requirements Specification (SRS)
 
 Project Name: MyLib  
-Version: 0.4  
+Version: 0.5  
 Date (YYYY-MM-DD): 2026-04-06  
 Author(s): Charles McKnight (draft; maintainers may revise)  
 Status: Draft  
@@ -52,7 +52,8 @@ This document specifies **software requirements** for **MyLib**, an **open-sourc
 - **Opening documents in native reader applications** for display; MyLib does **not** replace those readers for rendering or printing.  
 - **Shell UI accessibility** aligned with **WCAG 2.1 Level AA** as the conformance target (verification in test planning).  
 - **English** user interface and documentation for the initial release.  
-- **End-user documentation** (user manual, quick-start, in-app Help entry) per **NFR-007**.
+- **End-user documentation** (user manual, quick-start, in-app Help entry) per **NFR-007**.  
+- **Operational** and **diagnostic** logging for **client** and **server**, **configurable** via **Settings** / **administration** surfaces, per **FR-030** and **NFR-008**.
 
 **Explicitly out of scope (initial release)**
 
@@ -93,6 +94,9 @@ Stakeholders managing **large, heterogeneous** electronic document collections (
 | **Operator**        | A person who **deploys** and **configures** the system (may coincide with an **Administrator** user).                                                                          |
 | **OCR pipeline**    | Processing that derives searchable text from **image-like** or scanned page content; output quality is **variable** by input.                                                  |
 | **Tenant boundary** | The set of users and resources belonging to one **organization or household** as configured by an administrator.                                                               |
+| **Audit log** | **Security- and compliance-oriented** records (who did what, when, on which resource) per **FR-022**—**distinct** from **operational**/**diagnostic** streams unless **implementation** **maps** **categories** **without** **blurring** **toggle** **semantics** **(DD)**. |
+| **Operational log** | **Routine** **application** **and** **lifecycle** **events** **suitable** **for** **monitoring** **healthy** **operation** **(FR-030)**—**not** a **substitute** **for** **audit** **where** **audit** **is** **required**. |
+| **Diagnostic log** | **Warnings**, **errors**, **and** **troubleshooting** **detail** **for** **support** **and** **fault** **analysis** **(FR-030)**. |
 
 ---
 
@@ -349,14 +353,14 @@ Stakeholders managing **large, heterogeneous** electronic document collections (
 
 ## FR-027 — Settings (client preferences)
 
-**Description:** The **shell UI** SHALL provide a **Settings** (or equivalently named) area where an authenticated user can **view and change client-side preferences** that **do not** substitute for or **weaken** **server-enforced** access control (FR-012, FR-016). The Settings area SHALL include at minimum the capabilities in **FR-028** and **FR-029** and SHALL be **extensible** so that **additional** **client-side** or **documented system-level** options may be added in later releases **without** a new top-level navigation paradigm.
+**Description:** The **shell UI** SHALL provide a **Settings** (or equivalently named) area where an authenticated user can **view and change client-side preferences** that **do not** substitute for or **weaken** **server-enforced** access control (FR-012, FR-016). The Settings area SHALL include at minimum the capabilities in **FR-028**, **FR-029**, and **client-side** **controls** **for** **operational** **and** **diagnostic** **logging** **(FR-030)** and SHALL be **extensible** so that **additional** **client-side** or **documented system-level** options may be added in later releases **without** a new top-level navigation paradigm.
 
 **Acceptance criteria:** User can open Settings from the shell, change a preference, **restart** the application (if required by HLA), and **observe** the change **persisted** on the **same client installation**; **forbidden** operations remain **blocked** by the server regardless of client UI state.
 
 **Priority:** High  
 **Dependencies:** FR-015  
-**Constraints:** **Server-side** administrative options (e.g. log retention FR-024) **MAY** appear in Settings **only** for users with **appropriate** roles **and** **SHALL** remain **enforced** on the server.  
-**Notes:** Exact layout (tabs vs sidebar) **TBD** DD. **Further** system-level knobs **TBD**; this FR establishes the **facility**.
+**Constraints:** **Server-side** administrative options (e.g. **audit** **retention** **FR-024**, **server** **logging** **FR-030**) **MAY** appear in Settings **only** for users with **appropriate** roles **and** **SHALL** remain **enforced** on the server.  
+**Notes:** Exact layout (tabs vs sidebar) **TBD** DD. **Further** system-level knobs **TBD**; this FR establishes the **facility**. **Server** **logging** **toggles** **and** **rotation** **when** **not** **exposed** **in** **the** **desktop** **shell** **SHALL** **appear** **in** **a** **documented** **server** **administration** **surface** **(HLA)** **with** **equivalent** **capabilities** **(FR-030)**.
 
 ---
 
@@ -403,7 +407,7 @@ Stakeholders managing **large, heterogeneous** electronic document collections (
 
 **Description:** The **shell UI** SHALL meet **WCAG 2.1 Level AA** success criteria **where applicable** to the technology stack chosen in HLA (non-web shells map to **equivalent** documented checkpoints).
 
-**Acceptance criteria:** Documented **accessibility test plan** executed; **critical** flows (login, search, open document, **Settings** per FR-027, **access Help / user documentation** per NFR-007) **pass** agreed checkpoints.
+**Acceptance criteria:** Documented **accessibility test plan** executed; **critical** flows (login, search, open document, **Settings** per FR-027 **(including** **logging** **subsection** **FR-030)**, **access Help / user documentation** per NFR-007) **pass** agreed checkpoints.
 
 **Priority:** High  
 **Dependencies:** —  
@@ -433,8 +437,8 @@ Stakeholders managing **large, heterogeneous** electronic document collections (
 
 **Priority:** Medium  
 **Dependencies:** FR-015, FR-016  
-**Constraints:** **Privacy** and **retention** are **operator** policy (see §10, §12).  
-**Notes:** Exact event catalog **TBD** in DD.
+**Constraints:** **Privacy** and **retention** are **operator** policy (see §10, §12, **NFR-008**).  
+**Notes:** Exact event catalog **TBD** in DD. **Audit** **events** **(FR-022)** **are** **separate** **from** **operational**/**diagnostic** **logs** **(FR-030)**; **combined** **physical** **files** **MAY** **exist** **if** **DD** **defines** **discernible** **separation** **or** **fields**.
 
 ---
 
@@ -453,14 +457,36 @@ Stakeholders managing **large, heterogeneous** electronic document collections (
 
 ## FR-024 — Configurable log retention
 
-**Description:** The system SHALL provide **administrator-configurable** **log rotation and retention** parameters for **application/audit logs** it controls.
+**Description:** The system SHALL provide **administrator-configurable** **retention** and **rotation** **policy** for **all** **persistent** **log** **families** **the** **product** **controls**: **(a)** **audit** **logs** **(FR-022)** **and** **(b)** **operational** **and** **diagnostic** **logs** **(FR-030)**. **Enable**/**disable** **and** **day-based** **rollover** **for** **(b)** **are** **specified** **in** **FR-030**; **this** **requirement** **ensures** **operators** **can** **also** **configure** **maximum** **retention** **(e.g.** **deletion** **or** **archival** **of** **files** **older** **than** **N** **days)** **per** **log** **family** **where** **policy** **or** **jurisdiction** **requires**, **with** **documented** **defaults** **and** **bounds** **(DD)**.
 
-**Acceptance criteria:** Administrator can set **retention** and **rotation** per documented limits; behavior **documented** in admin guide.
+**Acceptance criteria:** Administrator **(or** **documented** **operator** **role)** **can** **configure** **retention**/**rotation** **limits** **for** **audit** **separately** **from** **operational**/**diagnostic** **(or** **as** **documented** **if** **unified** **surface)**; **behavior** **documented** **in** **admin** **guide** **(NFR-004)**.
 
 **Priority:** Medium  
 **Dependencies:** FR-022  
-**Constraints:** —  
+**Constraints:** **Operational**/**diagnostic** **artifacts** **and** **their** **retention**/**rotation** **knobs** **are** **defined** **in** **FR-030**; **this** **requirement** **unifies** **policy** **across** **log** **families**. **Stricter** **of** **overlapping** **policies** **SHALL** **apply** **when** **multiple** **knobs** **touch** **the** **same** **files** **(documented)**.  
 **Notes:** **Centralized log shipping** deferred unless required by HLA.
+
+---
+
+## FR-030 — Operational and diagnostic logging (client and server)
+
+**Description:** The **desktop client** and the **library server** **each** SHALL emit **two** **logging** **categories** **distinct** **in** **purpose** **from** **audit** **events** **(FR-022)**—though **implementation** **MAY** **multiplex** **streams** **into** **files** **if** **categories** **remain** **individually** **controllable** **per** **below**:
+
+1. **Operational** — **routine** **lifecycle** **and** **significant** **application** **events** **suitable** **for** **day-to-day** **monitoring** **(e.g.** **startup**/**shutdown**, **ready**, **coarse** **job**/**request** **boundaries** **as** **enumerated** **in** **DD**).  
+2. **Diagnostic** — **warnings**, **errors**, **and** **troubleshooting** **detail** **for** **support** **(e.g.** **error** **codes**, **correlation** **identifiers**, **limited** **context** **as** **defined** **in** **DD**).
+
+For **each** **category** **on** **each** **component** **(client** **vs** **server)**, **the** **product** **SHALL** **provide** **an** **independent** **enable**/**disable** **control** **exposed** **through** **Settings** **(FR-027)** **for** **client** **logs**, **and** **through** **the** **documented** **server** **administration** **interface** **(HLA**—**which** **MAY** **be** **the** **same** **shell** **app** **in** **solo** **deployments)** **for** **server** **logs**, **subject** **to** **RBAC** **(FR-016)**.
+
+**Default** **log** **file** **locations** **SHALL** **follow** **platform-idiomatic** **practice** **for** **application** **and** **service** **logs** **on** **Windows**, **macOS**, **and** **Linux** **(e.g.** **per-user** **vs** **system** **service** **directories)** **per** **HLA** **without** **prescribing** **a** **single** **canonical** **path** **in** **this** **SRS**.
+
+**Rotation:** **Operators** **SHALL** **be** **able** **to** **configure** **time-based** **rollover**, **including** **at** **minimum** **the** **number** **of** **days** **after** **which** **a** **log** **file** **rolls** **over** **to** **a** **new** **file** **(or** **equivalent** **documented** **semantics)**. **Optional** **size-based** **rotation** **MAY** **complement** **time-based** **rotation** **(DD)**. **Maximum** **retention** **(deletion** **or** **archival** **after** **N** **days)** **SHALL** **be** **configurable** **per** **FR-024** **and** **SHALL** **apply** **consistently** **to** **operational**/**diagnostic** **artifacts** **as** **documented**.
+
+**Acceptance criteria:** With **operational** **enabled** **and** **diagnostic** **disabled** **on** **one** **component**, **new** **diagnostic-only** **content** **(per** **DD** **taxonomy)** **does** **not** **accumulate** **in** **persisted** **logs** **for** **that** **category** **(allow** **documented** **minimal** **bootstrap** **errors** **if** **unavoidable)**; **converse** **configuration** **holds**; **both** **disabled** **stops** **routine** **persistence** **for** **both** **categories** **except** **any** **immutable** **minimum** **stated** **in** **DD**; **day-based** **rollover** **behavior** **is** **observable** **per** **DD**; **default** **paths** **and** **PII**/**secrets** **posture** **documented** **(NFR-004,** **NFR-007,** **NFR-008)**.
+
+**Priority:** High  
+**Dependencies:** FR-016, FR-027, FR-022  
+**Constraints:** **Secrets**, **session** **tokens**, **passwords**, **and** **full** **document** **payloads** **SHALL** **not** **appear** **in** **cleartext** **in** **operational**/**diagnostic** **logs** **(NFR-008)**. **Maximum** **retention** **and** **family-wide** **caps** **align** **with** **FR-024**.  
+**Notes:** **Audit** **(FR-022)** **remains** **governed** **by** **its** **own** **enablement**/**retention** **where** **applicable**; **diagnostic** **verbosity** **levels** **(e.g.** **debug)** **MAY** **be** **a** **separate** **DD** **topic** **if** **needed** **without** **violating** **the** **two-category** **toggle** **model** **above**.
 
 ---
 
@@ -524,9 +550,9 @@ Stakeholders managing **large, heterogeneous** electronic document collections (
 
 **Category:** Usability / Compliance  
 
-**Description:** The project SHALL publish **operator documentation** describing **backup scope** (corpus, database, index, configuration, logs), **security boundaries**, and **privacy-relevant** data flows **at a conceptual level** sufficient for **informed deployment**.
+**Description:** The project SHALL publish **operator documentation** describing **backup scope** (corpus, database, index, configuration, logs), **security boundaries**, and **privacy-relevant** data flows **at a conceptual level** sufficient for **informed deployment**. The **admin** **guide** **SHALL** **identify** **default** **locations** **(or** **discovery** **method)** **for** **audit** **(FR-022)**, **operational**, **and** **diagnostic** **logs** **(FR-030)** **on** **each** **supported** **platform**, **summarize** **what** **each** **log** **family** **may** **contain**, **and** **reference** **retention**/**rollover** **controls** **(FR-024,** **FR-030)** **and** **jurisdictional** **considerations** **(NFR-008)**.
 
-**Measurement criteria:** **Reviewer** can answer: what to back up, what is logged, and where **secrets** live—using **only** shipped docs.
+**Measurement criteria:** **Reviewer** can answer: what to back up, what is logged, **where** **each** **log** **type** **resides**, **how** **to** **tune** **retention**/**rollover**, **and** where **secrets** live—using **only** shipped docs.
 
 **Constraints:** Complements **NFR-007** (end-user / day-to-day documentation); **admin** vs **end-user** material **MAY** share a **Help** shell but **SHALL** remain **discernible** (e.g. separate sections or guides).  
 **Dependencies:** `system-documentation/user-documentation/` (e.g. admin guide); stubs **to be** expanded for release.
@@ -563,7 +589,7 @@ Stakeholders managing **large, heterogeneous** electronic document collections (
 
 **Category:** Usability / Maintainability  
 
-**Description:** The product SHALL ship **end-user documentation** in **English** (FR-021), comprising at minimum: **(a)** a **User manual** describing **primary** **shell** workflows—including **catalog**, **search**, **metadata/tags**, **open in native reader** (and **reader** preferences per FR-028), **Settings** (FR-027), and **RBAC-visible** behavior (e.g. what **denied access** looks like)—and **(b)** a **Quick-start guide** sufficient for a **new** user to **install or connect** the client, **authenticate** if required, and **import** at least **one** document **successfully**. Source **MAY** be maintained under **`system-documentation/user-documentation/`** (or successor path) and **SHALL** be **packaged** or **published** with **releases** **per** HLA (e.g. **HTML**, **PDF**, **Markdown** bundle—**exact** formats **TBD**).
+**Description:** The product SHALL ship **end-user documentation** in **English** (FR-021), comprising at minimum: **(a)** a **User manual** describing **primary** **shell** workflows—including **catalog**, **search**, **metadata/tags**, **open in native reader** (and **reader** preferences per FR-028), **Settings** (FR-027), **client** **operational**/**diagnostic** **logging** **controls** **and** **default** **log** **locations** **(FR-030)**, and **RBAC-visible** behavior (e.g. what **denied access** looks like)—and **(b)** a **Quick-start guide** sufficient for a **new** user to **install or connect** the client, **authenticate** if required, and **import** at least **one** document **successfully**. Source **MAY** be maintained under **`system-documentation/user-documentation/`** (or successor path) and **SHALL** be **packaged** or **published** with **releases** **per** HLA (e.g. **HTML**, **PDF**, **Markdown** bundle—**exact** formats **TBD**).
 
 The **shell UI** SHALL provide a **user-discoverable** **Help** affordance (e.g. **Help** menu, **toolbar**, or **Settings** link—**TBD** DD) that **reaches** the **Quick-start** and **User manual** for the **running** **product version** (e.g. **opens** bundled content in an **embedded** viewer, **local** help window, or **system** browser—**not** mandated herein).
 
@@ -571,7 +597,20 @@ The **shell UI** SHALL provide a **user-discoverable** **Help** affordance (e.g.
 
 **Constraints:** **Searchable** **full** in-app help **index**, **context-sensitive** (F1) help, and **very large** manual **browse/search** **UX** are **deferred** to **§13** unless **implemented** **early** via a **chosen** component. A **pre-built** help **component** or **viewer** **MAY** be used **provided** **licenses** are **compatible** with **Apache-2.0** distribution (or **clearly** **optional**), **security** posture is **acceptable**, and **accessibility** (FR-020) **obligations** are **met** for the **help** surface.
 
-**Dependencies:** FR-021; FR-020; NFR-004 (operator docs **distinct** but **may** **cross-link**).
+**Dependencies:** FR-021; FR-020; FR-030; NFR-004, NFR-008 (operator docs **distinct** but **may** **cross-link**).
+
+---
+
+## NFR-008 — Logging: privacy and jurisdictional readiness
+
+**Category:** Compliance / Security  
+
+**Description:** **Audit** **(FR-022)**, **operational**, **and** **diagnostic** **(FR-030)** **logging** **SHALL** **be** **designed** **assuming** **strict** **privacy**, **employment**, **health**, **or** **sector-specific** **rules** **may** **apply** **in** **some** **deployments**. **The** **product** **SHALL** **support** **data** **minimization** **in** **log** **content**, **purpose** **limitation** **and** **retention** **discipline** **documented** **for** **operators** **(NFR-004)**, **separation** **of** **audit** **from** **technical** **diagnostics** **where** **appropriate**, **and** **operator-configurable** **retention**, **rollover**, **and** **enablement** **(FR-024,** **FR-030)** **so** **that** **lawful** **basis**, **processor** **obligations**, **and** **internal** **policy** **can** **be** **honored** **without** **undocumented** **immutable** **log** **behavior**.
+
+**Measurement criteria:** **Privacy**/**compliance** **review** **checklist** **passes**: **cleartext** **secrets**/**credentials**/**tokens**/**full** **document** **bodies** **absent** **from** **operational**/**diagnostic** **logs** **(FR-030)**; **documentation** **states** **what** **identifiers** **or** **paths** **may** **constitute** **personal** **data** **and** **recommended** **configurations** **for** **restrictive** **jurisdictions**; **tests** **verify** **disable** **stops** **new** **persistence** **per** **FR-030** **acceptance**.
+
+**Constraints:** **Does** **not** **warrant** **compliance** **with** **any** **specific** **statute**; **operators** **and** **controllers** **remain** **accountable** **for** **legal** **interpretation**.  
+**Dependencies:** FR-022, FR-024, FR-030, NFR-004.
 
 ---
 
@@ -618,7 +657,8 @@ The **shell UI** SHALL provide a **user-discoverable** **Help** affordance (e.g.
 - **File system** paths or **administrator-configured** storage locations for **document bytes**.  
 - **Operating system** services to **launch native readers** with **file** or **URI** targets.  
 - **Human users** via **shell UI** and **native readers** (external).  
-- **Client preference data** (reader choices, theme, and future Settings values) **SHALL** **persist** on the **client** **per** DD (local store, profile path, or equivalent); **synchronization** of preferences across machines **deferred** unless **specified** in HLA.  
+- **Client preference data** (reader choices, theme, **logging** **toggles**/**rotation** **values**, and future Settings) **SHALL** **persist** on the **client** **per** DD (local store, profile path, or equivalent); **synchronization** of preferences across machines **deferred** unless **specified** in HLA.  
+- **Operational** **and** **diagnostic** **log** **files** **(FR-030)** **SHALL** **reside** **at** **platform-appropriate** **paths** **per** **HLA**; **server** **log** **paths** **SHALL** **follow** **service**/**daemon** **conventions** **per** **OS**.  
 - **Future:** optional **update metadata** endpoint **deferred**; **no** **public application API** in v1.  
 - **No** specific **vendor** OCR, PDF, or UI framework **required** in this SRS.
 
@@ -629,8 +669,9 @@ The **shell UI** SHALL provide a **user-discoverable** **Help** affordance (e.g.
 - **Catalog data** (metadata, tags, keywords, paths, tenant, permissions) **SHALL** be **durable** (survive restart).  
 - **Full-text index** **SHALL** be **rebuildable** from **source documents** and **catalog** state **per documented** procedure (acceptable **downtime** **TBD** HLA).  
 - **Passwords:** **hashed** only (FR-023).  
-- **Audit logs:** **personal data** in some jurisdictions; **purpose limitation** and **retention** **operator-configured** (FR-024).  
-- **Client preferences** (FR-027–FR-029): **SHALL NOT** be used to store **server secrets** or to **bypass** authorization; **backup** scope **MAY** include **client** preference stores **where** operators **document** **enterprise** restore practices (solo: typically **user-local**).  
+- **Audit logs:** **personal data** in some jurisdictions; **purpose limitation** and **retention** **operator-configured** (FR-024, **NFR-008**).  
+- **Operational** **and** **diagnostic** **logs** **(FR-030):** **MAY** **contain** **identifiers**, **paths**, **or** **other** **personal** **data**; **minimization** **and** **retention** **SHALL** **align** **with** **NFR-008** **and** **operator** **policy**.  
+- **Client preferences** (FR-027–FR-030): **SHALL NOT** be used to store **server secrets** or to **bypass** authorization; **backup** scope **MAY** include **client** preference stores **where** operators **document** **enterprise** restore practices (solo: typically **user-local**).  
 - **Backups:** **ideal** includes **corpus + DB + index + config + logs**; **minimal** subset **documented** for operators (NFR-004).
 
 ---
@@ -650,7 +691,8 @@ The **shell UI** SHALL provide a **user-discoverable** **Help** affordance (e.g.
 - **Client Settings** (FR-027) **SHALL NOT** allow **elevation** of privilege or **access** to **documents** **contrary** to **server** decisions; **UI** hiding alone **is** **insufficient** for **security** on **remote** deployments (FR-012).  
 - **Transport security** for **remote** access **SHALL** be **supported** (details HLA).  
 - **Audit** optional events per FR-022 with **privacy** awareness.  
-- **Regulatory:** **Operators** responsible for **lawful processing**; product provides **controls** and **documentation**, **not legal advice**.  
+- **Operational**/**diagnostic** **logs** **(FR-030):** **Where** **viewing** **or** **export** **is** **exposed** **in** **UI**, **access** **SHALL** **respect** **RBAC** **(FR-016)**. **Log** **content** **SHALL** **satisfy** **NFR-008** (**no** **cleartext** **secrets**, **session** **tokens**, **passwords**, **or** **full** **document** **payloads** **in** **operational**/**diagnostic** **streams**).  
+- **Regulatory:** **Operators** **remain** **responsible** **for** **lawful** **processing**; **the** **product** **provides** **controls** **and** **documentation** **(including** **NFR-008)** **but** **not** **legal** **advice** **or** **jurisdiction-specific** **certification**.  
 - **Accessibility law** alignment **targeted** via FR-020; **jurisdiction-specific** claims **deferred** to **counsel**.
 
 ---
@@ -680,16 +722,17 @@ The **shell UI** SHALL provide a **user-discoverable** **Help** affordance (e.g.
 
 # 14. Risk Assessment
 
-| Risk                                | Level        | Mitigation (requirements-level)     |
-| ----------------------------------- | ------------ | ----------------------------------- |
-| **Extraction/OCR inaccuracy**       | **High**     | §6, FR-019, FR-007 honest semantics |
-| **User expects SharePoint parity**  | **Moderate** | §2.2 non-goals, operator docs       |
-| **Remote access misconfiguration**  | **High**     | NFR-002, NFR-004, HLA hardening     |
-| **Legal/DRM boundary**              | **Moderate** | FR-006, FR-026, §7                  |
-| **Accessibility verification gaps** | **Moderate** | FR-020 + Test Plan                  |
-| **Documentation / Help gaps**       | **Moderate** | NFR-007 checklist, Quick-start test |
-| **Scope creep (web/API)**           | **Moderate** | §13 waiting room                    |
-| **Reader preference misconfiguration** | **Low–Moderate** | FR-028 acceptance, clear fallback |
+| Risk                                   | Level            | Mitigation (requirements-level)     |
+| -------------------------------------- | ---------------- | ----------------------------------- |
+| **Extraction/OCR inaccuracy**          | **High**         | §6, FR-019, FR-007 honest semantics |
+| **User expects SharePoint parity**     | **Moderate**     | §2.2 non-goals, operator docs       |
+| **Remote access misconfiguration**     | **High**         | NFR-002, NFR-004, HLA hardening     |
+| **Legal/DRM boundary**                 | **Moderate**     | FR-006, FR-026, §7                  |
+| **Accessibility verification gaps**    | **Moderate**     | FR-020 + Test Plan                  |
+| **Documentation / Help gaps**          | **Moderate**     | NFR-007 checklist, Quick-start test |
+| **Scope creep (web/API)**              | **Moderate**     | §13 waiting room                    |
+| **Reader preference misconfiguration** | **Low–Moderate** | FR-028 acceptance, clear fallback   |
+| **Logging / retention compliance**       | **Moderate**     | FR-030, FR-024, NFR-004, NFR-008    |
 
 ---
 

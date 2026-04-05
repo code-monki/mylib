@@ -3,9 +3,17 @@
 Timestamped summaries of **discussions**, **decisions**, and **technology choices** (or explicit **deferrals**).  
 **Newest entries first.** Append new blocks after updating the “Last updated” line below.
 
-**Last updated:** 2026-04-06 UTC  
+**Last updated:** 2026-04-06 (SRS v0.5 logging) UTC  
 
 **Not legal advice** where legal topics appear; see [`open-source-license.md`](open-source-license.md).
+
+---
+
+## 2026-04-06 — SRS v0.5: operational/diagnostic logs, Settings, compliance
+
+**Summary:** **FR-030** — **client** **and** **server** **operational** **and** **diagnostic** **logs**, **independent** **enable**/**disable** **per** **category**, **Settings** **(FR-027)** **/** **server** **admin** **UI**, **platform-default** **paths**, **day-based** **rollover** **+** **FR-024** **maximum** **retention**. **NFR-008** **privacy**/**jurisdictional** **readiness**. **Definitions**, **NFR-004**/**007**, **§9–§12**, **FR-020**, **risks** **updated**.
+
+**Documentation:** [`../srs.md`](../srs.md).
 
 ---
 
