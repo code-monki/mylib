@@ -3,9 +3,17 @@
 Timestamped summaries of **discussions**, **decisions**, and **technology choices** (or explicit **deferrals**).  
 **Newest entries first.** Append new blocks after updating the “Last updated” line below.
 
-**Last updated:** 2026-04-08 (SRS v0.7 password, search, sessions) UTC  
+**Last updated:** 2026-04-09 (SRS v0.8 MFA / passkeys posture) UTC  
 
 **Not legal advice** where legal topics appear; see [`open-source-license.md`](open-source-license.md).
+
+---
+
+## 2026-04-09 — SRS v0.8: MFA de-prioritized; passkeys as waiting-room candidate
+
+**Summary:** **§2.2** **explicit** **out-of-scope:** **MFA** **not** **in** **v1,** **intentionally** **de-prioritized** **until** **clear** **need;** **if** **ever** **introduced,** **optional** **per** **deployment** **only** **(not** **listed** **in** **§13** **—** **avoid** **implying** **a** **backlog** **item).** **§13** **waiting** **room:** **passkeys** **/** **WebAuthn** **as** **candidate** **post-v1** **optional** **sign-in** **(HLA** **/** **DD).** **FR-016** **Notes,** **§12** **cross-references.**
+
+**Documentation:** [`../srs.md`](../srs.md).
 
 ---
 

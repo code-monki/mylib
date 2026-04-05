@@ -14,9 +14,9 @@ They SHALL NOT encode architecture or implementation.
 # Software Requirements Specification (SRS)
 
 Project Name: MyLib  
-Version: 0.7  
-Date (YYYY-MM-DD): 2026-04-08  
-**Last revised (UTC):** 2026-04-08  
+Version: 0.8  
+Date (YYYY-MM-DD): 2026-04-09  
+**Last revised (UTC):** 2026-04-09  
 Author(s): Charles McKnight (draft; maintainers may revise)  
 Status: Draft  
 Project Primer Version Reference: 1.0 (`_process/project-primer.md`)  
@@ -65,7 +65,8 @@ This document specifies **software requirements** for **MyLib**, an **open-sourc
 - **Symbolic links** as first-class library paths (v1).  
 - **Numeric performance SLAs** tied to specific hardware (deferred; see NFRs for qualitative scale).  
 - **Features whose primary purpose is circumventing DRM** on copyrighted works.  
-- **MyLib-provided** document **export**, **download**, or **print** flows (users may use capabilities of native readers where applicable).
+- **MyLib-provided** document **export**, **download**, or **print** flows (users may use capabilities of native readers where applicable).  
+- **Multi-factor authentication (MFA)**—e.g. **TOTP, SMS or app push OTP, hardware tokens** as a **second** **factor** **bound** **to** **login**—**is** **not** **in** **v1** **and** **is** **intentionally** **de-prioritized** **until** **a** **clear,** **stakeholder-driven** **need** **arises**; **if** **MFA** **is** **ever** **introduced,** **it** **SHALL** **remain** **optional** **per** **deployment** **(operators** **or** **users** **enable** **it** **where** **supported)** **and** **SHALL** **not** **be** **mandated** **for** **all** **installations** **without** **an** **explicit** **future** **scope** **revision.**
 
 **Ownership boundaries**
 
@@ -312,7 +313,7 @@ Stakeholders managing **large, heterogeneous** electronic document collections (
 **Priority:** High  
 **Dependencies:** FR-013  
 **Constraints:** Enterprise IdP / SSO **deferred** (waiting room).  
-**Notes:** —
+**Notes:** **v1** **relies** **on** **server-validated** **username/password** **(or** **documented** **equivalent)** **per** **Description.** **MFA** **is** **out** **of** **scope** **(§2.2)** **unless** **explicitly** **reopened.** **Passkeys** **(FIDO2** **/** **WebAuthn-class** **credentials** **as** **an** **optional** **sign-in** **path)** **are** **a** **candidate** **post-v1** **enhancement** **(§13)** **when** **platform** **and** **privacy** **constraints** **are** **addressed** **in** **HLA** **/** **DD.**
 
 ---
 
@@ -867,6 +868,7 @@ The **shell UI** SHALL provide a **user-discoverable** **Help** affordance (e.g.
 # 12. Security and Compliance Requirements
 
 - **Authentication** and **RBAC** per FR-016–FR-018.  
+- **Multi-factor authentication (MFA)** **is** **not** **required** **in** **v1** **and** **is** **out** **of** **scope** **unless** **reopened** **(§2.2);** **any** **future** **MFA** **SHALL** **be** **optional** **per** **deployment.** **Passkey** **/** **WebAuthn** **sign-in** **is** **deferred** **as** **a** **candidate** **capability** **(§13).**  
 - **Client Settings** (FR-020) **SHALL NOT** allow **elevation** of privilege or **access** to **documents** **contrary** to **server** decisions; **UI** hiding alone **is** **insufficient** for **security** on **remote** deployments (FR-013).  
 - **Transport security** for **remote** access **SHALL** satisfy **NFR-009**; **loopback** **solo** **profiles** **per** **documented** **HLA** **exception**.  
 - **Audit** optional events per FR-026 with **privacy** awareness.  
@@ -896,7 +898,8 @@ The **shell UI** SHALL provide a **user-discoverable** **Help** affordance (e.g.
 - **Sync of client preferences** across **multiple** installations or devices  
 - **Searchable** in-app **help** (full-text **index** over the **manual**) when **document** size or **navigation** **pain** **warrants** it—**or** **adopt** a **component** that **provides** search **out of the box**  
 - **Context-sensitive** help (**F1**, **“?”**, or **screen-linked** topics) **tied** to the **active** **shell** view  
-- **Self-service** **password** **recovery** **(e.g.** **email** **magic** **link)** **without** **administrator** **involvement**
+- **Self-service** **password** **recovery** **(e.g.** **email** **magic** **link)** **without** **administrator** **involvement**  
+- **Passkeys** **/** **WebAuthn** **(platform** **or** **roaming** **authenticators)** **as** **an** **optional** **sign-in** **method** **alongside** **or** **instead** **of** **password** **where** **client** **and** **server** **design** **permit**—**candidate** **post-v1** **feature** **(requirements** **and** **UX** **TBD** **HLA** **/** **DD;** **privacy** **and** **account** **recovery** **story** **must** **be** **explicit)**
 
 ---
 
@@ -935,7 +938,7 @@ The **shell UI** SHALL provide a **user-discoverable** **Help** affordance (e.g.
 
 Confirm readiness to proceed to **High-Level Architecture**:
 
-- Requirements stable? **Partial** — **revision** **0.7** **(2026-04-08)** **captured** **password** **policy,** **v1** **search** **grammar,** **and** **session**/**capacity** **clarifications**; **further** **stakeholder** **pass** **recommended** **before** **Architecture**  
+- Requirements stable? **Partial** — **revision** **0.8** **(2026-04-09)** **records** **MFA** **out-of-scope** **(optional-only** **if** **ever** **reopened)** **and** **passkeys** **as** **waiting-room** **candidate**; **further** **stakeholder** **pass** **recommended** **before** **Architecture**  
 - NFRs measurable? **Partial** — **NFR-001** **gates** **on** **Test** **Plan**; **NFR-009** **on** **security** **checklist**  
 - Scope boundaries explicit? **Yes**  
 - Traceability scaffold prepared? **No** — **RTM** next  
