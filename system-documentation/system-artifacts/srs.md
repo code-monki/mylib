@@ -14,9 +14,9 @@ They SHALL NOT encode architecture or implementation.
 # Software Requirements Specification (SRS)
 
 Project Name: MyLib  
-Version: 0.6  
-Date (YYYY-MM-DD): 2026-04-06  
-**Last revised (UTC):** 2026-04-07  
+Version: 0.7  
+Date (YYYY-MM-DD): 2026-04-08  
+**Last revised (UTC):** 2026-04-08  
 Author(s): Charles McKnight (draft; maintainers may revise)  
 Status: Draft  
 Project Primer Version Reference: 1.0 (`_process/project-primer.md`)  
@@ -195,7 +195,7 @@ Stakeholders managing **large, heterogeneous** electronic document collections (
 **Priority:** High  
 **Dependencies:** FR-006  
 **Constraints:** —  
-**Notes:** “Jump to page/offset in native reader” behavior is **aspirational** and **format-dependent**; any such feature SHALL be **documented honestly** when specified in a later artifact.
+**Notes:** “Jump to page/offset in native reader” behavior is **aspirational** and **format-dependent**; any such feature SHALL be **documented honestly** when specified in a later artifact. **Query** **syntax** **and** **semantics** **(boolean,** **phrase,** **grouping)** **are** **specified** **in** **FR-038**.
 
 ---
 
@@ -457,7 +457,7 @@ Stakeholders managing **large, heterogeneous** electronic document collections (
 **Priority:** High  
 **Dependencies:** FR-016  
 **Constraints:** Algorithm choice **TBD** in DD (must be **industry-accepted**).  
-**Notes:** —
+**Notes:** **Human-chosen** **password** **composition** **rules** **(length** **and** **character** **classes)** **are** **in** **FR-033**; **storage** **here** **concerns** **hashing** **only**.
 
 ---
 
@@ -539,12 +539,14 @@ For **each** **category** **on** **each** **component** **(client** **vs** **ser
 
 **Description:** **Authenticated** users SHALL be able to **change** their **own** **password** subject to **current-password** **verification** **or** **equivalent** **re-auth** **per** **DD**. **Administrators** SHALL be able to **reset** another user’s password (**temporary** **password** **or** **must-change** **flag** **on** **next** **login**—**DD**). **Self-service** **out-of-band** **recovery** **(e.g.** **email** **link)** **without** **administrator** **involvement** **is** **out** **of** **scope** **for** **v1** **unless** **reopened** **(§13)**.
 
-**Acceptance criteria:** **Change** **and** **reset** **flows** **invalidate** **or** **preserve** **sessions** **per** **documented** **security** **policy** **(FR-035)**; **password** **rules** **(length,** **complexity)** **SHALL** **be** **documented** **defaults** **with** **configurable** **bounds** **where** **applicable** **(DD)**.
+**Any** **new** **password** **chosen** **by** **a** **user** **(self-service** **change** **or** **post-reset)** **SHALL** **meet** **all** **of** **the** **following** **v1** **rules:** **(a)** **minimum** **length** **eight** **characters;** **(b)** **at** **least** **one** **uppercase** **Latin** **letter** **(A–Z);** **(c)** **at** **least** **one** **lowercase** **Latin** **letter** **(a–z);** **(d)** **at** **least** **one** **decimal** **digit** **(0–9);** **(e)** **at** **least** **one** **symbol** **from** **a** **documented** **non-alphanumeric** **set** **(DD** **SHALL** **enumerate** **the** **default** **permitted** **symbols** **and** **any** **operator-configurable** **variants** **where** **allowed).**
+
+**Acceptance criteria:** **Change** **and** **reset** **flows** **invalidate** **or** **preserve** **sessions** **per** **documented** **security** **policy** **(FR-035)**; **passwords** **violating** **the** **rules** **above** **are** **rejected** **with** **clear,** **actionable** **errors** **before** **persistence**; **compliant** **passwords** **are** **accepted** **and** **stored** **per** **FR-027**.
 
 **Priority:** High  
 **Dependencies:** FR-016, FR-027, FR-031  
 **Constraints:** —  
-**Notes:** **Self-service** **out-of-band** **recovery** **(e.g.** **email)** **remains** **in** **§13** **unless** **promoted** **to** **scope**.
+**Notes:** **Self-service** **out-of-band** **recovery** **(e.g.** **email)** **remains** **in** **§13** **unless** **promoted** **to** **scope.** **System-generated** **temporary** **passwords** **SHALL** **either** **satisfy** **the** **same** **composition** **rules** **or** **be** **usable** **only** **until** **the** **user** **sets** **a** **compliant** **password** **on** **first** **login** **per** **DD.**
 
 ---
 
@@ -563,14 +565,18 @@ For **each** **category** **on** **each** **component** **(client** **vs** **ser
 
 ## FR-035 — Session management
 
-**Description:** **Server-validated** **sessions** **(or** **tokens)** **SHALL** **support** **administrator-configurable** **idle** **timeout** **and** **absolute** **maximum** **lifetime** **(documented** **defaults** **and** **bounds** **in** **DD)**. **Explicit** **user** **logout** **from** **the** **client** **SHALL** **invalidate** **the** **session** **on** **the** **server** **for** **remote-capable** **deployments** **(FR-013)**. **Concurrent** **sessions** **per** **user** **SHALL** **follow** **documented** **policy:** **either** **limited** **to** **N** **simultaneous** **sessions** **or** **unlimited** **with** **documented** **semantics** **(DD)**.
+**Description:** **Server-validated** **sessions** **(or** **tokens)** **SHALL** **support** **administrator-configurable** **idle** **timeout** **and** **absolute** **maximum** **lifetime** **(documented** **defaults** **and** **bounds** **in** **DD)**. **Explicit** **user** **logout** **from** **the** **client** **SHALL** **invalidate** **the** **session** **on** **the** **server** **for** **remote-capable** **deployments** **(FR-013)**.
 
-**Acceptance criteria:** **Idle** **timeout** **expires** **session** **in** **test** **harness**; **logout** **prevents** **reuse** **of** **old** **token**; **concurrent** **policy** **verified** **per** **DD** **matrix**.
+**Per-user** **concurrent** **sessions** **(the** **same** **identity** **with** **multiple** **active** **tokens** **or** **connections** **at** **once)** **SHALL** **follow** **documented** **product** **policy:** **either** **limited** **to** **N** **simultaneous** **sessions** **or** **unlimited** **with** **documented** **semantics** **(DD)**—**this** **is** **distinct** **from** **aggregate** **deployment** **capacity** **(below).**
+
+**Aggregate** **concurrent** **authenticated** **sessions** **across** **all** **users** **depend** **on** **hardware,** **network,** **and** **deployment** **topology** **(e.g.** **one** **server** **process** **vs.** **multiple** **instances** **behind** **routing** **and** **load** **balancing** **per** **HLA)** **and** **are** **not** **assigned** **a** **single** **numeric** **maximum** **in** **this** **SRS.** **Where** **stakeholders** **require** **it,** **stress** **or** **load** **scenarios** **in** **the** **Test** **Plan** **(and** **operator** **guidance** **in** **NFR-004)** **SHALL** **characterize** **headroom** **for** **agreed** **reference** **configurations** **(see** **NFR-001).**
+
+**Acceptance criteria:** **Idle** **timeout** **expires** **session** **in** **test** **harness**; **logout** **prevents** **reuse** **of** **old** **token**; **per-user** **concurrent** **policy** **verified** **per** **DD** **matrix**.
 
 **Priority:** High  
 **Dependencies:** FR-016  
 **Constraints:** —  
-**Notes:** **Token** **binding** **to** **device** **fingerprinting** **deferred**.
+**Notes:** **Token** **binding** **to** **device** **fingerprinting** **deferred.**
 
 ---
 
@@ -602,14 +608,22 @@ For **each** **category** **on** **each** **component** **(client** **vs** **ser
 
 ## FR-038 — Search query semantics and results
 
-**Description:** **Full-text** **search** **(FR-007)** **SHALL** **implement** **documented** **v1** **semantics:** **whitespace-separated** **terms** **combine** **with** **logical** **AND**; **matching** **SHALL** **be** **case-insensitive** **for** **basic** **Latin** **(other** **scripts** **per** **DD)**; **records** **matched** **only** **via** **keyword** **lists** **(FR-009)** **SHALL** **appear** **when** **keywords** **match** **the** **query** **per** **DD**. **Search** **results** **SHALL** **support** **documented** **sort** **and** **pagination** **consistent** **with** **FR-037** **where** **applicable**. **Phrase** **search,** **boolean** **operators,** **and** **fielded** **query** **syntax** **beyond** **this** **default** **are** **optional** **v1** **enhancements** **documented** **in** **DD** **if** **shipped**.
+**Description:** **Full-text** **search** **(FR-007)** **SHALL** **implement** **documented** **v1** **query** **semantics** **including** **all** **of** **the** **following:**
 
-**Acceptance criteria:** **Golden** **query** **fixtures** **in** **Test** **Plan** **validate** **AND** **semantics,** **case** **behavior,** **and** **keyword-only** **hits**; **malformed** **queries** **fail** **gracefully** **with** **user-visible** **feedback**.
+1. **Implicit** **conjunction:** **Whitespace-separated** **bare** **terms** **(outside** **quotes** **and** **outside** **explicit** **operators)** **combine** **with** **logical** **AND** **by** **default.**  
+2. **Boolean** **operators:** **The** **query** **language** **SHALL** **support** **explicit** **`AND`,** **`OR`,** **and** **`NOT`** **(spelling** **and** **tokenization** **per** **DD)** **so** **users** **can** **express** **disjunction** **and** **negation** **without** **workarounds.**  
+3. **Phrase** **search:** **Double-quoted** **strings** **SHALL** **denote** **phrase** **units** **matched** **as** **contiguous** **text** **per** **index** **capabilities** **(documented** **limitations** **e.g.** **stemming,** **word** **breaks).**  
+4. **Grouping:** **Parentheses** **`(`** **`)`** **SHALL** **group** **subexpressions** **so** **that** **precedence** **is** **unambiguous** **for** **nested** **boolean** **and** **phrase** **combinations.**  
+5. **Grammar** **and** **precedence:** **DD** **SHALL** **publish** **a** **normative** **grammar** **(e.g.** **BNF** **or** **equivalent)** **including** **operator** **precedence** **and** **associativity** **where** **parentheses** **are** **omitted,** **and** **SHALL** **define** **interaction** **between** **phrases,** **operators,** **and** **implicit** **AND.**
+
+**Matching** **SHALL** **be** **case-insensitive** **for** **basic** **Latin** **(other** **scripts** **per** **DD).** **Records** **matched** **only** **via** **keyword** **lists** **(FR-009)** **SHALL** **participate** **in** **queries** **per** **documented** **rules** **consistent** **with** **the** **same** **grammar** **where** **applicable.** **Search** **results** **SHALL** **support** **documented** **sort** **and** **pagination** **consistent** **with** **FR-037** **where** **applicable.** **Fielded** **or** **metadata-only** **query** **syntax** **beyond** **full-text** **and** **keywords** **is** **optional** **for** **v1** **and** **SHALL** **be** **specified** **in** **DD** **if** **shipped.**
+
+**Acceptance criteria:** **Golden** **query** **fixtures** **in** **Test** **Plan** **validate** **implicit** **AND,** **explicit** **`AND`/`OR`/`NOT`,** **double-quoted** **phrases,** **parenthesized** **grouping** **(including** **at** **least** **one** **nested** **case),** **case** **behavior** **for** **Latin,** **and** **keyword-only** **hits** **(FR-009);** **malformed** **queries** **(e.g.** **unbalanced** **parentheses,** **empty** **phrases)** **fail** **with** **user-visible,** **actionable** **feedback** **without** **server** **fault.**
 
 **Priority:** High  
 **Dependencies:** FR-007, FR-009  
 **Constraints:** —  
-**Notes:** **Relevance** **ranking** **algorithm** **TBD** **DD** **(deterministic** **tie-break** **required** **for** **tests)**.
+**Notes:** **Relevance** **ranking** **algorithm** **TBD** **DD** **(deterministic** **tie-break** **required** **for** **tests).**
 
 ---
 
@@ -662,10 +676,12 @@ For **each** **category** **on** **each** **component** **(client** **vs** **ser
 
 **Description:** The system SHALL support **routine** catalog, browse (**FR-037**), and search (**FR-007**, **FR-038**) operations for libraries of **at least 10,000** catalog records **without** requiring **manual database surgery** for normal operation. **Architecture** **and** **index** **design** **SHALL** **treat** **corpora** **on** **the** **order** **of** **100,000** **documents** **as** **a** **design-center** **scale** **(concept** **alignment)** **even** **when** **formal** **release** **testing** **initially** **emphasizes** **the** **10,000-record** **verification** **gate** **below**.
 
-**Measurement criteria:** **Load test** with **10,000** representative records on a **reference environment** defined in the **Test Plan**; **no** unbounded memory growth on **steady-state** browse/search **as defined in Test Plan**. **Optional** **stretch** **scenario** **(e.g.** **50k–100k** **synthetic** **records)** **MAY** **be** **defined** **in** **Test** **Plan** **as** **an** **engineering** **signal** **without** **being** **a** **v1** **release** **blocker** **unless** **promoted** **by** **stakeholders**.
+**Deployments** **that** **require** **high** **aggregate** **concurrency** **MAY** **use** **multiple** **server** **instances** **behind** **network** **routing** **and** **load** **balancing** **(HLA);** **maximum** **sustainable** **authenticated** **session** **count** **and** **throughput** **depend** **on** **hardware,** **network,** **and** **topology** **and** **are** **not** **fixed** **by** **this** **SRS** **(see** **FR-035** **for** **per-user** **vs.** **aggregate** **distinction).**
+
+**Measurement criteria:** **Load test** with **10,000** representative records on a **reference environment** defined in the **Test Plan**; **no** unbounded memory growth on **steady-state** browse/search **as defined in Test Plan**. **Optional** **stretch** **scenario** **(e.g.** **50k–100k** **synthetic** **records)** **MAY** **be** **defined** **in** **Test** **Plan** **as** **an** **engineering** **signal** **without** **being** **a** **v1** **release** **blocker** **unless** **promoted** **by** **stakeholders**. **Where** **stakeholders** **require** **capacity** **evidence,** **the** **Test** **Plan** **MAY** **add** **concurrent-session** **or** **multi-instance** **stress** **scenarios** **against** **agreed** **reference** **hardware** **profiles** **to** **identify** **when** **additional** **instances** **or** **capacity** **are** **warranted**—**without** **prescribing** **a** **universal** **numeric** **connection** **ceiling.**
 
 **Constraints:** Does **not** fix **latency** milliseconds on all hardware.  
-**Dependencies:** Test Plan, HLA, FR-037, FR-038.
+**Dependencies:** Test Plan, HLA, FR-035, FR-037, FR-038.
 
 ---
 
@@ -699,7 +715,7 @@ For **each** **category** **on** **each** **component** **(client** **vs** **ser
 
 **Category:** Usability / Compliance  
 
-**Description:** The project SHALL publish **operator documentation** describing **backup scope** (corpus, database, index, configuration, logs), **security boundaries**, and **privacy-relevant** data flows **at a conceptual level** sufficient for **informed deployment**. The **admin** **guide** **SHALL** **cover** **first-run** **bootstrap** **(FR-032)**, **user** **and** **role** **administration** **(FR-031)**, **session** **and** **lockout** **policy** **(FR-034,** **FR-035)**, **TLS** **and** **certificate** **handling** **(NFR-009)**, **library** **storage** **roots** **(FR-036)**, **index** **rebuild** **(FR-039)**, **and** **time** **synchronization** **expectations** **(§8)**. It **SHALL** **identify** **default** **locations** **(or** **discovery** **method)** **for** **audit** **(FR-026)**, **operational**, **and** **diagnostic** **logs** **(FR-029)** **on** **each** **supported** **platform**, **summarize** **what** **each** **log** **family** **may** **contain**, **and** **reference** **retention**/**rollover** **controls** **(FR-028,** **FR-029)** **and** **jurisdictional** **considerations** **(NFR-008)**.
+**Description:** The project SHALL publish **operator documentation** describing **backup scope** (corpus, database, index, configuration, logs), **security boundaries**, and **privacy-relevant** data flows **at a conceptual level** sufficient for **informed deployment**. The **admin** **guide** **SHALL** **cover** **first-run** **bootstrap** **(FR-032)**, **user** **and** **role** **administration** **(FR-031)**, **password** **composition** **policy** **as** **deployed** **(FR-033)**, **session** **and** **lockout** **policy** **(FR-034,** **FR-035)**, **TLS** **and** **certificate** **handling** **(NFR-009)**, **library** **storage** **roots** **(FR-036)**, **index** **rebuild** **(FR-039)**, **and** **time** **synchronization** **expectations** **(§8)**. It **SHALL** **identify** **default** **locations** **(or** **discovery** **method)** **for** **audit** **(FR-026)**, **operational**, **and** **diagnostic** **logs** **(FR-029)** **on** **each** **supported** **platform**, **summarize** **what** **each** **log** **family** **may** **contain**, **and** **reference** **retention**/**rollover** **controls** **(FR-028,** **FR-029)** **and** **jurisdictional** **considerations** **(NFR-008)**.
 
 **Measurement criteria:** **Reviewer** can answer: what to back up, what is logged, **where** **each** **log** **type** **resides**, **how** **to** **tune** **retention**/**rollover**, **and** where **secrets** live—using **only** shipped docs.
 
@@ -889,6 +905,7 @@ The **shell UI** SHALL provide a **user-discoverable** **Help** affordance (e.g.
 | Risk                                   | Level            | Mitigation (requirements-level)     |
 | -------------------------------------- | ---------------- | ----------------------------------- |
 | **Extraction/OCR inaccuracy**          | **High**         | §6, FR-023, FR-007 honest semantics |
+| **Search query parsing / user expectation** | **Moderate**  | FR-038 normative grammar, golden fixtures, NFR-007 |
 | **User expects SharePoint parity**     | **Moderate**     | §2.2 non-goals, operator docs       |
 | **Remote access misconfiguration**     | **High**         | NFR-002, NFR-004, NFR-009, HLA     |
 | **Credential / session abuse**         | **High**         | FR-034, FR-035, NFR-009, FR-033     |
@@ -918,7 +935,7 @@ The **shell UI** SHALL provide a **user-discoverable** **Help** affordance (e.g.
 
 Confirm readiness to proceed to **High-Level Architecture**:
 
-- Requirements stable? **Partial** — **substantive** **revision** **0.6** **(2026-04-07)** **addressed** **review** **gaps**; **further** **stakeholder** **pass** **recommended** **before** **Architecture**  
+- Requirements stable? **Partial** — **revision** **0.7** **(2026-04-08)** **captured** **password** **policy,** **v1** **search** **grammar,** **and** **session**/**capacity** **clarifications**; **further** **stakeholder** **pass** **recommended** **before** **Architecture**  
 - NFRs measurable? **Partial** — **NFR-001** **gates** **on** **Test** **Plan**; **NFR-009** **on** **security** **checklist**  
 - Scope boundaries explicit? **Yes**  
 - Traceability scaffold prepared? **No** — **RTM** next  

@@ -3,9 +3,17 @@
 Timestamped summaries of **discussions**, **decisions**, and **technology choices** (or explicit **deferrals**).  
 **Newest entries first.** Append new blocks after updating the “Last updated” line below.
 
-**Last updated:** 2026-04-07 (SRS v0.6 renumber + gaps) UTC  
+**Last updated:** 2026-04-08 (SRS v0.7 password, search, sessions) UTC  
 
 **Not legal advice** where legal topics appear; see [`open-source-license.md`](open-source-license.md).
+
+---
+
+## 2026-04-08 — SRS v0.7: password policy, v1 boolean/phrase search, session vs capacity
+
+**Summary:** **FR-033** **—** **v1** **password** **rules:** **minimum** **8** **characters;** **uppercase,** **lowercase,** **digit,** **and** **one** **symbol** **from** **a** **DD-enumerated** **set** **(temporary** **passwords** **meet** **rules** **or** **force** **change).** **FR-038** **—** **v1** **search** **requires** **`AND`/`OR`/`NOT`,** **double-quoted** **phrases,** **parentheses** **for** **grouping;** **DD** **carries** **normative** **grammar** **and** **precedence.** **FR-035** **+** **NFR-001** **—** **clarified** **per-user** **concurrent** **sessions** **(product** **policy** **in** **DD)** **vs.** **aggregate** **deployment** **capacity** **(hardware,** **network,** **multi-instance** **routing** **per** **HLA;** **stress** **scenarios** **optional** **in** **Test** **Plan).** **FR-027** **note** **cross-ref** **FR-033.** **NFR-004** **admin** **guide** **covers** **password** **policy.** **Risk** **row** **for** **search** **parsing.** **Version** **0.7,** **Last** **revised** **2026-04-08** **UTC.**
+
+**Documentation:** [`../srs.md`](../srs.md).
 
 ---
 
@@ -13,7 +21,7 @@ Timestamped summaries of **discussions**, **decisions**, and **technology choice
 
 **Summary:** **Renumbered** **functional** **requirements** **to** **FR-001–FR-030** **strict** **order** **(keywords** **FR-009,** **release** **FR-030).** **Added** **FR-031–FR-041:** **account**/**role** **admin,** **bootstrap,** **password** **change**/**admin** **reset,** **auth** **throttling,** **sessions,** **corpus** **storage** **model,** **catalog** **browse**/**pagination,** **search** **semantics** **(AND** **default),** **index** **rebuild,** **metadata** **validation,** **optimistic** **concurrency.** **Expanded** **FR-026** **audit** **(enable**/**disable,** **denied** **access** **default).** **NFR-001** **design-center** **100k;** **NFR-009** **TLS** **defaults.** **Header:** **Last** **revised** **2026-04-07** **UTC;** **§15–§16** **refresh.** **§8** **time** **sync** **assumption.**
 
-**Open** **product** **choices** **embedded** **(revisit** **if** **needed):** **v1** **search** **default** **=** **AND** **of** **terms,** **case-insensitive** **Latin;** **concurrent** **sessions** **=** **policy** **choice** **in** **DD** **(cap** **vs** **unlimited);** **self-service** **email** **password** **recovery** **=** **deferred** **(§13).**
+**Open** **product** **choices** **embedded** **(revisit** **if** **needed):** **v1** **search** **default** **=** **AND** **of** **terms,** **case-insensitive** **Latin;** **concurrent** **sessions** **=** **policy** **choice** **in** **DD** **(cap** **vs** **unlimited);** **self-service** **email** **password** **recovery** **=** **deferred** **(§13).** **(Superseded** **for** **search**/**sessions**/**password** **by** **2026-04-08** **v0.7** **entry** **above.)**
 
 **Documentation:** [`../srs.md`](../srs.md).
 
