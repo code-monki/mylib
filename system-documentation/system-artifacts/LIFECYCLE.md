@@ -47,8 +47,9 @@ If scope, requirements, architecture, design boundaries, packaging, tests, or tr
 
 ## 5. Current status
 
-- **Ideation** closed **2026-04-05**; **Requirements** phase **authorized** next.  
-- See [`_process/project-primer.md`](_process/project-primer.md) **§12 — Gate Declaration** for the formal record.
+- **Ideation** closed **2026-04-05**; **Requirements** phase **in progress**.  
+- **SRS:** [`srs.md`](srs.md) **draft** (v0.1); **not** approved for Architecture until **§16** gate satisfied.  
+- See [`_process/project-primer.md`](_process/project-primer.md) **§12 — Gate Declaration** for the Ideation→Requirements authorization.
 
 ---
 

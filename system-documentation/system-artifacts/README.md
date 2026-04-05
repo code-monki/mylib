@@ -6,7 +6,7 @@ Engineering record for how MyLib is specified, designed, tested, and traced.
 |----------|------|--------|
 | Lifecycle & gates | [LIFECYCLE.md](LIFECYCLE.md) | Active |
 | Concept | [concept.md](concept.md) | Active |
-| SRS | `srs.md` (planned) | TBD |
+| SRS | [srs.md](srs.md) | Draft (review before Architecture) |
 | HLA | `hla.md` (planned) | TBD |
 | DD | `dd.md` (planned) | TBD |
 | Test plan | `test-plan.md` (planned) | TBD |

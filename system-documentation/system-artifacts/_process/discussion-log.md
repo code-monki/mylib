@@ -3,9 +3,21 @@
 Timestamped summaries of **discussions**, **decisions**, and **technology choices** (or explicit **deferrals**).  
 **Newest entries first.** Append new blocks after updating the “Last updated” line below.
 
-**Last updated:** 2026-04-05 22:30 UTC  
+**Last updated:** 2026-04-06 UTC  
 
 **Not legal advice** where legal topics appear; see [`open-source-license.md`](open-source-license.md).
+
+---
+
+## 2026-04-06 — SRS initial draft (`srs.md` v0.1)
+
+**Summary:** Added **[`../srs.md`](../srs.md)** as **draft** SRS (**FR-001–FR-026**, **NFR-001–NFR-005**), derived from **`concept.md`** and **`project-primer.md`**. **Phase gate** in SRS **§16** records **not** ready for Architecture until **review**, **RTM**, and **human approval**. **PDF/DOCX** mandatory for v1; **EPUB** and several items remain **waiting room**.
+
+**Decisions**
+
+- **None finalized** — document is **draft** for review.
+
+**Documentation:** [`../srs.md`](../srs.md); [`../README.md`](../README.md) (artifact index).
 
 ---
 
