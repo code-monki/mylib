@@ -9,7 +9,7 @@ This document defines **mandatory phase sequencing** and **authority** for AI-as
 Paths are relative to the **repository root**.
 
 1. **`system-documentation/system-artifacts/LIFECYCLE.md`** (this file)  
-2. **`system-documentation/system-artifacts/`** — `concept.md`, SRS, HLA, DD, test artifacts, RTM (as they exist)  
+2. **`system-documentation/system-artifacts/`** — `concept.md`, SRS, HLA, DD, test artifacts, RTM, packaging plan (as they exist)  
 3. **`.cursor/rules/cursor-rules.mdc`** — Cursor behavior  
 4. **Maintainer / project owner** decisions  
 

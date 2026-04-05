@@ -135,7 +135,7 @@ Implementation without testing alignment is prohibited once test planning is in 
 
 Cursor SHALL NOT:
 
-- Modify packaging configuration without an updated packaging/release plan recorded under `system-documentation/system-artifacts/` (or successor path)
+- Modify packaging configuration without an updated packaging/release plan recorded under `system-documentation/system-artifacts/` (scaffold: `_templates/packaging-plan.md` → `packaging-plan.md` when promoted)
 - Modify orchestration pipeline without alignment to documented release intent
 - Introduce environment-specific assumptions
 - Introduce non-reproducible build behavior
