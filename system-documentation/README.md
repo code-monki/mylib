@@ -8,6 +8,7 @@ This directory holds **product and process documentation** for the MyLib reposit
 |------|---------|
 | **`system-artifacts/`** | Engineering record: concept, future SRS, HLA, DD, test plan, test suite, RTM, and lifecycle summary. |
 | **`system-artifacts/_process/`** | Project primer, decision/discussion log, license notes (supporting artifacts). |
+| **`system-artifacts/_templates/`** | Scaffolds for SRS, HLA, DD, test plan, RTM — copy into `system-artifacts/` when a phase authorizes each artifact. |
 | **`user-documentation/`** | End-user and operator guides (installation, usage, administration). |
 
 ## Reading order (for contributors)

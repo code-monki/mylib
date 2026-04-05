@@ -11,6 +11,9 @@ Lifecycle authority:
 Product and traceability artifacts:
   system-documentation/system-artifacts/
 
+Scaffolds for new artifacts (copy, do not treat as authoritative until promoted):
+  system-documentation/system-artifacts/_templates/
+
 Optional public site stub:
   docs/
 
@@ -23,7 +26,7 @@ Cursor operates within a structured, phase-gated lifecycle defined for this repo
 Cursor must adhere to:
 
 - `system-documentation/system-artifacts/LIFECYCLE.md` (phase sequence, gates, rollback)
-- `system-documentation/system-artifacts/concept.md` and subsequent artifacts (**SRS**, **HLA**, **DD**, **test plan**, **RTM**) as they exist
+- `system-documentation/system-artifacts/concept.md` and subsequent artifacts (**SRS**, **HLA**, **DD**, **test plan**, **RTM**) as they exist (scaffold from `_templates/` when creating those files)
 - Explicit **human authorization** to advance phases (see `_process/project-primer.md` gate history where applicable)
 
 Cursor must not override lifecycle discipline.

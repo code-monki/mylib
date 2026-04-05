@@ -13,4 +13,5 @@ Engineering record for how MyLib is specified, designed, tested, and traced.
 | Test suite | `tests/` or linked suite (planned) | TBD |
 | RTM | `rtm.md` (planned) | TBD |
 
-**Process / meta:** [`_process/`](_process/) (primer, discussion log, license notes).
+**Process / meta:** [`_process/`](_process/) (primer, discussion log, license notes).  
+**Scaffolds:** [`_templates/`](_templates/) — copy templates to this folder when creating `srs.md`, `hla.md`, etc.
