@@ -3,9 +3,24 @@
 Timestamped summaries of **discussions**, **decisions**, and **technology choices** (or explicit **deferrals**).  
 **Newest entries first.** Append new blocks after updating the “Last updated” line below.
 
-**Last updated:** 2026-04-05 20:49 UTC  
+**Last updated:** 2026-04-05 21:05 UTC  
 
 **Not legal advice** where legal topics appear; see `docs/open-source-license.md`.
+
+---
+
+## 2026-04-05 21:05 UTC — Optional server autostart / always-on
+
+**Summary:** Capture need for **user-configurable** startup so the **library server** can run **continuously** (login or boot) without requiring the **desktop client UI** first.
+
+**Decisions / artifacts**
+
+- **Likely in-scope:** optional **start server at OS user login** or **system startup** (exact options **TBD**), so solo or small-team deployments can keep the server **reachable** for local/remote clients.
+- **Deferred to Requirements / HLA:** per-OS mechanisms (e.g. **LaunchAgent**, **systemd**, **Windows** service vs user startup), **which account** runs the server, and **security** implications.
+
+**Documentation**
+
+- `docs/concept.md` (corpus/ops); `docs/project-primer.md` (v0.3).
 
 ---
 

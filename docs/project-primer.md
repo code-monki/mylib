@@ -19,7 +19,7 @@ Project Name: MyLib
 Initiation Date (YYYY-MM-DD): 2026-04-03  
 Author(s): Charles McKnight
 Lifecycle Phase: Ideation  
-Version: 0.2  
+Version: 0.3  
 RTM Scaffold Created? No  
 
 ---
@@ -211,13 +211,13 @@ Which stack best satisfies **accessibility**, **long-term maintenance**, and **s
 # 10. Preliminary Scope Boundaries
 
 - **Likely in-scope (initial)**  
-  **Desktop** library **client** and **server** (same installer/deployment may bundle both for solo use); **import** (menu + file dialog); **metadata** (Dublin Core–ish + bibliographic fields); **free-form tags**; **user keywords** for items without buildable full-text index (e.g. **DRM EPUB**); **full-text search**; **content-digest duplicate detection** (e.g. SHA-256); **OCR** where needed for searchability; **server-side** **RBAC**; **missing-file** detection and **relink**; **deletion** flow with **admin** choice on **disk**; **accessibility** of shell (**WCAG 2.1 AA** target); **open-source** distribution with **AS-IS** terms (draft).
+  **Desktop** library **client** and **server** (same installer/deployment may bundle both for solo use); **optional** **start server at OS login or boot** (or equivalent “always-on server” mode) so the library stays **reachable** without manually launching the client—**configurable** by user/admin; **import** (menu + file dialog); **metadata** (Dublin Core–ish + bibliographic fields); **free-form tags**; **user keywords** for items without buildable full-text index (e.g. **DRM EPUB**); **full-text search**; **content-digest duplicate detection** (e.g. SHA-256); **OCR** where needed for searchability; **server-side** **RBAC**; **missing-file** detection and **relink**; **deletion** flow with **admin** choice on **disk**; **accessibility** of shell (**WCAG 2.1 AA** target); **open-source** distribution with **AS-IS** terms (draft).
 
 - **Clearly out-of-scope (initial)**  
   **Standalone web client**; **offline/sync**; **public API** and **scripting**; **MyLib-provided** export/print (readers may still provide); **symbolic links** (v1); **numeric performance SLA**; **Mac App Store** (initially).
 
 - **Areas requiring further validation**  
-  **Bulk import** with **review queue**; **game system** (e.g. TTRPG) as **tag vs field**; **updater** and **version-notification** mechanism with **minimal outbound** policy; **exact** reader integration for **search hand-off**; **format phasing** (likely **PDF/DOCX** before **EPUB**).
+  **Bulk import** with **review queue**; **game system** (e.g. TTRPG) as **tag vs field**; **updater** and **version-notification** mechanism with **minimal outbound** policy; **exact** reader integration for **search hand-off**; **format phasing** (likely **PDF/DOCX** before **EPUB**); **server autostart** (login vs boot, **service** vs user session, per-OS install hooks and **security**).
 
 - **Explicit exclusions**  
   **DRM circumvention** features; **enterprise SharePoint** replacement positioning.

@@ -73,6 +73,7 @@ Electronic documents appear in many formats, some proprietary or layout-heavy. A
 - **Corpus location** is **user/admin-specified**: documents may live on **one machine** (single-user) or on **remote storage** served to **multiple clients** (multi-user).
 - **Scale:** libraries may reach **tens to hundreds of thousands** of documents (and beyond). **Order-of-magnitude** scale affects indexing and UX expectations; a **numeric performance SLA** is **deferred** given hardware diversity.
 - **Offline use and sync** are **deferred**; operational burden for backup and availability is initially on the **administrator**.
+- **Server always available (optional):** support **user/admin-configurable** behavior so the **server** can **start automatically** at **OS login** or **system startup** (e.g. “run in background” without opening the full client UI), keeping the library **reachable** for local or remote clients. **Platform-specific** mechanisms (user launch agent vs system service, **Windows** / **macOS** / **Linux**) and **security** implications (which account runs the server) are **TBD in Requirements / HLA**.
 
 ---
 
@@ -148,6 +149,7 @@ Electronic documents appear in many formats, some proprietary or layout-heavy. A
 - **Game system** (and similar) as **tag vs structured field**.
 - **Desktop technology** direction (e.g. **Electron vs Qt** or other)—**not** decided in this document.
 - **Updater** mechanism per platform and **version-notification** flow (**minimal outbound** vs **update checks**—final in **Requirements / HLA**).
+- **Server autostart:** login vs boot, **service** vs **user session**, and per-OS packaging (**Requirements / HLA**).
 - **Format phasing:** likely **PDF and DOCX** before **EPUB** complexity; **DRM EPUB** uses **keywords** path when indexing blocked.
 
 ---
