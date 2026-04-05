@@ -3,22 +3,34 @@
 Timestamped summaries of **discussions**, **decisions**, and **technology choices** (or explicit **deferrals**).  
 **Newest entries first.** Append new blocks after updating the “Last updated” line below.
 
-**Last updated:** 2026-04-05 21:45 UTC  
+**Last updated:** 2026-04-05 22:30 UTC  
 
-**Not legal advice** where legal topics appear; see `docs/open-source-license.md`.
+**Not legal advice** where legal topics appear; see [`open-source-license.md`](open-source-license.md).
+
+---
+
+## 2026-04-05 22:30 UTC — Documentation layout: `system-documentation/`
+
+**Summary:** Reorganized documentation under **`system-documentation/`** with **`system-artifacts/`** (concept, lifecycle, future SRS/HLA/DD/tests/RTM) and **`user-documentation/`** (guides). Removed **`AI-Bootstrap/`** toolkit copy from this product repo. **`docs/`** reserved for optional **GitHub Pages** site later.
+
+**Decisions**
+
+- **Cursor rules** now reference **`system-documentation/system-artifacts/LIFECYCLE.md`** and artifacts under **`system-documentation/system-artifacts/`** (no `AI-Bootstrap/` paths).
+
+**Documentation:** `system-documentation/README.md`; migrated `concept.md`, `_process/*`; new stubs in `user-documentation/`.
 
 ---
 
 ## 2026-04-05 21:45 UTC — Ideation gate: authorized to Requirements
 
-**Summary:** Project owner **closed Ideation for this cycle** and **authorized** advancement to the **Requirements** phase, with explicit acceptance that **unknowns remain** and **rollback** remains possible per lifecycle bootstrap.
+**Summary:** Project owner **closed Ideation for this cycle** and **authorized** advancement to the **Requirements** phase, with explicit acceptance that **unknowns remain** and **rollback** remains possible per [`../LIFECYCLE.md`](../LIFECYCLE.md).
 
 **Decisions**
 
-- **Gate:** `docs/project-primer.md` **§12** completed (**Charles McKnight**, **2026-04-05**). **Primer version → 1.0**; **lifecycle phase** noted as **Requirements** (Ideation closed).
+- **Gate:** `system-documentation/system-artifacts/_process/project-primer.md` **§12** completed (**Charles McKnight**, **2026-04-05**). **Primer version → 1.0**; **lifecycle phase** noted as **Requirements** (Ideation closed).
 - **RTM scaffold** still **not** created—appropriate when **SRS / traceability** work begins.
 
-**Documentation:** `docs/concept.md` (lifecycle note); `docs/project-primer.md`; this log.
+**Documentation:** `system-documentation/system-artifacts/concept.md` (lifecycle note); `system-documentation/system-artifacts/_process/project-primer.md`; this log.
 
 ---
 
@@ -31,7 +43,7 @@ Timestamped summaries of **discussions**, **decisions**, and **technology choice
 - **OSS-appropriate:** Signing is for **published release artifacts** and user trust—not a requirement for **license** or **building from source**.
 - **CI:** Integrate **SignPath** (or successor/equivalent) **as applicable** per platform; details **TBD** in release/HLA work.
 
-**Documentation:** `docs/concept.md`, `docs/project-primer.md` (v**0.5**).
+**Documentation:** `system-documentation/system-artifacts/concept.md`, `system-documentation/system-artifacts/_process/project-primer.md` (v**0.5**).
 
 ---
 
@@ -41,14 +53,14 @@ Timestamped summaries of **discussions**, **decisions**, and **technology choice
 
 **Decisions / artifacts**
 
-- **License:** **Apache-2.0** chosen; added repository root **`LICENSE`** (verbatim text) and **`NOTICE`** (copyright + placeholder for dependency notices). **`docs/open-source-license.md`** updated to **recorded decision**; **counsel review** still **pending**.
+- **License:** **Apache-2.0** chosen; added repository root **`LICENSE`** (verbatim text) and **`NOTICE`** (copyright + placeholder for dependency notices). **`system-documentation/system-artifacts/_process/open-source-license.md`** updated to **recorded decision**; **counsel review** still **pending**.
 - **Duplicates:** same **content digest** → **warn** user; **explicit user choice** on how to proceed (**no** silent merge/skip by default).
 - **Backup / logs:** **ideal** backup scope = **corpus + DB + index + config + logs**; **practical** scope **operator-dependent**; **log rotation/retention** = **admin-configurable** (mechanism **TBD** Requirements/HLA).
 - **Installers:** expect **solo** (client + co-located server) vs **server/self-hosted multi-user** packaging (**HLA**/release detail).
 
 **Documentation**
 
-- `docs/concept.md`, `docs/project-primer.md` (v**0.4**), `docs/open-source-license.md`, `docs/discussion-log.md`; **`LICENSE`**, **`NOTICE`**.
+- `system-documentation/system-artifacts/concept.md`, `system-documentation/system-artifacts/_process/project-primer.md` (v**0.4**), `system-documentation/system-artifacts/_process/open-source-license.md`, `system-documentation/system-artifacts/_process/discussion-log.md`; **`LICENSE`**, **`NOTICE`**.
 
 ---
 
@@ -63,7 +75,7 @@ Timestamped summaries of **discussions**, **decisions**, and **technology choice
 
 **Documentation**
 
-- `docs/concept.md` (corpus/ops); `docs/project-primer.md` (v0.3).
+- `system-documentation/system-artifacts/concept.md` (corpus/ops); `system-documentation/system-artifacts/_process/project-primer.md` (v0.3).
 
 ---
 
@@ -88,7 +100,7 @@ Timestamped summaries of **discussions**, **decisions**, and **technology choice
 
 **Documentation**
 
-- Updated `docs/concept.md`, `docs/project-primer.md` (version **0.2**).
+- Updated `system-documentation/system-artifacts/concept.md`, `system-documentation/system-artifacts/_process/project-primer.md` (version **0.2**).
 
 ---
 
@@ -98,8 +110,8 @@ Timestamped summaries of **discussions**, **decisions**, and **technology choice
 
 **Decisions / artifacts**
 
-- Maintain project narrative in `docs/concept.md` and structured Ideation in `docs/project-primer.md`; use **this file** for **time-ordered** deltas from working sessions.
-- License selection notes live in `docs/open-source-license.md` (working preference: **Apache-2.0**, **MIT** fallback); root `LICENSE` still **TBD**.
+- Maintain project narrative in `system-documentation/system-artifacts/concept.md` and structured Ideation in `system-documentation/system-artifacts/_process/project-primer.md`; use **this file** for **time-ordered** deltas from working sessions.
+- License selection notes live in `system-documentation/system-artifacts/_process/open-source-license.md` (working preference: **Apache-2.0**, **MIT** fallback); root `LICENSE` still **TBD**.
 
 **Technology**
 
@@ -121,13 +133,13 @@ Timestamped summaries of **discussions**, **decisions**, and **technology choice
 
 - N/A (legal/process).
 
-**Reference:** `docs/open-source-license.md` (committed as initial repo commit `fa69086`).
+**Reference:** `system-documentation/system-artifacts/_process/open-source-license.md` (committed as initial repo commit `fa69086`).
 
 ---
 
 ## 2026-04-03 (session) — Ideation artifacts and product boundaries
 
-**Summary:** Folded extended Ideation into `docs/concept.md` and created `docs/project-primer.md` (template-aligned). Aligned AI-Bootstrap paths and Cursor rules earlier in the same initiative.
+**Summary:** Folded extended Ideation into `system-documentation/system-artifacts/concept.md` and created `system-documentation/system-artifacts/_process/project-primer.md` (template-aligned). Aligned AI-Bootstrap paths and Cursor rules earlier in the same initiative.
 
 **Product / scope decisions**
 
@@ -155,7 +167,7 @@ Timestamped summaries of **discussions**, **decisions**, and **technology choice
 
 - Open-source **license** final pick and root `LICENSE`.
 - **RTM scaffold** not created (per primer).
-- **Gate to Requirements:** explicit human approval only (`docs/project-primer.md` §12).
+- **Gate to Requirements:** explicit human approval only (`system-documentation/system-artifacts/_process/project-primer.md` §12).
 
 ---
 

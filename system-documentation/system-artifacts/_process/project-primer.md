@@ -1,14 +1,14 @@
 <!--
-File: docs/project-primer.md
+File: system-documentation/system-artifacts/_process/project-primer.md
 
 Purpose:
-  Ideation-phase Project Primer aligned with AI-Bootstrap lifecycle governance.
+  Ideation-phase Project Primer (historical record) aligned with repository lifecycle.
 
 Lifecycle authority:
-  AI-Bootstrap/02-governance/00-lifecycle-bootstrap.md
+  ../LIFECYCLE.md
 
 Related artifact:
-  docs/concept.md (expanded concept narrative)
+  ../concept.md (expanded concept narrative)
 
 This primer defines intent. It does not authorize architecture or implementation.
 -->
@@ -254,7 +254,7 @@ Approved to Proceed to Requirements Phase:
 **Date (YYYY-MM-DD):** 2026-04-05  
 **Signature (if applicable):** *Recorded in repository (electronic authorization).*  
 
-**Note:** Ideation is closed **for now** on a **best-efforts** basis. Material discoveries later may require **rollback or rework** per `AI-Bootstrap/02-governance/00-lifecycle-bootstrap.md` (scope, requirements, or architecture changes).
+**Note:** Ideation is closed **for now** on a **best-efforts** basis. Material discoveries later may require **rollback or rework** per [`../LIFECYCLE.md`](../LIFECYCLE.md) (scope, requirements, or architecture changes).
 
 Version incremented upon approval (**primer 1.0**).
 

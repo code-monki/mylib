@@ -1,9 +1,9 @@
 # MyLib — Electronic Document Management System
 
-Structured Ideation record (template-aligned): [Project Primer](project-primer.md).  
-Timestamped discussion and decisions: [Discussion log](discussion-log.md).
+Structured Ideation record (template-aligned): [Project Primer](_process/project-primer.md).  
+Timestamped discussion and decisions: [Discussion log](_process/discussion-log.md).
 
-**Lifecycle (this cycle):** **Ideation** closed **2026-04-05**—authorization to proceed to **Requirements** recorded in [Project Primer §12 — Gate Declaration](project-primer.md#12-gate-declaration). Further discovery may still trigger **phase rollback** under lifecycle governance.
+**Lifecycle (this cycle):** **Ideation** closed **2026-04-05**—authorization to proceed to **Requirements** recorded in [Project Primer §12 — Gate Declaration](_process/project-primer.md#12-gate-declaration). Further discovery may still trigger **phase rollback** per [LIFECYCLE.md](LIFECYCLE.md).
 
 ## Overview
 
