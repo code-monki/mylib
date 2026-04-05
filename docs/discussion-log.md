@@ -3,9 +3,26 @@
 Timestamped summaries of **discussions**, **decisions**, and **technology choices** (or explicit **deferrals**).  
 **Newest entries first.** Append new blocks after updating the “Last updated” line below.
 
-**Last updated:** 2026-04-05 21:05 UTC  
+**Last updated:** 2026-04-05 21:15 UTC  
 
 **Not legal advice** where legal topics appear; see `docs/open-source-license.md`.
+
+---
+
+## 2026-04-05 21:15 UTC — Apache-2.0, duplicate policy, backup/logs, dual installers
+
+**Summary:** Locked **Apache License 2.0** (pending **IP counsel** final sign-off); clarified **SHA-256 duplicate** handling, **backup/logging** intent, and **two installer** lines.
+
+**Decisions / artifacts**
+
+- **License:** **Apache-2.0** chosen; added repository root **`LICENSE`** (verbatim text) and **`NOTICE`** (copyright + placeholder for dependency notices). **`docs/open-source-license.md`** updated to **recorded decision**; **counsel review** still **pending**.
+- **Duplicates:** same **content digest** → **warn** user; **explicit user choice** on how to proceed (**no** silent merge/skip by default).
+- **Backup / logs:** **ideal** backup scope = **corpus + DB + index + config + logs**; **practical** scope **operator-dependent**; **log rotation/retention** = **admin-configurable** (mechanism **TBD** Requirements/HLA).
+- **Installers:** expect **solo** (client + co-located server) vs **server/self-hosted multi-user** packaging (**HLA**/release detail).
+
+**Documentation**
+
+- `docs/concept.md`, `docs/project-primer.md` (v**0.4**), `docs/open-source-license.md`, `docs/discussion-log.md`; **`LICENSE`**, **`NOTICE`**.
 
 ---
 

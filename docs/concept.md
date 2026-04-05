@@ -7,7 +7,7 @@ Timestamped discussion and decisions: [Discussion log](discussion-log.md).
 
 MyLib addresses the need to manage a **large corpus** of electronic documents in **heterogeneous formats** (including PDF, word-processing formats such as DOCX, and EPUB). It aims to provide a **unified library**: consistent **cataloging**, **metadata**, **full-text search**, **tag-based filtering**, and **access control**, while **display and printing** are delegated to **native reader applications** where practical so rendering fidelity and reader-specific features (including bookmarks) stay with those tools.
 
-The product is intended as **open source** (specific license not yet chosen). Primary delivery is a **desktop client** for **Windows, macOS, and Linux**. The system is **client–server** in nature: **authentication and authorization are enforced by a server component**. In a **solo / desktop deployment**, that server runs on the **same machine** (e.g. loopback), but remains the **authority** for credentials and RBAC—so remote multi-user deployments do not rely on **UI-only** hiding of admin features. A **web client** is **deferred**; the initial assumption is that **installing a desktop application** is acceptable for the target audience (individuals, families, and small teams—not a substitute for enterprise suites such as SharePoint).
+The product is **open source** under the **Apache License 2.0** (see repository root `LICENSE` and `NOTICE`); **final confirmation with counsel** is expected before wide publication. Primary delivery is a **desktop client** for **Windows, macOS, and Linux**. The system is **client–server** in nature: **authentication and authorization are enforced by a server component**. In a **solo / desktop deployment**, that server runs on the **same machine** (e.g. loopback), but remains the **authority** for credentials and RBAC—so remote multi-user deployments do not rely on **UI-only** hiding of admin features. A **web client** is **deferred**; the initial assumption is that **installing a desktop application** is acceptable for the target audience (individuals, families, and small teams—not a substitute for enterprise suites such as SharePoint).
 
 **Personal motivation for the project:** the author maintains on the order of **~10,000** electronic publications from **many sources**, which drives the emphasis on **scale**, **metadata normalization**, and **search quality** across formats.
 
@@ -73,6 +73,8 @@ Electronic documents appear in many formats, some proprietary or layout-heavy. A
 - **Corpus location** is **user/admin-specified**: documents may live on **one machine** (single-user) or on **remote storage** served to **multiple clients** (multi-user).
 - **Scale:** libraries may reach **tens to hundreds of thousands** of documents (and beyond). **Order-of-magnitude** scale affects indexing and UX expectations; a **numeric performance SLA** is **deferred** given hardware diversity.
 - **Offline use and sync** are **deferred**; operational burden for backup and availability is initially on the **administrator**.
+- **Backup (ideal):** a **full** restore picture includes **document corpus**, **server database**, **search/index state**, **configuration**, and **logs**—recognizing that **storage** limits what operators can retain in practice. **Operator documentation** should describe **minimal** vs **complete** backup scope.
+- **Logs:** support **rotation / retention** on an **administrator-configured** schedule (exact mechanism **TBD** in Requirements/HLA).
 - **Server always available (optional):** support **user/admin-configurable** behavior so the **server** can **start automatically** at **OS login** or **system startup** (e.g. “run in background” without opening the full client UI), keeping the library **reachable** for local or remote clients. **Platform-specific** mechanisms (user launch agent vs system service, **Windows** / **macOS** / **Linux**) and **security** implications (which account runs the server) are **TBD in Requirements / HLA**.
 
 ---
@@ -80,7 +82,7 @@ Electronic documents appear in many formats, some proprietary or layout-heavy. A
 ## Document identity, files on disk, and deletion
 
 - Each **logical edition** is treated as a **distinct document** (no merged version chain in early thinking).
-- **Duplicate detection:** treat **identical file content** (e.g. **SHA-256** of bytes) as a **duplicate** from the outset to avoid redundant catalog entries and index work (same logical work re-imported still differs by edition intent unless deduplicated by policy—exact merge rules for Requirements).
+- **Duplicate detection:** **SHA-256** (or equivalent) of file bytes; on **matching digest**, **warn** the user and require an **explicit choice** (e.g. cancel import, import as separate record, or other actions **TBD** in Requirements)—**no silent** merge or skip by default.
 - If a **file is missing** (moved, renamed, deleted outside the app), the system should **not** silently relearn from disk; it should **notify the user** and offer a **file dialog to relink** the library entry to a replacement path.
 - **Symbolic links** are **unlikely to be supported** initially to avoid ambiguous identity and path semantics.
 - **Deletion:** removing a document from the **application** should be distinct from **deleting the underlying file**; the **administrator** should be **prompted** for whether to remove content from **persistent storage**.
@@ -127,6 +129,7 @@ Electronic documents appear in many formats, some proprietary or layout-heavy. A
 
 - **Maintainer support:** primary channel **GitHub** (issues/discussions); **no** maintainer-operated SaaS hosting anticipated—**others** may self-host or fork.
 - **Distribution:** e.g. **GitHub Pages** (or similar) for **project presence** and links; **installers and binaries** typically attached to **GitHub Releases** rather than stored as large blobs in the git tree.
+- **Installers (intent):** expect **two** distribution lines—**(1) solo / single-user** (bundled **client + co-located server**, friendly defaults) and **(2) server / self-hosted multi-user** (server-oriented install plus **client** builds or same client pointed at remote host). Exact packaging **TBD** in HLA/release engineering.
 - **macOS:** **Apple Developer Program** for **signing and notarization**; **not** initially targeting **Mac App Store** distribution.
 - **Windows / Linux signing:** e.g. **SignPath** or comparable workflows where applicable (**Apple notarization remains a separate pipeline**).
 - **Automatic updates** (“Check for updates”): e.g. **Sparkle** on native macOS stacks, or **stack-native** updaters (e.g. Electron ecosystem); **not yet decided**.
@@ -135,7 +138,7 @@ Electronic documents appear in many formats, some proprietary or layout-heavy. A
 
 ## Legal, privacy, and operator responsibility (concept-level)
 
-- Software is intended to be provided under an **open-source license** with **standard AS-IS / no-warranty** terms. **Final** disclaimer and **license** text should be **reviewed with counsel** when the project is public and especially if **EU or enterprise** adoption is expected.
+- **Apache License 2.0** applies to this project (see `LICENSE`); **maintain** `NOTICE` and dependency attributions as the stack grows. **Counsel review** (IP lawyer) is **pending** for final sign-off before broad publication—especially if **EU or enterprise** adoption appears.
 - The product should **not** center features whose **primary purpose** is **circumventing DRM** on copyrighted works; **relying on native readers** for display reduces that surface.
 - **Personal data** is expected to be **minimal** (e.g. **account identifiers**; **passwords** stored only as **strong one-way hashes**, never in clear text). **Audit logs** (e.g. user + timestamp + document access) may still be **personal data** under privacy regimes and should be **purpose-limited**, **minimized**, and **retained** according to operator policy. **Encryption** and **self-hosted** deployment help **security** but are **not** a substitute for **clear documentation** of what is processed and **operator obligations**.
 - **Users and operators** are responsible for **lawful use** and **compliance with applicable regulations** in their jurisdiction.
@@ -144,7 +147,7 @@ Electronic documents appear in many formats, some proprietary or layout-heavy. A
 
 ## Open decisions (carry into requirements phase)
 
-- **Open source license** (working direction: **Apache-2.0** primary, **MIT** fallback—see `docs/open-source-license.md`); root `LICENSE` still **TBD**.
+- **License:** **Apache-2.0** **chosen** (root `LICENSE` + `NOTICE`); **counsel sign-off** pending.
 - **Bulk import** UX and **review queue** shape.
 - **Game system** (and similar) as **tag vs structured field**.
 - **Desktop technology** direction (e.g. **Electron vs Qt** or other)—**not** decided in this document.

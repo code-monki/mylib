@@ -1,6 +1,6 @@
 # Open source license selection (MyLib)
 
-**This document is not legal advice.** It records engineering-oriented notes and a preferred direction for discussion with counsel before publication.
+**This document is not legal advice.** It records engineering-oriented notes. **Apache License 2.0** is **selected** for MyLib (see repository root `LICENSE` and `NOTICE`); **counsel sign-off** is **pending** before treating publication as final.
 
 ---
 
@@ -55,8 +55,10 @@ Neither is implied by current MyLib intent unless **copyleft** becomes an explic
 
 ---
 
-## Recorded preference (working)
+## Recorded decision
 
-**Default direction:** **Apache-2.0**, with **MIT** as the fallback if simplicity outweighs the Apache patent/NOTICE structure.
+**Chosen license:** **Apache License 2.0** (aligned with prior counsel recommendation on similar projects).
 
-**Final license:** TBD until explicitly approved and `LICENSE` is added at repository root.
+**Repository:** Root **`LICENSE`** contains the **verbatim** Apache-2.0 text; **`NOTICE`** holds **project copyright** and a reminder to append **third-party** notices as dependencies are added (**Apache-2.0 §4d**).
+
+**Pending:** **Final review/sign-off** with IP counsel before wide publication; **dependency license audit** as implementation proceeds.

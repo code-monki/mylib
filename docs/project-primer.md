@@ -19,7 +19,7 @@ Project Name: MyLib
 Initiation Date (YYYY-MM-DD): 2026-04-03  
 Author(s): Charles McKnight
 Lifecycle Phase: Ideation  
-Version: 0.3  
+Version: 0.4  
 RTM Scaffold Created? No  
 
 ---
@@ -46,7 +46,7 @@ This section describes the **problem only**.
 
 
 - **Observable success conditions**  
-  Users can **discover** documents via **search and filters** (including **tags**); where **full-text index** is impossible (e.g. **DRM-protected EPUB** without circumvention), **user-associated keywords** (separate from tags) support **discovery**; **metadata** (Dublin Core–inspired and bibliographic fields) is **usable** for organization; **access** aligns with **RBAC** enforced **server-side**; **duplicate imports** can be detected via **content digest** (e.g. SHA-256); **missing files** are **detected** and **relinked** deliberately; **removal from the application** is **separate** from **deletion on disk**, with **admin confirmation**. **Shell UI** targets **WCAG 2.1 Level AA** where achievable.
+  Users can **discover** documents via **search and filters** (including **tags**); where **full-text index** is impossible (e.g. **DRM-protected EPUB** without circumvention), **user-associated keywords** (separate from tags) support **discovery**; **metadata** (Dublin Core–inspired and bibliographic fields) is **usable** for organization; **access** aligns with **RBAC** enforced **server-side**; **duplicate imports** detected via **content digest** (e.g. SHA-256) **warn** the user, who **chooses** the next action (**no silent** resolution); **missing files** are **detected** and **relinked** deliberately; **removal from the application** is **separate** from **deletion on disk**, with **admin confirmation**. **Shell UI** targets **WCAG 2.1 Level AA** where achievable.
 
 - **Measurable impact (if known)**  
   Not yet specified with numeric SLAs; **scale** is understood as **10³–10⁵+** documents. **Performance targets** are **deferred** pending requirements and hardware diversity.
@@ -80,7 +80,7 @@ Outcomes describe **results**, not system structure.
 # 4. Context and Environment
 
 - **Business context**  
-  **Non-commercial open-source** intent; **not** competing directly with **SharePoint-class** enterprise stacks for v1.
+  **Non-commercial open-source** intent; **not** competing directly with **SharePoint-class** enterprise stacks for v1. **License:** **Apache-2.0** (root `LICENSE`); **counsel sign-off** pending before treating publication as final.
 
 - **Existing systems**  
   Documents originate from **many sources** and formats; users already rely on **OS file storage** and **native/desktop readers**.
@@ -95,7 +95,7 @@ Outcomes describe **results**, not system structure.
   **Copyright and DRM:** product should **not** center on **circumventing** technical protection measures. **Privacy:** **minimal** account data; **audit logs** may be sensitive; **operator responsibility** for lawful processing. **Disclaimer and license** to be **lawyer-reviewed** when public.
 
 - **Operational environment**  
-  **User-specified storage** (local or **remote server** for multi-user). **Network exposure** (e.g. opening a **port** for remote clients) is the **operator’s** choice and responsibility. **Maintainer** does not anticipate operating a **hosted SaaS**; **community support** via **GitHub**; **others** may self-host or fork. **Offline/sync deferred.** **Distribution** envisioned via **GitHub Pages** (presence) and **GitHub Releases** (binaries); **macOS signing/notarization** via **Apple Developer Program** (not App Store initially); **other platforms** signing (e.g. **SignPath-class**) **separate** from Apple pipeline.
+  **User-specified storage** (local or **remote server** for multi-user). **Network exposure** (e.g. opening a **port** for remote clients) is the **operator’s** choice and responsibility. **Maintainer** does not anticipate operating a **hosted SaaS**; **community support** via **GitHub**; **others** may self-host or fork. **Offline/sync deferred.** **Distribution** envisioned via **GitHub Pages** (presence) and **GitHub Releases** (binaries); **dual installer** lines anticipated—**solo** (client + co-located server) vs **server/self-hosted multi-user** (details in HLA/release). **macOS signing/notarization** via **Apple Developer Program** (not App Store initially); **other platforms** signing (e.g. **SignPath-class**) **separate** from Apple pipeline.
 
 ---
 
@@ -111,7 +111,7 @@ Outcomes describe **results**, not system structure.
   None fixed in this primer.
 
 - **Infrastructure limitations**  
-  **Backup/restore** and **bulk storage** largely **administrator-owned** initially.
+  **Backup/restore** and **bulk storage** largely **administrator-owned** initially. **Ideal backup** includes **corpus**, **database**, **index state**, **config**, and **logs**; **practical** scope depends on **operator storage**. **Log rotation/retention** on an **administrator-configured** schedule (**Requirements/HLA**).
 
 - **Governance requirements**  
   **RBAC**; **separation of admin vs everyday user** recommended; **tenant boundary** defined by **admin**, **enforced** by app.
@@ -217,7 +217,7 @@ Which stack best satisfies **accessibility**, **long-term maintenance**, and **s
   **Standalone web client**; **offline/sync**; **public API** and **scripting**; **MyLib-provided** export/print (readers may still provide); **symbolic links** (v1); **numeric performance SLA**; **Mac App Store** (initially).
 
 - **Areas requiring further validation**  
-  **Bulk import** with **review queue**; **game system** (e.g. TTRPG) as **tag vs field**; **updater** and **version-notification** mechanism with **minimal outbound** policy; **exact** reader integration for **search hand-off**; **format phasing** (likely **PDF/DOCX** before **EPUB**); **server autostart** (login vs boot, **service** vs user session, per-OS install hooks and **security**).
+  **Bulk import** with **review queue**; **game system** (e.g. TTRPG) as **tag vs field**; **updater** and **version-notification** mechanism with **minimal outbound** policy; **exact** reader integration for **search hand-off**; **format phasing** (likely **PDF/DOCX** before **EPUB**); **server autostart** (login vs boot, **service** vs user session, per-OS install hooks and **security**); **dual-installer** packaging details; **duplicate-digest** follow-on actions in UI.
 
 - **Explicit exclusions**  
   **DRM circumvention** features; **enterprise SharePoint** replacement positioning.
