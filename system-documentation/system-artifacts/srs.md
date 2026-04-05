@@ -14,9 +14,9 @@ They SHALL NOT encode architecture or implementation.
 # Software Requirements Specification (SRS)
 
 Project Name: MyLib  
-Version: 0.8  
-Date (YYYY-MM-DD): 2026-04-09  
-**Last revised (UTC):** 2026-04-09  
+Version: 0.8.1  
+Date (YYYY-MM-DD): 2026-04-10  
+**Last revised (UTC):** 2026-04-10  
 Author(s): Charles McKnight (draft; maintainers may revise)  
 Status: Draft  
 Project Primer Version Reference: 1.0 (`_process/project-primer.md`)  
@@ -612,7 +612,7 @@ For **each** **category** **on** **each** **component** **(client** **vs** **ser
 **Description:** **Full-text** **search** **(FR-007)** **SHALL** **implement** **documented** **v1** **query** **semantics** **including** **all** **of** **the** **following:**
 
 1. **Implicit** **conjunction:** **Whitespace-separated** **bare** **terms** **(outside** **quotes** **and** **outside** **explicit** **operators)** **combine** **with** **logical** **AND** **by** **default.**  
-2. **Boolean** **operators:** **The** **query** **language** **SHALL** **support** **explicit** **`AND`,** **`OR`,** **and** **`NOT`** **(spelling** **and** **tokenization** **per** **DD)** **so** **users** **can** **express** **disjunction** **and** **negation** **without** **workarounds.**  
+2. **Boolean** **operators:** **The** **query** **language** **SHALL** **support** **explicit** **`AND`,** **`OR`,** **and** **`NOT`.** **DD** **SHALL** **define** **spelling,** **whether** **those** **keywords** **are** **case-sensitive** **or** **accepted** **case-insensitively,** **and** **tokenization** **(including** **how** **they** **interact** **with** **quoted** **phrases** **and** **bare** **terms)** **so** **users** **can** **express** **disjunction** **and** **negation** **without** **workarounds.**  
 3. **Phrase** **search:** **Double-quoted** **strings** **SHALL** **denote** **phrase** **units** **matched** **as** **contiguous** **text** **per** **index** **capabilities** **(documented** **limitations** **e.g.** **stemming,** **word** **breaks).**  
 4. **Grouping:** **Parentheses** **`(`** **`)`** **SHALL** **group** **subexpressions** **so** **that** **precedence** **is** **unambiguous** **for** **nested** **boolean** **and** **phrase** **combinations.**  
 5. **Grammar** **and** **precedence:** **DD** **SHALL** **publish** **a** **normative** **grammar** **(e.g.** **BNF** **or** **equivalent)** **including** **operator** **precedence** **and** **associativity** **where** **parentheses** **are** **omitted,** **and** **SHALL** **define** **interaction** **between** **phrases,** **operators,** **and** **implicit** **AND.**
@@ -624,7 +624,7 @@ For **each** **category** **on** **each** **component** **(client** **vs** **ser
 **Priority:** High  
 **Dependencies:** FR-007, FR-009  
 **Constraints:** —  
-**Notes:** **Relevance** **ranking** **algorithm** **TBD** **DD** **(deterministic** **tie-break** **required** **for** **tests).**
+**Notes:** **Relevance** **ranking** **algorithm** **TBD** **DD** **(deterministic** **tie-break** **required** **for** **tests).** **Latin** **case** **behavior** **for** **search** **terms** **(item** **5** **and** **matching** **paragraph)** **is** **distinct** **from** **boolean** **keyword** **case** **rules** **(item** **2).**
 
 ---
 
@@ -860,7 +860,7 @@ The **shell UI** SHALL provide a **user-discoverable** **Help** affordance (e.g.
 
 - **Import** of **unreadable** or **unsupported** files **SHALL** **fail** with **actionable** messages.  
 - **Partial index** failures **SHALL** **not** present **silent** success.  
-- **Concurrent edits** to metadata **SHALL** follow **documented** conflict rules (**last-write-wins** or **merge**—**TBD** DD, **must be** **explicit**).  
+- **Concurrent** **edits** **to** **the** **same** **catalog** **record’s** **metadata** **SHALL** **follow** **FR-041** **(optimistic** **concurrency):** **stale** **updates** **fail** **without** **silent** **overwrite;** **the** **client** **SHALL** **support** **refresh** **and** **retry** **per** **DD;** **an** **optional** **explicit** **user** **overwrite** **after** **conflict** **MAY** **be** **offered** **per** **DD** **(if** **offered,** **SHALL** **be** **documented** **and** **tested).**  
 - **Server unavailable:** client **SHALL** **degrade** **per documented** behavior (offline **editing** **not** required in v1).
 
 ---
@@ -938,7 +938,7 @@ The **shell UI** SHALL provide a **user-discoverable** **Help** affordance (e.g.
 
 Confirm readiness to proceed to **High-Level Architecture**:
 
-- Requirements stable? **Partial** — **revision** **0.8** **(2026-04-09)** **records** **MFA** **out-of-scope** **(optional-only** **if** **ever** **reopened)** **and** **passkeys** **as** **waiting-room** **candidate**; **further** **stakeholder** **pass** **recommended** **before** **Architecture**  
+- Requirements stable? **Partial** — **revision** **0.8.1** **(2026-04-10)** **aligns** **§11** **with** **FR-041** **and** **clarifies** **FR-038** **operator** **case** **/** **tokenization** **in** **DD;** **further** **stakeholder** **pass** **recommended** **before** **Architecture**  
 - NFRs measurable? **Partial** — **NFR-001** **gates** **on** **Test** **Plan**; **NFR-009** **on** **security** **checklist**  
 - Scope boundaries explicit? **Yes**  
 - Traceability scaffold prepared? **No** — **RTM** next  

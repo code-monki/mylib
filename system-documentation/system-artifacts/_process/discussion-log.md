@@ -3,9 +3,19 @@
 Timestamped summaries of **discussions**, **decisions**, and **technology choices** (or explicit **deferrals**).  
 **Newest entries first.** Append new blocks after updating the “Last updated” line below.
 
-**Last updated:** 2026-04-09 (SRS v0.8 MFA / passkeys posture) UTC  
+**Last updated:** 2026-04-10 (SRS v0.8.1 §11 / FR-038) UTC  
 
 **Not legal advice** where legal topics appear; see [`open-source-license.md`](open-source-license.md).
+
+**Archival** **note:** **Log** **entries** **dated** **before** **2026-04-07** **may** **cite** **superseded** **FR** **numbers** **from** **SRS** **revisions** **prior** **to** **v0.6;** **the** **current** **[`../srs.md`](../srs.md)** **section** **headers** **are** **authoritative** **for** **IDs.**
+
+---
+
+## 2026-04-10 — SRS v0.8.1: §11 aligns with FR-041; FR-038 operator rules
+
+**Summary:** **§11** **—** **removed** **generic** **last-write-wins** **/** **merge** **for** **metadata;** **same-record** **metadata** **concurrency** **now** **tracks** **FR-041** **(optimistic** **concurrency,** **refresh**/**retry,** **optional** **explicit** **overwrite** **per** **DD).** **FR-038** **item** **2** **—** **DD** **must** **define** **boolean** **keyword** **case** **and** **tokenization** **explicitly;** **Notes** **distinguish** **operator** **case** **from** **Latin** **matching** **case** **for** **terms.** **Version** **0.8.1.**
+
+**Documentation:** [`../srs.md`](../srs.md).
 
 ---
 
