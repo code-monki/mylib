@@ -9,6 +9,14 @@ Timestamped summaries of **discussions**, **decisions**, and **technology choice
 
 ---
 
+## 2026-04-06 — SRS v0.3: NFR-007 end-user docs and Help
+
+**Summary:** Added **NFR-007** (user manual, quick-start, **Help** affordance to version-matched docs; packaging **TBD** HLA). **Searchable** help index and **context-sensitive** help in **waiting room**; **pre-built** help components allowed if license/a11y OK. **NFR-004** clarified vs end-user docs; **§2.2**, **FR-020**, **§14** updated.
+
+**Documentation:** [`../srs.md`](../srs.md); [`../../user-documentation/README.md`](../../user-documentation/README.md).
+
+---
+
 ## 2026-04-06 (later) — SRS v0.2: Settings, reader preferences, theme
 
 **Summary:** Extended [`../srs.md`](../srs.md) with **FR-027** (Settings facility, extensible), **FR-028** (preferred external reader per supported document type with platform-default fallback), **FR-029** (light/dark theme, **match system** where feasible). **NFR-006** ties shipped themes to **WCAG 2.1 AA** contrast for the shell. **FR-018** updated to honor reader preferences. **Waiting room:** third-party theme packs, preference sync across devices.

@@ -14,7 +14,7 @@ They SHALL NOT encode architecture or implementation.
 # Software Requirements Specification (SRS)
 
 Project Name: MyLib  
-Version: 0.2  
+Version: 0.3  
 Date (YYYY-MM-DD): 2026-04-06  
 Author(s): Charles McKnight (draft; maintainers may revise)  
 Status: Draft  
@@ -51,7 +51,8 @@ This document specifies **software requirements** for **MyLib**, an **open-sourc
 - **Cataloging**, **metadata**, **free-form tags**, **full-text search** (where lawfully and technically feasible), **keyword-based discovery** when full-text indexing is not possible without circumventing protection measures, **duplicate detection** using a **content digest**, **missing-file detection and relink**, and **controlled removal** from the catalog vs **deletion on disk**.  
 - **Opening documents in native reader applications** for display; MyLib does **not** replace those readers for rendering or printing.  
 - **Shell UI accessibility** aligned with **WCAG 2.1 Level AA** as the conformance target (verification in test planning).  
-- **English** user interface and documentation for the initial release.
+- **English** user interface and documentation for the initial release.  
+- **End-user documentation** (user manual, quick-start, in-app Help entry) per **NFR-007**.
 
 **Explicitly out of scope (initial release)**
 
@@ -402,7 +403,7 @@ Stakeholders managing **large, heterogeneous** electronic document collections (
 
 **Description:** The **shell UI** SHALL meet **WCAG 2.1 Level AA** success criteria **where applicable** to the technology stack chosen in HLA (non-web shells map to **equivalent** documented checkpoints).
 
-**Acceptance criteria:** Documented **accessibility test plan** executed; **critical** flows (login, search, open document, **Settings** per FR-027) **pass** agreed checkpoints.
+**Acceptance criteria:** Documented **accessibility test plan** executed; **critical** flows (login, search, open document, **Settings** per FR-027, **access Help / user documentation** per NFR-007) **pass** agreed checkpoints.
 
 **Priority:** High  
 **Dependencies:** —  
@@ -527,8 +528,8 @@ Stakeholders managing **large, heterogeneous** electronic document collections (
 
 **Measurement criteria:** **Reviewer** can answer: what to back up, what is logged, and where **secrets** live—using **only** shipped docs.
 
-**Constraints:** —  
-**Dependencies:** `user-documentation/` / admin guide stubs to be expanded.
+**Constraints:** Complements **NFR-007** (end-user / day-to-day documentation); **admin** vs **end-user** material **MAY** share a **Help** shell but **SHALL** remain **discernible** (e.g. separate sections or guides).  
+**Dependencies:** `system-documentation/user-documentation/` (e.g. admin guide); stubs **to be** expanded for release.
 
 ---
 
@@ -555,6 +556,22 @@ Stakeholders managing **large, heterogeneous** electronic document collections (
 
 **Constraints:** Does **not** guarantee **custom** OS **high-contrast** modes beyond **documented** behavior.  
 **Dependencies:** FR-020, FR-029.
+
+---
+
+## NFR-007 — End-user documentation and Help
+
+**Category:** Usability / Maintainability  
+
+**Description:** The product SHALL ship **end-user documentation** in **English** (FR-021), comprising at minimum: **(a)** a **User manual** describing **primary** **shell** workflows—including **catalog**, **search**, **metadata/tags**, **open in native reader** (and **reader** preferences per FR-028), **Settings** (FR-027), and **RBAC-visible** behavior (e.g. what **denied access** looks like)—and **(b)** a **Quick-start guide** sufficient for a **new** user to **install or connect** the client, **authenticate** if required, and **import** at least **one** document **successfully**. Source **MAY** be maintained under **`system-documentation/user-documentation/`** (or successor path) and **SHALL** be **packaged** or **published** with **releases** **per** HLA (e.g. **HTML**, **PDF**, **Markdown** bundle—**exact** formats **TBD**).
+
+The **shell UI** SHALL provide a **user-discoverable** **Help** affordance (e.g. **Help** menu, **toolbar**, or **Settings** link—**TBD** DD) that **reaches** the **Quick-start** and **User manual** for the **running** **product version** (e.g. **opens** bundled content in an **embedded** viewer, **local** help window, or **system** browser—**not** mandated herein).
+
+**Measurement criteria:** **Release checklist:** manual + quick-start **present**, **version** **aligned** with the **release**; **smoke test:** **novice** or **proxy** user completes **Quick-start** **without** **engineering** support **or** **gaps** are **recorded** and **tracked**; **Help** entry **reachable** from **default** logged-in shell within **documented** **click**/**key** budget.
+
+**Constraints:** **Searchable** **full** in-app help **index**, **context-sensitive** (F1) help, and **very large** manual **browse/search** **UX** are **deferred** to **§13** unless **implemented** **early** via a **chosen** component. A **pre-built** help **component** or **viewer** **MAY** be used **provided** **licenses** are **compatible** with **Apache-2.0** distribution (or **clearly** **optional**), **security** posture is **acceptable**, and **accessibility** (FR-020) **obligations** are **met** for the **help** surface.
+
+**Dependencies:** FR-021; FR-020; NFR-004 (operator docs **distinct** but **may** **cross-link**).
 
 ---
 
@@ -655,7 +672,9 @@ Stakeholders managing **large, heterogeneous** electronic document collections (
 - **Automatic update** / **phone-home** behavior (until **specified** with **opt-in** defaults in HLA)  
 - **Server autostart** at login vs **system** boot—**configurable behavior** **required** by product goals but **exact** mechanism **deferred** to **HLA** (capture there as **non-SRS** detail)  
 - **User-installable / third-party visual themes** and **theme marketplace**  
-- **Sync of client preferences** across **multiple** installations or devices
+- **Sync of client preferences** across **multiple** installations or devices  
+- **Searchable** in-app **help** (full-text **index** over the **manual**) when **document** size or **navigation** **pain** **warrants** it—**or** **adopt** a **component** that **provides** search **out of the box**  
+- **Context-sensitive** help (**F1**, **“?”**, or **screen-linked** topics) **tied** to the **active** **shell** view
 
 ---
 
@@ -668,6 +687,7 @@ Stakeholders managing **large, heterogeneous** electronic document collections (
 | **Remote access misconfiguration**  | **High**     | NFR-002, NFR-004, HLA hardening     |
 | **Legal/DRM boundary**              | **Moderate** | FR-006, FR-026, §7                  |
 | **Accessibility verification gaps** | **Moderate** | FR-020 + Test Plan                  |
+| **Documentation / Help gaps**       | **Moderate** | NFR-007 checklist, Quick-start test |
 | **Scope creep (web/API)**           | **Moderate** | §13 waiting room                    |
 | **Reader preference misconfiguration** | **Low–Moderate** | FR-028 acceptance, clear fallback |
 

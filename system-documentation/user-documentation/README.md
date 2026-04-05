@@ -1,6 +1,6 @@
 # User documentation (MyLib)
 
-End-user and operator-facing guides. **Content TBD** as the product is implemented.
+End-user and operator-facing guides. **Content TBD** as the product is implemented. **Release expectations** for the user manual, quick-start, and in-app Help entry: see **NFR-007** in [`../system-artifacts/srs.md`](../system-artifacts/srs.md).
 
 | Document | Audience |
 |----------|----------|
