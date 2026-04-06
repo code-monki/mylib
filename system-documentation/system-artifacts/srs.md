@@ -19,11 +19,11 @@ They **SHALL** NOT encode architecture or implementation.
 
 **Date (YYYY-MM-DD):** 2026-04-11
 
-**Last revised (UTC):** 2026-04-03
+**Last revised (UTC):** 2026-04-06
 
-**Author(s):** Charles McKnight (draft; maintainers may revise)
+**Author(s):** Charles McKnight (maintainers may revise via change control)
 
-**Status:** Draft
+**Status:** Approved
 
 **Project Primer Version Reference:** 1.0 (`_process/project-primer.md`)
 
@@ -35,10 +35,11 @@ They **SHALL** NOT encode architecture or implementation.
 
 Confirm:
 
-- Ideation phase approved? **Yes** (2026-04-05; see `_process/project-primer.md` [§12](#12-security-and-compliance-requirements "12. Security and Compliance Requirements"))
+- Ideation phase approved? **Yes** (2026-04-05; see [`_process/project-primer.md`](_process/project-primer.md#12-gate-declaration "Project Primer §12 Gate Declaration"))
 - Project Primer stable? **Yes** (subject to lifecycle rollback if scope shifts materially)
 - Scope boundaries defined? **Yes** (see [§2.2](#22-scope "2.2 Scope"), [§13](#13-waiting-room-deferred-scope "13 Waiting Room - Deferred Scope"))
 - Advancement to Requirements authorized? **Yes**
+- Advancement to High-Level Architecture authorized? **Yes** (2026-04-06; project owner / sole stakeholder; recorded in [§16](#16-phase-gate-declaration "16. Phase Gate Declaration") and [§Approval](#approval "Approval"))
 
 ---
 
@@ -1105,25 +1106,25 @@ The **shell UI** **SHALL** provide a user-discoverable Help affordance (e.g. Hel
 
 Confirm readiness to proceed to **High-Level Architecture**:
 
-- **Requirements stable?** **Partial** — revision **0.9** (2026-04-11) updates [FR-002](#fr-002--metadata-fields "FR-002 Metadata Fields") (publication/acquisition dates), [FR-004](#fr-004--deliberate-import "FR-004 Deliberate Import") (admin-only import), [FR-010](#fr-010--duplicate-detection-digest "FR-010 Duplicate Detection Digest") (digest persistence), [FR-011](#fr-011--missing-file-detection-and-relink "FR-011 Missing File Detection and Relink") (solo vs multi-user missing file), [FR-013](#fr-013--server-authority-for-security "FR-013 Server Authority for Security") Notes, [FR-038](#fr-038--search-query-semantics-and-results "FR-038 Search Query Semantics and Results") (nested query examples); stakeholder pass still recommended before Architecture
-- **NFRs measurable?** Partial — [NFR-001](#nfr-001--corpus-scale-qualitative "NFR-001 Corpus Scale Qualitative") gates on Test Plan; [NFR-009](#nfr-009--transport-security-remote-access "NFR-009 Transport Security (Remote Access)") on security checklist
-- **Scope boundaries explicit?** Yes
+- **Requirements stable?** **Yes** — **v0.9** baseline reviewed by **project owner** (sole stakeholder), **2026-04-06**, including the revision items in [FR-002](#fr-002--metadata-fields "FR-002 Metadata Fields"), [FR-004](#fr-004--deliberate-import "FR-004 Deliberate Import"), [FR-010](#fr-010--duplicate-detection-digest "FR-010 Duplicate Detection Digest"), [FR-011](#fr-011--missing-file-detection-and-relink "FR-011 Missing File Detection and Relink"), [FR-013](#fr-013--server-authority-for-security "FR-013 Server Authority for Security") Notes, and [FR-038](#fr-038--search-query-semantics-and-results "FR-038 Search Query Semantics and Results"); further changes via **change control** and **LIFECYCLE.md** rollback rules if scope shifts materially
+- **NFRs measurable?** **Partial** — **accepted for Architecture entry**: quantitative fixtures and checklist binding deferred to **Test Plan** and design artifacts ([NFR-001](#nfr-001--corpus-scale-qualitative "NFR-001 Corpus Scale Qualitative"), [NFR-009](#nfr-009--transport-security-remote-access "NFR-009 Transport Security (Remote Access)"), and related NFRs); stakeholder recorded **2026-04-06**
+- **Scope boundaries explicit?** **Yes**
 - **Traceability scaffold prepared?** **Yes** — RTM draft v0.1 ([`rtm.md`](rtm.md "Rtm")); downstream columns **TBD** until HLA, DD, and test plan
-- **Human approval granted?** **No** — required after final SRS review (and any targeted SRS tweaks) per **LIFECYCLE.md**
+- **Human approval granted?** **Yes** — **Charles McKnight**, project owner / sole stakeholder, **2026-04-06** (see [§Approval](#approval "Approval"))
 
-**Action:** Remain in **Requirements** until stakeholder/final SRS pass as needed, **recorded human approval** to Architecture, and RTM updates when HLA maps components to requirement rows.
+**Action:** Proceed to **High-Level Architecture** — draft **`hla.md`**, obtain **approval** per **LIFECYCLE.md**, then populate **RTM** HLA component columns and continue the mandatory sequence toward **DD** and **test planning** (no implementation before approved DD and RTM readiness per project rules).
 
 ---
 
 # Approval
 
-Approved By: *— pending —*
-Role:
-Date:
-Version Incremented:
+Approved By: Charles McKnight  
+Role: Project owner (sole stakeholder)  
+Date (YYYY-MM-DD): 2026-04-06  
+Version Incremented: No (baseline remains **v0.9**; increment on future approved SRS revisions per change control)
 
-Advancement to High-Level Architecture requires explicit authorization per **LIFECYCLE.md**.
+Advancement to **High-Level Architecture** authorized **2026-04-06** per **LIFECYCLE.md** and **§16** above.
 
 ---
 
-End of SRS (draft)
+End of SRS

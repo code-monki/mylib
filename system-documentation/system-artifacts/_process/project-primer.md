@@ -18,9 +18,9 @@ This primer defines intent. It does not authorize architecture or implementation
 Project Name: MyLib  
 Initiation Date (YYYY-MM-DD): 2026-04-03  
 Author(s): Charles McKnight
-Lifecycle Phase: Requirements (Ideation closed for this cycle; 2026-04-05)  
-Version: 1.0  
-RTM Scaffold Created? No  
+Lifecycle Phase: High-Level Architecture (SRS v0.9 approved 2026-04-06)  
+Version: 1.1  
+RTM Scaffold Created? Yes ([`../rtm.md`](../rtm.md "Rtm") v0.1 draft)  
 
 ---
 
@@ -257,6 +257,23 @@ Approved to Proceed to Requirements Phase:
 **Note:** Ideation is closed **for now** on a **best-efforts** basis. Material discoveries later may require **rollback or rework** per [`../LIFECYCLE.md`](../LIFECYCLE.md "Lifecycle") (scope, requirements, or architecture changes).
 
 Version incremented upon approval (**primer 1.0**).
+
+---
+
+# 13. Requirements completion and Architecture authorization
+
+**SRS** [`../srs.md`](../srs.md "Srs") **v0.9** reviewed and **Approved** by the **sole stakeholder**; **NFR** measurement binding deferred to **Test Plan** / design artifacts (**accepted** for Architecture entry **2026-04-06**).
+
+Approved to proceed to **High-Level Architecture** phase:
+
+**Name:** Charles McKnight  
+**Role:** Project owner / sole stakeholder  
+**Date (YYYY-MM-DD):** 2026-04-06  
+**Signature (if applicable):** *Recorded in repository (electronic authorization).*  
+
+**Note:** Draft **`hla.md`**, obtain approval per [`../LIFECYCLE.md`](../LIFECYCLE.md "Lifecycle"), then update **[`../rtm.md`](../rtm.md "Rtm")** with architectural component IDs.
+
+Version incremented to **primer 1.1** upon this gate record.
 
 ---
 

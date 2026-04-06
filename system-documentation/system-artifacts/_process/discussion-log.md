@@ -3,11 +3,19 @@
 Timestamped summaries of **discussions**, **decisions**, and **technology choices** (or explicit **deferrals**).  
 **Newest entries first.** Append new blocks after updating the “Last updated” line below.
 
-**Last updated:** 2026-04-03 (RTM v0.1 scaffold; LIFECYCLE SRS v0.9; §16 gate) UTC  
+**Last updated:** 2026-04-06 (SRS v0.9 approved; Architecture phase authorized) UTC  
 
 **Not legal advice** where legal topics appear; see [`open-source-license.md`](open-source-license.md "Open Source License").
 
 **Archival note:** Log entries dated before 2026-04-07 may cite superseded FR numbers from SRS revisions prior to v0.6; the current [`../srs.md`](../srs.md "Srs") section headers are authoritative for IDs.
+
+---
+
+## 2026-04-06 — SRS v0.9 approved; Requirements→Architecture gate
+
+**Summary:** **Project owner** (sole stakeholder) **reviewed** and **approved** **[`../srs.md`](../srs.md "Srs")** **v0.9** **2026-04-06**. **§16** and **§Approval** updated; **NFR** measurement **deferred** to **Test Plan** / design (**accepted** for Architecture entry). **High-Level Architecture** phase **authorized**. **[`../LIFECYCLE.md`](../LIFECYCLE.md "Lifecycle")** **§5** and **[`project-primer.md`](project-primer.md "Project Primer")** **§13** record the gate; primer **v1.1**. **[`../rtm.md`](../rtm.md "Rtm")** **§1** — requirements **approved**; Architecture **work** authorized (HLA not yet approved). Fixed **SRS §1** link to primer **§12** (was incorrectly pointing at SRS §12). **[`../README.md`](../README.md "Readme")** artifact table updated.
+
+**Documentation:** [`../srs.md`](../srs.md "Srs"), [`../LIFECYCLE.md`](../LIFECYCLE.md "Lifecycle"), [`../rtm.md`](../rtm.md "Rtm"), [`project-primer.md`](project-primer.md "Project Primer").
 
 ---
 

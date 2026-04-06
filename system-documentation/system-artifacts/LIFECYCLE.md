@@ -47,10 +47,11 @@ If scope, requirements, architecture, design boundaries, packaging, tests, or tr
 
 ## 5. Current status
 
-- **Ideation** closed **2026-04-05**; **Requirements** phase **in progress**.  
-- **SRS:** [`srs.md`](srs.md "Srs") **draft** (**v0.9**); **not** approved for Architecture until **§16** gate satisfied (including recorded human approval).  
-- **RTM:** [`rtm.md`](rtm.md "Rtm") **draft** (**v0.1**); one row per SRS requirement (FR-001–FR-041, NFR-001–NFR-009); HLA, DD, test, packaging, and orchestration columns **TBD** until those artifacts exist.  
-- See [`_process/project-primer.md`](_process/project-primer.md "Project Primer") **§12 — Gate Declaration** for the Ideation→Requirements authorization.
+- **Ideation** closed **2026-04-05**. **Requirements** phase **complete** for baseline **SRS v0.9** (approved **2026-04-06**).  
+- **SRS:** [`srs.md`](srs.md "Srs") **Approved** (**v0.9**); **High-Level Architecture** phase **authorized** **2026-04-06** (see SRS **§16**, **§Approval**, and primer **§13**).  
+- **RTM:** [`rtm.md`](rtm.md "Rtm") **draft** (**v0.1**); one row per SRS requirement (FR-001–FR-041, NFR-001–NFR-009); HLA, DD, test, packaging, and orchestration columns **TBD** until those artifacts exist — **update RTM** when **HLA** is approved.  
+- **Next deliverable:** draft and approve **`hla.md`** per phase gates; **DD** and **implementation** remain blocked until their **LIFECYCLE.md** prerequisites are met.  
+- See [`_process/project-primer.md`](_process/project-primer.md "Project Primer") **§12** (Ideation→Requirements) and **§13** (Requirements→Architecture).
 
 ---
 

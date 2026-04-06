@@ -15,10 +15,10 @@ columns remain TBD until HLA and DD are drafted and approved.
 
 **Project Name:** MyLib  
 **Version:** 0.1  
-**Date (YYYY-MM-DD):** 2026-04-03  
+**Date (YYYY-MM-DD):** 2026-04-06  
 **Maintained By:** Charles McKnight (draft; maintainers may revise)  
 **Status:** Draft  
-**Requirement Version Reference:** SRS v0.9 ([`srs.md`](srs.md "Srs"), dated 2026-04-11 in SRS header)  
+**Requirement Version Reference:** SRS v0.9 **Approved** ([`srs.md`](srs.md "Srs"); header dated 2026-04-11; approved 2026-04-06)  
 **Architecture Version Reference:** N/A (HLA not yet drafted)  
 **Design Version Reference:** N/A (DD not yet drafted)  
 **Test Plan Version Reference:** N/A (test plan not yet drafted)  
@@ -29,13 +29,14 @@ columns remain TBD until HLA and DD are drafted and approved.
 
 Confirm:
 
-- Requirements approved? **No** (SRS draft v0.9)  
-- Architecture approved? **No**  
+- Requirements approved? **Yes** — SRS **v0.9**, **2026-04-06**  
+- Architecture approved? **No** (HLA not yet drafted/approved)  
 - Detailed Design approved? **No**  
 - Test Plan aligned? **No**  
-- Advancement to next phase authorized? **No**  
+- Advancement to **High-Level Architecture** work authorized? **Yes** — **2026-04-06** (SRS **§16** / **§Approval**; **LIFECYCLE.md** §5)  
+- Advancement to **Detailed Design** or **implementation** authorized? **No** — per **LIFECYCLE.md** until **HLA** (and later **DD**) are approved  
 
-If any answer is “No,” traceability validation is incomplete. This matrix is a **scaffold**: every SRS requirement has a row; downstream IDs are filled as HLA, DD, and tests land.
+If any answer is “No” where a phase requires a “Yes,” traceability validation is incomplete for that phase. This matrix is a **scaffold**: every SRS requirement has a row; downstream IDs are filled as HLA, DD, and tests land.
 
 ---
 
@@ -238,6 +239,7 @@ Untracked change invalidates lifecycle integrity.
 | Date (UTC) | Summary | Impacted IDs | Rollback |
 |------------|---------|--------------|----------|
 | 2026-04-03 | Initial RTM v0.1: full FR-001–FR-041 and NFR-001–NFR-009 rows; downstream TBD | All | N/A |
+| 2026-04-06 | SRS v0.9 **Approved**; Architecture phase authorized; §1 authority rows updated | — | N/A |
 
 ---
 

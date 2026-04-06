@@ -27,7 +27,7 @@ Cursor must adhere to:
 
 - `system-documentation/system-artifacts/LIFECYCLE.md` (phase sequence, gates, rollback)
 - `system-documentation/system-artifacts/concept.md` and subsequent artifacts (**SRS**, **HLA**, **DD**, **test plan**, **RTM**) as they exist (scaffold from `_templates/` when creating those files)
-- Explicit **human authorization** to advance phases (see `_process/project-primer.md` gate history where applicable)
+- Explicit **human authorization** to advance phases (see `_process/project-primer.md` **§12–§13** and later gate records where applicable)
 
 Cursor must not override lifecycle discipline.
 
