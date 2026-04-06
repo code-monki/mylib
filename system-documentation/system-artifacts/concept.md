@@ -3,7 +3,7 @@
 Structured Ideation record (template-aligned): [Project Primer](_process/project-primer.md "Project Primer").  
 Timestamped discussion and decisions: [Discussion log](_process/discussion-log.md "Discussion Log").
 
-**Lifecycle (this cycle):** **Ideation** closed **2026-04-05**—authorization to proceed to **Requirements** recorded in [Project Primer §12 — Gate Declaration](_process/project-primer.md#12-gate-declaration "12. Gate Declaration"). **SRS (draft):** [srs.md](srs.md "Srs"). Further discovery may still trigger **phase rollback** per [LIFECYCLE.md](LIFECYCLE.md "Lifecycle").
+**Lifecycle (this cycle):** **Ideation** closed **2026-04-05** (see [Project Primer §12](_process/project-primer.md#12-gate-declaration "12. Gate Declaration")). **SRS v0.9** **Approved** **2026-04-06** ([srs.md](srs.md "Srs")); **Architecture** authorized; **HLA** draft **[hla.md](hla.md "Hla")** **v0.1**. Further discovery may trigger **phase rollback** per [LIFECYCLE.md](LIFECYCLE.md "Lifecycle").
 
 ## Overview
 

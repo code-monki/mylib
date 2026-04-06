@@ -3,11 +3,19 @@
 Timestamped summaries of **discussions**, **decisions**, and **technology choices** (or explicit **deferrals**).  
 **Newest entries first.** Append new blocks after updating the “Last updated” line below.
 
-**Last updated:** 2026-04-06 (SRS v0.9 approved; Architecture phase authorized) UTC  
+**Last updated:** 2026-04-06 (HLA v0.1 draft; RTM HLA column) UTC  
 
 **Not legal advice** where legal topics appear; see [`open-source-license.md`](open-source-license.md "Open Source License").
 
 **Archival note:** Log entries dated before 2026-04-07 may cite superseded FR numbers from SRS revisions prior to v0.6; the current [`../srs.md`](../srs.md "Srs") section headers are authoritative for IDs.
+
+---
+
+## 2026-04-06 — HLA v0.1 draft; RTM architectural mapping
+
+**Summary:** Added **[`../hla.md`](../hla.md "Hla")** **v0.1** (**Draft**): client–server structural model, twelve components (**HLA-SHELL** through **HLA-RELEASE**), **HLA-BOUND-OCR**, context **mermaid** diagram, NFR structural notes, open questions for DD. Updated **[`../rtm.md`](../rtm.md "Rtm")** §3 **HLA Component ID** for all FR/NFR; §4 **FR-023** boundary row; §5 NFR mechanism column; lineage. **[`../LIFECYCLE.md`](../LIFECYCLE.md "Lifecycle")** §5 and **[`../README.md`](../README.md "Readme")**; **[`../concept.md`](../concept.md "Concept")** lifecycle blurb. HLA **§15** — human approval **pending** before DD.
+
+**Documentation:** [`../hla.md`](../hla.md "Hla"), [`../rtm.md`](../rtm.md "Rtm").
 
 ---
 
