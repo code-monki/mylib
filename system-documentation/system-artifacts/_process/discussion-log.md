@@ -3,11 +3,19 @@
 Timestamped summaries of **discussions**, **decisions**, and **technology choices** (or explicit **deferrals**).  
 **Newest entries first.** Append new blocks after updating the “Last updated” line below.
 
-**Last updated:** 2026-04-06 (HLA v0.1 draft; RTM HLA column) UTC  
+**Last updated:** 2026-04-06 (HLA v0.1.1 SRS cross-links for GitHub) UTC  
 
 **Not legal advice** where legal topics appear; see [`open-source-license.md`](open-source-license.md "Open Source License").
 
 **Archival note:** Log entries dated before 2026-04-07 may cite superseded FR numbers from SRS revisions prior to v0.6; the current [`../srs.md`](../srs.md "Srs") section headers are authoritative for IDs.
+
+---
+
+## 2026-04-06 — HLA v0.1.1: SRS anchors for rendered (GitHub) viewing
+
+**Summary:** **[`../hla.md`](../hla.md "Hla")** **v0.1.1** — note on **relative** `srs.md#…` links matching **GitHub** heading IDs; converted **FR**/**NFR**/**§** references in drivers, components, data/NFR/failure/risk/open-questions tables, and gates to **`[text](srs.md#slug "Title")`** (and **[`LIFECYCLE.md`](../LIFECYCLE.md "Lifecycle")** where useful). **SRS** header **HLA** reference **0.1.1**; **README** artifact status.
+
+**Documentation:** [`../hla.md`](../hla.md "Hla"), [`../srs.md`](../srs.md "Srs").
 
 ---
 

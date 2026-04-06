@@ -49,8 +49,8 @@ If scope, requirements, architecture, design boundaries, packaging, tests, or tr
 
 - **Ideation** closed **2026-04-05**. **Requirements** phase **complete** for baseline **SRS v0.9** (approved **2026-04-06**).  
 - **SRS:** [`srs.md`](srs.md "Srs") **Approved** (**v0.9**); **High-Level Architecture** phase **authorized** **2026-04-06** (see SRS **§16**, **§Approval**, and primer **§13**).  
-- **HLA:** [`hla.md`](hla.md "Hla") **draft** (**v0.1**); **not** approved for Detailed Design until **§15** gate and **§Approval** satisfied.  
-- **RTM:** [`rtm.md`](rtm.md "Rtm") **draft** (**v0.1**); **HLA Component ID** column populated from HLA v0.1 draft; **DD**, test, packaging, and orchestration columns **TBD**.  
+- **HLA:** [`hla.md`](hla.md "Hla") **draft** (**v0.1.1**); **not** approved for Detailed Design until **§15** gate and **§Approval** satisfied.  
+- **RTM:** [`rtm.md`](rtm.md "Rtm") **draft** (**v0.1**); **HLA Component ID** column populated from HLA draft; **DD**, test, packaging, and orchestration columns **TBD**.  
 - **Next deliverable:** review and **approve** **`hla.md`**; then **DD** (`dd.md`). **Implementation** remains blocked until **approved DD** and RTM readiness per project rules.  
 - See [`_process/project-primer.md`](_process/project-primer.md "Project Primer") **§12** (Ideation→Requirements) and **§13** (Requirements→Architecture).
 

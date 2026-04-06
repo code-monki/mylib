@@ -28,7 +28,7 @@ They **SHALL** NOT encode architecture or implementation.
 **Project Primer Version Reference:** 1.0 (`_process/project-primer.md`)
 
 **RTM Version Reference:** 0.1 ([`rtm.md`](rtm.md "Rtm") draft; HLA column populated from [`hla.md`](hla.md "Hla") v0.1 draft)  
-**HLA Version Reference:** 0.1 ([`hla.md`](hla.md "Hla") draft — pending approval before Detailed Design)
+**HLA Version Reference:** 0.1.1 ([`hla.md`](hla.md "Hla") draft — pending approval before Detailed Design)
 
 ---
 
