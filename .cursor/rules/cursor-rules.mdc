@@ -31,6 +31,8 @@ Cursor must adhere to:
 
 Cursor must not override lifecycle discipline.
 
+**Markdown documentation:** In `*.md` under `system-documentation/`, `docs/`, and related templates, use **`[text](url "Title")`** for inline links (paths and `#` fragments). When editing, preserve or add titles; align `#` slugs with heading anchors (e.g. GitHub-style). Do not strip quoted titles.
+
 ------------------------------------------------------------------------
 
 # 1. Lifecycle Authorization

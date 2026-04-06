@@ -254,7 +254,7 @@ Approved to Proceed to Requirements Phase:
 **Date (YYYY-MM-DD):** 2026-04-05  
 **Signature (if applicable):** *Recorded in repository (electronic authorization).*  
 
-**Note:** Ideation is closed **for now** on a **best-efforts** basis. Material discoveries later may require **rollback or rework** per [`../LIFECYCLE.md`](../LIFECYCLE.md) (scope, requirements, or architecture changes).
+**Note:** Ideation is closed **for now** on a **best-efforts** basis. Material discoveries later may require **rollback or rework** per [`../LIFECYCLE.md`](../LIFECYCLE.md "Lifecycle") (scope, requirements, or architecture changes).
 
 Version incremented upon approval (**primer 1.0**).
 

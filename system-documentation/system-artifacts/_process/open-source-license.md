@@ -6,7 +6,7 @@
 
 ## Context
 
-MyLib is intended as an **open-source** project: a tool for cataloging and indexing **electronic publications the user owns**, without rewriting PDFs for redistribution, without DRM circumvention, and with indexing as a **lookup aid** rather than a substitute for the readable document. See [`../concept.md`](../concept.md) for product intent.
+MyLib is intended as an **open-source** project: a tool for cataloging and indexing **electronic publications the user owns**, without rewriting PDFs for redistribution, without DRM circumvention, and with indexing as a **lookup aid** rather than a substitute for the readable document. See [`../concept.md`](../concept.md "Concept") for product intent.
 
 ---
 

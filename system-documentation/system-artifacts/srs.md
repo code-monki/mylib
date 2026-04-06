@@ -19,7 +19,7 @@ They **SHALL** NOT encode architecture or implementation.
 
 **Date (YYYY-MM-DD):** 2026-04-11
 
-**Last revised (UTC):** 2026-04-12
+**Last revised (UTC):** 2026-04-03
 
 **Author(s):** Charles McKnight (draft; maintainers may revise)
 
@@ -88,7 +88,7 @@ This document specifies software requirements for **MyLib**, an open-source elec
 
 Stakeholders managing large, heterogeneous electronic document collections (e.g. PDF, word-processing formats, EPUB-class content) suffer fragmented discovery, weak cross-corpus search, unreliable jump from search hits to in-document context, inconsistent metadata, and limited governance of who may access or alter content. At scale (roughly 10³–10⁵+ documents), manual folder-based workflows break down. Impact falls on researchers, archivists, small teams, and administrators who must keep corpora findable and access-controlled without assuming enterprise suite budgets.
 
-*(Problem framing only; see [`concept.md`](concept.md) and [`_process/project-primer.md`](_process/project-primer.md).)*
+*(Problem framing only; see [`concept.md`](concept.md "Concept") and [`_process/project-primer.md`](_process/project-primer.md "Project Primer").)*
 
 ## 3.2 Definitions and Terminology
 
@@ -171,7 +171,7 @@ Stakeholders managing large, heterogeneous electronic document collections (e.g.
 
 **Priority:** High
 
-**Dependencies:** [FR-001](#fr-001--catalog-records)
+**Dependencies:** [FR-001](#fr-001--catalog-records "FR-001 Catalog Records")
 
 **Constraints:** —
 
@@ -317,7 +317,7 @@ Stakeholders managing large, heterogeneous electronic document collections (e.g.
 
 **Description:** Removing a document from the library catalog **SHALL** be distinct from deleting the underlying file bytes. When deletion on disk is offered, the system **SHALL** require explicit administrator confirmation (or equivalent elevated authorization).
 
-**Acceptance criteria:** Default remove operation does not delete bytes without separate confirmed action; audit trail if logging enabled ([FR-026](#fr-026--audit-logging)).
+**Acceptance criteria:** Default remove operation does not delete bytes without separate confirmed action; audit trail if logging enabled ([FR-026](#fr-026--audit-logging "FR-026 Audit Logging")).
 
 **Priority:** High
 
@@ -369,7 +369,7 @@ Stakeholders managing large, heterogeneous electronic document collections (e.g.
 
 **Priority:** High
 
-**Dependencies:** [FR-013](#fr-013--server-authority-for-security "FR-013 Server Authority for Security"), [FR-016](#fr-016--authentication-v1 "FR-016 Authentication (v1)"), [FR-017](#fr-017--role-based-access-control "FR-017 Role-Based Access Control)
+**Dependencies:** [FR-013](#fr-013--server-authority-for-security "FR-013 Server Authority for Security"), [FR-016](#fr-016--authentication-v1 "FR-016 Authentication (v1)"), [FR-017](#fr-017--role-based-access-control "FR-017 Role-Based Access Control")
 
 **Constraints:** Network and TLS posture **TBD** in HLA; operator configures exposure.
 
@@ -401,7 +401,7 @@ Stakeholders managing large, heterogeneous electronic document collections (e.g.
 
 **Priority:** High
 
-**Dependencies:** [FR-016](#fr-016--authentication-v1 "FR-016 Authentication")
+**Dependencies:** [FR-016](#fr-016--authentication-v1 "FR-016 Authentication (v1)")
 
 **Constraints:** Granularity (per-collection vs per-document) **TBD** in design—must support at least administrator vs non-administrator distinction.
 
@@ -443,17 +443,17 @@ Stakeholders managing large, heterogeneous electronic document collections (e.g.
 
 ## FR-020 — Settings (client preferences)
 
-**Description:** The shell UI **SHALL** provide a Settings (or equivalently named) area where an authenticated user can view and change client-side preferences that do not substitute for or weaken server-enforced** access control ([FR-013](#fr-013--server-authority-for-security "FR-013 Server Authority for Security"), [FR-017](#fr-017--role-based-access-control)). The Settings area **SHALL** include at minimum the capabilities in [FR-021](#fr-021--preferred-reader-per-document-type "FR-021 Preferred Reader per Document Type"), [FR-022](#fr-022--application-theme "FR-022 Application Theme"), and **client-side** controls** for** operational** and** diagnostic** logging** ([FR-029](#fr-029--operational-and-diagnostic-logging-client-and-server "FR-029 Operational and Diagnostics Logging Client and Server"))** and **SHALL** be **extensible** so that **additional** client-side** or **documented system-level** options may be added in later releases **without** a new top-level navigation paradigm.
+**Description:** The shell UI **SHALL** provide a Settings (or equivalently named) area where an authenticated user can view and change client-side preferences that do not substitute for or weaken server-enforced access control ([FR-013](#fr-013--server-authority-for-security "FR-013 Server Authority for Security"), [FR-017](#fr-017--role-based-access-control "FR-017 Role-Based Access Control")). The Settings area **SHALL** include at minimum the capabilities in [FR-021](#fr-021--preferred-reader-per-document-type "FR-021 Preferred Reader per Document Type"), [FR-022](#fr-022--application-theme "FR-022 Application Theme"), and client-side controls for operational and diagnostic logging ([FR-029](#fr-029--operational-and-diagnostic-logging-client-and-server "FR-029 Operational and Diagnostic Logging Client and Server")) and **SHALL** be extensible so that additional client-side or documented system-level options may be added in later releases without a new top-level navigation paradigm.
 
 **Acceptance criteria:** User can open Settings from the shell, change a preference, restart the application (if required by HLA), and observe the change persisted on the same client installation; forbidden operations remain blocked by the server regardless of client UI state.
 
 **Priority:** High
 
-**Dependencies:** [FR-016](#fr-016--authentication-v1)
+**Dependencies:** [FR-016](#fr-016--authentication-v1 "FR-016 Authentication (v1)")
 
 **Constraints:** Server-side administrative options (e.g. audit retention [FR-028](#fr-028--configurable-log-retention "FR-028 Configurable Log Retention"), server logging [FR-029](#fr-029--operational-and-diagnostic-logging-client-and-server "FR-029 Operational and Diagnostic Logging Client and Server")) **MAY** appear in Settings only for users with appropriate roles and **SHALL** remain enforced on the server.
 
-**Notes:** Exact layout (tabs vs sidebar) **TBD** DD. Further system-level knobs **TBD**; this FR establishes the facility. Administrative functions ([FR-031](#fr-031--user-account-and-role-administration "FR-031 User Account and Role Administration") – [FR-035](#fr-035--session-management "FR-035 Session Management), [FR-039](#fr-039--full-text-index-administration "FR-039 Full-Text Index Administration")) **MAY** live in Settings, a separate admin shell, or documented CLI (HLA) but **SHALL** remain RBAC-gated. Server logging toggles and rotation when not exposed in the desktop shell **SHALL** appear in a documented server administration surface with equivalent capabilities ([FR-029](#fr-029--operational-and-diagnostic-logging-client-and-server "FR-029 Operational and Diagnostic Logging Client and Server")).
+**Notes:** Exact layout (tabs vs sidebar) **TBD** DD. Further system-level knobs **TBD**; this FR establishes the facility. Administrative functions ([FR-031](#fr-031--user-account-and-role-administration "FR-031 User Account and Role Administration") – [FR-035](#fr-035--session-management "FR-035 Session Management"), [FR-039](#fr-039--full-text-index-administration "FR-039 Full-Text Index Administration")) **MAY** live in Settings, a separate admin shell, or documented CLI (HLA) but **SHALL** remain RBAC-gated. Server logging toggles and rotation when not exposed in the desktop shell **SHALL** appear in a documented server administration surface with equivalent capabilities ([FR-029](#fr-029--operational-and-diagnostic-logging-client-and-server "FR-029 Operational and Diagnostic Logging Client and Server")).
 
 ---
 
@@ -469,7 +469,7 @@ Stakeholders managing large, heterogeneous electronic document collections (e.g.
 
 **Constraints:** Some environments **MAY** only support default handler; product **SHALL** document limitations.
 
-**Notes:** EPUB** and future types **SHALL** gain the same preference row when those types become supported.
+**Notes:** **EPUB** and future types **SHALL** gain the same preference row when those types become supported.
 
 ---
 
@@ -501,7 +501,7 @@ Stakeholders managing large, heterogeneous electronic document collections (e.g.
 
 **Constraints:** OCR engine not specified herein.
 
-**Notes:** Correction UX **TBD** in DD; ties to [§6](#6-deterministicprobabilistic-requirements "6. Deterministic-Probabilistic Requirements).
+**Notes:** Correction UX **TBD** in DD; ties to [§6](#6-deterministicprobabilistic-requirements "6. Deterministic-Probabilistic Requirements "6. Deterministicprobabilistic Requirements").
 
 ---
 
@@ -547,7 +547,7 @@ Stakeholders managing large, heterogeneous electronic document collections (e.g.
 
 **Priority:** Medium
 
-**Dependencies:** [FR-016](#fr-016--authentication-v1 "FR-06 Authentication"), [FR-017](#fr-017--role-based-access-control "FR-017 Role-Based Access Control"), [FR-031](#fr-031--user-account-and-role-administration "User Account and Role Administration")
+**Dependencies:** [FR-016](#fr-016--authentication-v1 "FR-016 Authentication (v1)"), [FR-017](#fr-017--role-based-access-control "FR-017 Role-Based Access Control"), [FR-031](#fr-031--user-account-and-role-administration "FR-031 User Account and Role Administration")
 
 **Constraints:** Privacy and retention are operator policy (see [§10](#10-data-requirements "10. Data Requirements"), [§12](#12-security-and-compliance-requirements "12. Security and Compliance Requirements"), [NFR-008](#nfr-008--logging-privacy-and-jurisdictional-readiness "NFR-008 Logging Privacy and Jurisdictional Readiness")).
 
@@ -573,7 +573,7 @@ Stakeholders managing large, heterogeneous electronic document collections (e.g.
 
 ## FR-028 — Configurable log retention
 
-**Description:** The system **SHALL** provide administrator-configurable retention and rotation policy for all persistent log families the product controls: (a) audit logs ([FR-026](#fr-026--audit-logging "FR-026 Audit Logging")) and (b) operational and diagnostic logs (FR-029). Enable/disable and day-based rollover for (b) are specified in [FR-029](#fr-029--operational-and-diagnostic-logging-client-and-server "FR-029 Operational and Diagnostic Logging Client and Server"); this requirement ensures operators can also configure maximum retention (e.g. deletion or archival of files older than N days) per log family where policy or jurisdiction requires, with documented defaults and bounds (DD).
+**Description:** The system **SHALL** provide administrator-configurable retention and rotation policy for all persistent log families the product controls: (a) audit logs ([FR-026](#fr-026--audit-logging "FR-026 Audit Logging")) and (b) operational and diagnostic logs ([FR-029](#fr-029--operational-and-diagnostic-logging-client-and-server "FR-029 Operational and Diagnostic Logging Client and Server")). Enable/disable and day-based rollover for (b) are specified in [FR-029](#fr-029--operational-and-diagnostic-logging-client-and-server "FR-029 Operational and Diagnostic Logging Client and Server"); this requirement ensures operators can also configure maximum retention (e.g. deletion or archival of files older than N days) per log family where policy or jurisdiction requires, with documented defaults and bounds (DD).
 
 **Acceptance criteria:** Administrator (or documented operator role) can configure retention/rotation limits for audit separately from operational/diagnostic (or as documented if unified surface); behavior documented in admin guide ([NFR-004](#nfr-004--operator-documentation "Operator Documentation")).
 
@@ -596,19 +596,19 @@ Stakeholders managing large, heterogeneous electronic document collections (e.g.
 1. **Operational** — routine lifecycle and significant application events suitable for day-to-day monitoring (e.g. startup/shutdown, ready, coarse job/request boundaries as enumerated in DD).
 2. **Diagnostic** — warnings, errors, and troubleshooting detail for support (e.g. error codes, correlation identifiers, limited context as defined in DD).
 
-For each category on each component (client vs server), the product **SHALL** provide an independent enable/disable control exposed through Settings ([FR-020](#fr-020--settings-client-preferences "FR-020 Settings Client Preferences")) for client logs, and through the documented server administration interface (HLA—which MAY be the same shell app in solo deployments) for server logs, subject to RBAC ([FR-017](#fr-017--role-based-access-control "FR-17 Role-Based Access Control")).
+For each category on each component (client vs server), the product **SHALL** provide an independent enable/disable control exposed through Settings ([FR-020](#fr-020--settings-client-preferences "FR-020 Settings Client Preferences")) for client logs, and through the documented server administration interface (HLA—which MAY be the same shell app in solo deployments) for server logs, subject to RBAC ([FR-017](#fr-017--role-based-access-control "FR-017 Role-Based Access Control")).
 
 **Default** log file locations **SHALL** follow platform-idiomatic practice for application and service logs on Windows, macOS, and Linux (e.g. per-user vs system service directories) per HLA without prescribing a single canonical path in this SRS.
 
-**Rotation:** Operators **SHALL** be able to configure time-based rollover, including at minimum the number of days after which a log file rolls over to a new file (or equivalent documented semantics). Optional size-based rotation **MAY** complement time-based rotation (DD). Maximum retention (deletion or archival after N days) **SHALL** be configurable per [FR-028](#fr-028--configurable-log-retention "FR-028 Configurabole Log Retention") and **SHALL** apply consistently to operational/diagnostic artifacts as documented.
+**Rotation:** Operators **SHALL** be able to configure time-based rollover, including at minimum the number of days after which a log file rolls over to a new file (or equivalent documented semantics). Optional size-based rotation **MAY** complement time-based rotation (DD). Maximum retention (deletion or archival after N days) **SHALL** be configurable per [FR-028](#fr-028--configurable-log-retention "FR-028 Configurable Log Retention") and **SHALL** apply consistently to operational/diagnostic artifacts as documented.
 
-**Acceptance criteria:** With operational enabled and diagnostic disabled on one component, new diagnostic-only content (per DD taxonomy) does not accumulate in persisted logs for that category (allow documented minimal bootstrap errors if unavoidable); converse configuration holds; both disabled stops routine persistence for both categories except any immutable minimum stated in DD; day-based rollover behavior is observable per DD; default paths and PII/secrets posture documented ([NFR-004](#nfr-004--operator-documentation "NFR-004 Operator Documentation"), [NFR-007](#nfr-007--end-user-documentation-and-help "NFR-007 End-User Documentation and Help"), [NFR-008](#nfr-008--logging-privacy-and-jurisdictional-readiness ""NFR-008 Logging and Privacy Jurisdictional Readiness")).
+**Acceptance criteria:** With operational enabled and diagnostic disabled on one component, new diagnostic-only content (per DD taxonomy) does not accumulate in persisted logs for that category (allow documented minimal bootstrap errors if unavoidable); converse configuration holds; both disabled stops routine persistence for both categories except any immutable minimum stated in DD; day-based rollover behavior is observable per DD; default paths and PII/secrets posture documented ([NFR-004](#nfr-004--operator-documentation "NFR-004 Operator Documentation"), [NFR-007](#nfr-007--end-user-documentation-and-help "NFR-007 End-User Documentation and Help"), [NFR-008](#nfr-008--logging-privacy-and-jurisdictional-readiness "NFR-008 Logging Privacy and Jurisdictional Readiness")).
 
 **Priority:** High
 
-**Dependencies:** [FR-017](#fr-017--role-based-access-control "NFR-017 Role-Based Access Control"), [FR-020](#fr-020--settings-client-preferences "FR-020 Settings Client Prefernces"), [FR-026](#fr-026--audit-logging "FR-026 Audit Logging")
+**Dependencies:** [FR-017](#fr-017--role-based-access-control "FR-017 Role-Based Access Control"), [FR-020](#fr-020--settings-client-preferences "FR-020 Settings Client Preferences"), [FR-026](#fr-026--audit-logging "FR-026 Audit Logging")
 
-**Constraints:** Secrets, session tokens, passwords, and full document payloads **SHALL** not appear in cleartext in operational/diagnostic logs ([NFR-008](#nfr-008--logging-privacy-and-jurisdictional-readiness "NFR-008 Loggin Privacy and Jurisdictional Readiness")). Maximum retention and family-wide caps align with [FR-028](#fr-028--configurable-log-retention "FR-028 Configurable Log Retention").
+**Constraints:** Secrets, session tokens, passwords, and full document payloads **SHALL** not appear in cleartext in operational/diagnostic logs ([NFR-008](#nfr-008--logging-privacy-and-jurisdictional-readiness "NFR-008 Logging Privacy and Jurisdictional Readiness")). Maximum retention and family-wide caps align with [FR-028](#fr-028--configurable-log-retention "FR-028 Configurable Log Retention").
 
 **Notes:** Audit ([FR-026](#fr-026--audit-logging "FR-026 Audit Logging")) remains governed by its own enablement/retention where applicable; diagnostic verbosity levels (e.g. debug) MAY be a separate DD topic if needed without violating the two-category toggle model above.
 
@@ -668,7 +668,7 @@ For each category on each component (client vs server), the product **SHALL** pr
 
 Any new password chosen by a user (self-service change or post-reset) **SHALL** meet all of the following v1 rules: (a) minimum length eight characters; (b) at least one uppercase Latin letter (A–Z); (c) at least one lowercase Latin letter (a–z); (d) at least one decimal digit (0–9); (e) at least one symbol from a documented non-alphanumeric set (DD **SHALL** enumerate the default permitted symbols and any operator-configurable variants where allowed).
 
-**Acceptance criteria:** Change and reset flows invalidate or preserve sessions per documented security policy ([FR-035](#fr-035--session-management "FR-035 Sesson Management")); passwords violating the rules above are rejected with clear, actionable errors before persistence; compliant passwords are accepted and stored per [FR-027](#fr-027--password-storage "FR-027 Password Storage").
+**Acceptance criteria:** Change and reset flows invalidate or preserve sessions per documented security policy ([FR-035](#fr-035--session-management "FR-035 Session Management")); passwords violating the rules above are rejected with clear, actionable errors before persistence; compliant passwords are accepted and stored per [FR-027](#fr-027--password-storage "FR-027 Password Storage").
 
 **Priority:** High
 
@@ -878,12 +878,12 @@ Matching **SHALL** be case-insensitive for basic Latin (other scripts per DD). R
 
 **Category:** Usability / Compliance
 
-**Description:** The project **SHALL** publish operator documentation describing backup scope (corpus, database, index, configuration, logs), security boundaries, and privacy-relevant data flows at a conceptual level sufficient for informed deployment. The admin guide **SHALL** cover first-run bootstrap ([FR-032](#fr-032--initial-administrator-bootstrap "FR-032 Initial Administrative Bootstrap")), user and role administration ([FR-031](#fr-031--user-account-and-role-administration "FR-031 User Account and Role Administration")), import authorization (administrator-only default per [FR-004](#fr-004--deliberate-import "FR-004 Deliberate Import")), content digest persistence and algorithm identifiers ([FR-010](#fr-010--duplicate-detection-digest "FR-010 Duplicate Detection Digest")), missing-file detection and administrator notification defaults ([FR-011](#fr-011--missing-file-detection-and-relink "FR-011 Missing File Detection and Relink")), password composition policy as deployed ([FR-033](#fr-033--password-change-and-administrative-reset "FR-033 Password Change and Administrative Reset")), session and lockout policy ([FR-034](#fr-034--authentication-throttling "FR-034 Authentication Throttling"), [FR-035](#fr-035--session-management "FR-035 Session Management")), TLS and certificate handling ([NFR-009](#nfr-009--transport-security-remote-access "NFR-009 Transport Security (Remote Access)")), library storage roots ([FR-036](#fr-036--library-corpus-and-storage-model "FR-036 Library and Corpus Storage Model")), index rebuild ([FR-039](#fr-039--full-text-index-administration "FR-039 Full-Text Index Administration")), and time synchronization expectations ([§8](#8-assumptions "8. Assumptions")). It **SHALL** identify default locations (or discovery method) for audit ([FR-026](#fr-026--audit-logging "FR-026 Audit Logging")), operational, and diagnostic logs ([FR-029](#fr-029--operational-and-diagnostic-logging-client-and-server "FR-029 Operational and Diagnostic Logging Client and Server")) on each supported platform, summarize what each log family may contain, and reference retention/rollover controls ([FR-028](#fr-028--configurable-log-retention "FR-028 Configurable Log Retention"), [FR-029](#fr-029--operational-and-diagnostic-logging-client-and-server "FR-029 Operational and Diagnostic Logging Client and Server")) and jurisdictional considerations ([NFR-008](#nfr-008--logging-privacy-and-jurisdictional-readiness "NFR-008 Logging Privacy and Jurisdictional Readiness")).
+**Description:** The project **SHALL** publish operator documentation describing backup scope (corpus, database, index, configuration, logs), security boundaries, and privacy-relevant data flows at a conceptual level sufficient for informed deployment. The admin guide **SHALL** cover first-run bootstrap ([FR-032](#fr-032--initial-administrator-bootstrap "FR-032 Initial Administrator Bootstrap")), user and role administration ([FR-031](#fr-031--user-account-and-role-administration "FR-031 User Account and Role Administration")), import authorization (administrator-only default per [FR-004](#fr-004--deliberate-import "FR-004 Deliberate Import")), content digest persistence and algorithm identifiers ([FR-010](#fr-010--duplicate-detection-digest "FR-010 Duplicate Detection Digest")), missing-file detection and administrator notification defaults ([FR-011](#fr-011--missing-file-detection-and-relink "FR-011 Missing File Detection and Relink")), password composition policy as deployed ([FR-033](#fr-033--password-change-and-administrative-reset "FR-033 Password Change and Administrative Reset")), session and lockout policy ([FR-034](#fr-034--authentication-throttling "FR-034 Authentication Throttling"), [FR-035](#fr-035--session-management "FR-035 Session Management")), TLS and certificate handling ([NFR-009](#nfr-009--transport-security-remote-access "NFR-009 Transport Security (Remote Access)")), library storage roots ([FR-036](#fr-036--library-corpus-and-storage-model "FR-036 Library and Corpus Storage Model")), index rebuild ([FR-039](#fr-039--full-text-index-administration "FR-039 Full-Text Index Administration")), and time synchronization expectations ([§8](#8-assumptions "8. Assumptions")). It **SHALL** identify default locations (or discovery method) for audit ([FR-026](#fr-026--audit-logging "FR-026 Audit Logging")), operational, and diagnostic logs ([FR-029](#fr-029--operational-and-diagnostic-logging-client-and-server "FR-029 Operational and Diagnostic Logging Client and Server")) on each supported platform, summarize what each log family may contain, and reference retention/rollover controls ([FR-028](#fr-028--configurable-log-retention "FR-028 Configurable Log Retention"), [FR-029](#fr-029--operational-and-diagnostic-logging-client-and-server "FR-029 Operational and Diagnostic Logging Client and Server")) and jurisdictional considerations ([NFR-008](#nfr-008--logging-privacy-and-jurisdictional-readiness "NFR-008 Logging Privacy and Jurisdictional Readiness")).
 
 **Measurement criteria:** Reviewer** can answer: what to back up, what is logged, **where** each** log** type** resides**, **how** to** tune** retention**/**rollover**, **and** where **secrets** live—using **only** shipped docs.
 
 **Constraints:** Complements [NFR-007](#nfr-007--end-user-documentation-and-help "NFR-007 End-User Documentation and Help") (end-user / day-to-day documentation); admin vs end-user material MAY share a Help shell but SHALL remain discernible (e.g. separate sections or guides).
-**Dependencies:** `system-documentation/user-documentation/` (e.g. admin guide); stubs to be expanded for release; [FR-004](#fr-004--deliberate-import "FR-004 Deliberate Import"), [FR-010](#fr-010--duplicate-detection-digest "FR-010 Duplicate Detection Digest"), [FR-011](#fr-011--missing-file-detection-and-relink "FR-011 Missing File Detection and Relink"); [FR-026](#fr-026--audit-logging "FR-026 Audit Loggin") – [FR-029](#fr-029--operational-and-diagnostic-logging-client-and-server "FR-029 Operational and Diagnostic Logging Client and Server") (logging and retention); [FR-031](#fr-031--user-account-and-role-administration "FR-031 User Account and Role Administration"), [FR-032](#fr-032--initial-administrator-bootstrap "FR-032 Initial Administrator Bootstrap"), [FR-034](#fr-034--authentication-throttling "FR-034 Authentication Throttling"), [FR-035](#fr-035--session-management "FR-035 Session Management"), [FR-036](#fr-036--library-corpus-and-storage-model "FR-036 Library Corpus and Storage Model"), [FR-039](#fr-039--full-text-index-administration "FR-039 Full-Text Index Administration"); [NFR-009](#nfr-009--transport-security-remote-access "NFR-009 Transport Security (Remote Access)") (TLS).
+**Dependencies:** `system-documentation/user-documentation/` (e.g. admin guide); stubs to be expanded for release; [FR-004](#fr-004--deliberate-import "FR-004 Deliberate Import"), [FR-010](#fr-010--duplicate-detection-digest "FR-010 Duplicate Detection Digest"), [FR-011](#fr-011--missing-file-detection-and-relink "FR-011 Missing File Detection and Relink"); [FR-026](#fr-026--audit-logging "FR-026 Audit Logging") – [FR-029](#fr-029--operational-and-diagnostic-logging-client-and-server "FR-029 Operational and Diagnostic Logging Client and Server") (logging and retention); [FR-031](#fr-031--user-account-and-role-administration "FR-031 User Account and Role Administration"), [FR-032](#fr-032--initial-administrator-bootstrap "FR-032 Initial Administrator Bootstrap"), [FR-034](#fr-034--authentication-throttling "FR-034 Authentication Throttling"), [FR-035](#fr-035--session-management "FR-035 Session Management"), [FR-036](#fr-036--library-corpus-and-storage-model "FR-036 Library Corpus and Storage Model"), [FR-039](#fr-039--full-text-index-administration "FR-039 Full-Text Index Administration"); [NFR-009](#nfr-009--transport-security-remote-access "NFR-009 Transport Security (Remote Access)") (TLS).
 
 ---
 
@@ -1073,7 +1073,7 @@ The **shell UI** **SHALL** provide a user-discoverable Help affordance (e.g. Hel
 
 | Risk                                        | Level            | Mitigation (requirements-level)                    |
 | ------------------------------------------- | ---------------- | -------------------------------------------------- |
-| **Extraction/OCR inaccuracy**               | **High**         | [§6](#6-deterministicprobabilistic-requirements "6. Deterministic-Probabilistic Requirements), [FR-023](#fr-023--ocr-for-searchability "FR-023 OCR for Searchability"), [FR-007](#fr-007--full-text-search "FR-007 Full-Text Search") honest semantics                |
+| **Extraction/OCR inaccuracy**               | **High**         | [§6](#6-deterministicprobabilistic-requirements "6. Deterministic-Probabilistic Requirements "6. Deterministicprobabilistic Requirements"), [FR-023](#fr-023--ocr-for-searchability "FR-023 OCR for Searchability"), [FR-007](#fr-007--full-text-search "FR-007 Full-Text Search") honest semantics                |
 | **Search query parsing / user expectation** | **Moderate**     | [FR-038](#fr-038--search-query-semantics-and-results "FR-038 Search Query Semantics and Results") normative grammar, golden fixtures, [NFR-007](#nfr-007--end-user-documentation-and-help "NFR-007 End-User Documentation and Help") |
 | **Non-administrator expects to import**     | **Low–Moderate** | [FR-004](#fr-004--deliberate-import "FR-004 Deliberate Import"), [NFR-007](#nfr-007--end-user-documentation-and-help "NFR-007 End-User Documentation and Help"), RBAC messaging                    |
 | **User expects SharePoint parity**          | **Moderate**     | [§2.2](#22-scope "2. Scope") non-goals, operator docs                      |

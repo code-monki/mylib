@@ -1,5 +1,5 @@
 <!--
-File: system-documentation/system-artifacts/_templates/srs.md
+File: 04-templates/system/requirements-template.md
 
 Purpose:
   Provide enforceable Software Requirements Specification (SRS)
@@ -7,17 +7,11 @@ Purpose:
   for hybrid deterministic–probabilistic systems.
 
 Lifecycle authority resides in:
-  system-documentation/system-artifacts/LIFECYCLE.md
+  02-governance/00-lifecycle-bootstrap.md
 
 Requirements define intent.
 They SHALL NOT encode architecture or implementation.
 -->
-
-> **Scaffold only — not the project SRS.**  
-> The live MyLib requirements document is **[`../srs.md`](../srs.md "Srs")** (same folder as `concept.md`).  
-> Copy **this** file when you need a blank SRS for a **new** product or major reset.
-
----
 
 # Software Requirements Specification (SRS)
 

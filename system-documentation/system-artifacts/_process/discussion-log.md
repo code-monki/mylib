@@ -3,11 +3,19 @@
 Timestamped summaries of **discussions**, **decisions**, and **technology choices** (or explicit **deferrals**).  
 **Newest entries first.** Append new blocks after updating the “Last updated” line below.
 
-**Last updated:** 2026-04-11 (SRS v0.9 metadata, import, digest, missing-file, search) UTC  
+**Last updated:** 2026-04-03 (Markdown link convention; SRS repair pass) UTC  
 
-**Not legal advice** where legal topics appear; see [`open-source-license.md`](open-source-license.md).
+**Not legal advice** where legal topics appear; see [`open-source-license.md`](open-source-license.md "Open Source License").
 
-**Archival note:** Log entries dated before 2026-04-07 may cite superseded FR numbers from SRS revisions prior to v0.6; the current [`../srs.md`](../srs.md) section headers are authoritative for IDs.
+**Archival note:** Log entries dated before 2026-04-07 may cite superseded FR numbers from SRS revisions prior to v0.6; the current [`../srs.md`](../srs.md "Srs") section headers are authoritative for IDs.
+
+---
+
+## 2026-04-03 — Markdown link convention and tooling
+
+**Summary:** **Repository** documentation **SHALL** use inline links **`[text](url "Title")`** (paths and `#` fragments). **`system-documentation/_tools/add_link_titles.py`** adds missing quoted titles only when the target has **no** `"` (avoids corrupting titles that contain `)`). **`system-documentation/README.md`** documents the convention; **`.cursor/rules/cursor-rules.mdc`** instructs Cursor to preserve titles. **SRS** link repairs where an earlier naive pass had duplicated titles.
+
+**Documentation:** [`../../README.md`](../../README.md "MyLib documentation"), [`../srs.md`](../srs.md "Srs").
 
 ---
 
@@ -15,7 +23,7 @@ Timestamped summaries of **discussions**, **decisions**, and **technology choice
 
 **Summary:** **FR-002** — separate **publication date** (optional) and **acquisition date** (tracked, import semantics in DD). **FR-004** — import **administrator-only** (import-equivalent permission in DD); solo via bootstrap admin (FR-032); deps FR-017, FR-032. **FR-010** — **durable digest store** + **algorithm identifier**; migration in DD. **FR-011** — **solo** relink UX; **multi-user** default **notify administrators** for remediation, non-admin degraded per DD; FR-013 Notes tie server-side auth. **FR-038** — explicit **nested** query examples and acceptance fixtures. **NFR-004** / **NFR-007** updated. **§15–§16** bullets use **phrase-level** bolding (reduce per-word noise).
 
-**Documentation:** [`../srs.md`](../srs.md).
+**Documentation:** [`../srs.md`](../srs.md "Srs").
 
 ---
 
@@ -23,7 +31,7 @@ Timestamped summaries of **discussions**, **decisions**, and **technology choice
 
 **Summary:** **§11** **—** **removed** **generic** **last-write-wins** **/** **merge** **for** **metadata;** **same-record** **metadata** **concurrency** **now** **tracks** **FR-041** **(optimistic** **concurrency,** **refresh**/**retry,** **optional** **explicit** **overwrite** **per** **DD).** **FR-038** **item** **2** **—** **DD** **must** **define** **boolean** **keyword** **case** **and** **tokenization** **explicitly;** **Notes** **distinguish** **operator** **case** **from** **Latin** **matching** **case** **for** **terms.** **Version** **0.8.1.**
 
-**Documentation:** [`../srs.md`](../srs.md).
+**Documentation:** [`../srs.md`](../srs.md "Srs").
 
 ---
 
@@ -31,7 +39,7 @@ Timestamped summaries of **discussions**, **decisions**, and **technology choice
 
 **Summary:** **§2.2** **explicit** **out-of-scope:** **MFA** **not** **in** **v1,** **intentionally** **de-prioritized** **until** **clear** **need;** **if** **ever** **introduced,** **optional** **per** **deployment** **only** **(not** **listed** **in** **§13** **—** **avoid** **implying** **a** **backlog** **item).** **§13** **waiting** **room:** **passkeys** **/** **WebAuthn** **as** **candidate** **post-v1** **optional** **sign-in** **(HLA** **/** **DD).** **FR-016** **Notes,** **§12** **cross-references.**
 
-**Documentation:** [`../srs.md`](../srs.md).
+**Documentation:** [`../srs.md`](../srs.md "Srs").
 
 ---
 
@@ -39,7 +47,7 @@ Timestamped summaries of **discussions**, **decisions**, and **technology choice
 
 **Summary:** **FR-033** **—** **v1** **password** **rules:** **minimum** **8** **characters;** **uppercase,** **lowercase,** **digit,** **and** **one** **symbol** **from** **a** **DD-enumerated** **set** **(temporary** **passwords** **meet** **rules** **or** **force** **change).** **FR-038** **—** **v1** **search** **requires** **`AND`/`OR`/`NOT`,** **double-quoted** **phrases,** **parentheses** **for** **grouping;** **DD** **carries** **normative** **grammar** **and** **precedence.** **FR-035** **+** **NFR-001** **—** **clarified** **per-user** **concurrent** **sessions** **(product** **policy** **in** **DD)** **vs.** **aggregate** **deployment** **capacity** **(hardware,** **network,** **multi-instance** **routing** **per** **HLA;** **stress** **scenarios** **optional** **in** **Test** **Plan).** **FR-027** **note** **cross-ref** **FR-033.** **NFR-004** **admin** **guide** **covers** **password** **policy.** **Risk** **row** **for** **search** **parsing.** **Version** **0.7,** **Last** **revised** **2026-04-08** **UTC.**
 
-**Documentation:** [`../srs.md`](../srs.md).
+**Documentation:** [`../srs.md`](../srs.md "Srs").
 
 ---
 
@@ -49,7 +57,7 @@ Timestamped summaries of **discussions**, **decisions**, and **technology choice
 
 **Open** **product** **choices** **embedded** **(revisit** **if** **needed):** **v1** **search** **default** **=** **AND** **of** **terms,** **case-insensitive** **Latin;** **concurrent** **sessions** **=** **policy** **choice** **in** **DD** **(cap** **vs** **unlimited);** **self-service** **email** **password** **recovery** **=** **deferred** **(§13).** **(Superseded** **for** **search**/**sessions**/**password** **by** **2026-04-08** **v0.7** **entry** **above.)**
 
-**Documentation:** [`../srs.md`](../srs.md).
+**Documentation:** [`../srs.md`](../srs.md "Srs").
 
 ---
 
@@ -57,7 +65,7 @@ Timestamped summaries of **discussions**, **decisions**, and **technology choice
 
 **Summary:** **FR-030** — **client** **and** **server** **operational** **and** **diagnostic** **logs**, **independent** **enable**/**disable** **per** **category**, **Settings** **(FR-027)** **/** **server** **admin** **UI**, **platform-default** **paths**, **day-based** **rollover** **+** **FR-024** **maximum** **retention**. **NFR-008** **privacy**/**jurisdictional** **readiness**. **Definitions**, **NFR-004**/**007**, **§9–§12**, **FR-020**, **risks** **updated**.
 
-**Documentation:** [`../srs.md`](../srs.md).
+**Documentation:** [`../srs.md`](../srs.md "Srs").
 
 ---
 
@@ -65,7 +73,7 @@ Timestamped summaries of **discussions**, **decisions**, and **technology choice
 
 **Summary:** **FR-029** now **requires** a **shipped** **warm sepia** theme (**parchment-style** **background** allowed). **NFR-006** **contrast** **applies** to **all** **shipped** themes **including** sepia—**no** **WCAG** **waivers** for **decorative** **backgrounds**.
 
-**Documentation:** [`../srs.md`](../srs.md).
+**Documentation:** [`../srs.md`](../srs.md "Srs").
 
 ---
 
@@ -73,31 +81,31 @@ Timestamped summaries of **discussions**, **decisions**, and **technology choice
 
 **Summary:** Added **NFR-007** (user manual, quick-start, **Help** affordance to version-matched docs; packaging **TBD** HLA). **Searchable** help index and **context-sensitive** help in **waiting room**; **pre-built** help components allowed if license/a11y OK. **NFR-004** clarified vs end-user docs; **§2.2**, **FR-020**, **§14** updated.
 
-**Documentation:** [`../srs.md`](../srs.md); [`../../user-documentation/README.md`](../../user-documentation/README.md).
+**Documentation:** [`../srs.md`](../srs.md "Srs"); [`../../user-documentation/README.md`](../../user-documentation/README.md "Readme").
 
 ---
 
 ## 2026-04-06 (later) — SRS v0.2: Settings, reader preferences, theme
 
-**Summary:** Extended [`../srs.md`](../srs.md) with **FR-027** (Settings facility, extensible), **FR-028** (preferred external reader per supported document type with platform-default fallback), **FR-029** (light/dark theme, **match system** where feasible). **NFR-006** ties shipped themes to **WCAG 2.1 AA** contrast for the shell. **FR-018** updated to honor reader preferences. **Waiting room:** third-party theme packs, preference sync across devices.
+**Summary:** Extended [`../srs.md`](../srs.md "Srs") with **FR-027** (Settings facility, extensible), **FR-028** (preferred external reader per supported document type with platform-default fallback), **FR-029** (light/dark theme, **match system** where feasible). **NFR-006** ties shipped themes to **WCAG 2.1 AA** contrast for the shell. **FR-018** updated to honor reader preferences. **Waiting room:** third-party theme packs, preference sync across devices.
 
 **Decisions**
 
 - **None** beyond adopting draft requirement text pending review.
 
-**Documentation:** [`../srs.md`](../srs.md).
+**Documentation:** [`../srs.md`](../srs.md "Srs").
 
 ---
 
 ## 2026-04-06 — SRS initial draft (`srs.md` v0.1)
 
-**Summary:** Added **[`../srs.md`](../srs.md)** as **draft** SRS (**FR-001–FR-026**, **NFR-001–NFR-005**), derived from **`concept.md`** and **`project-primer.md`**. **Phase gate** in SRS **§16** records **not** ready for Architecture until **review**, **RTM**, and **human approval**. **PDF/DOCX** mandatory for v1; **EPUB** and several items remain **waiting room**.
+**Summary:** Added **[`../srs.md`](../srs.md "Srs")** as **draft** SRS (**FR-001–FR-026**, **NFR-001–NFR-005**), derived from **`concept.md`** and **`project-primer.md`**. **Phase gate** in SRS **§16** records **not** ready for Architecture until **review**, **RTM**, and **human approval**. **PDF/DOCX** mandatory for v1; **EPUB** and several items remain **waiting room**.
 
 **Decisions**
 
 - **None finalized** — document is **draft** for review.
 
-**Documentation:** [`../srs.md`](../srs.md); [`../README.md`](../README.md) (artifact index).
+**Documentation:** [`../srs.md`](../srs.md "Srs"); [`../README.md`](../README.md "Readme") (artifact index).
 
 ---
 
@@ -115,7 +123,7 @@ Timestamped summaries of **discussions**, **decisions**, and **technology choice
 
 ## 2026-04-05 21:45 UTC — Ideation gate: authorized to Requirements
 
-**Summary:** Project owner **closed Ideation for this cycle** and **authorized** advancement to the **Requirements** phase, with explicit acceptance that **unknowns remain** and **rollback** remains possible per [`../LIFECYCLE.md`](../LIFECYCLE.md).
+**Summary:** Project owner **closed Ideation for this cycle** and **authorized** advancement to the **Requirements** phase, with explicit acceptance that **unknowns remain** and **rollback** remains possible per [`../LIFECYCLE.md`](../LIFECYCLE.md "Lifecycle").
 
 **Decisions**
 
