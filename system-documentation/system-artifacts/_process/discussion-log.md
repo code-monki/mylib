@@ -3,11 +3,19 @@
 Timestamped summaries of **discussions**, **decisions**, and **technology choices** (or explicit **deferrals**).  
 **Newest entries first.** Append new blocks after updating the “Last updated” line below.
 
-**Last updated:** 2026-04-03 (Markdown link convention; SRS repair pass) UTC  
+**Last updated:** 2026-04-03 (RTM v0.1 scaffold; LIFECYCLE SRS v0.9; §16 gate) UTC  
 
 **Not legal advice** where legal topics appear; see [`open-source-license.md`](open-source-license.md "Open Source License").
 
 **Archival note:** Log entries dated before 2026-04-07 may cite superseded FR numbers from SRS revisions prior to v0.6; the current [`../srs.md`](../srs.md "Srs") section headers are authoritative for IDs.
+
+---
+
+## 2026-04-03 — RTM v0.1 instantiated; LIFECYCLE aligned with SRS v0.9
+
+**Summary:** Created **[`../rtm.md`](../rtm.md "Rtm")** **v0.1** (draft): core matrix rows for **FR-001–FR-041** and **NFR-001–NFR-009**; **HLA**, **DD**, **test**, **packaging**, and **orchestration** columns **TBD** until those artifacts exist. **§4** deterministic–probabilistic stub for **FR-023**. Updated **[`../LIFECYCLE.md`](../LIFECYCLE.md "Lifecycle")** **§5** to reference SRS **v0.9** and the RTM draft. **SRS** **§15–§16**: RTM reference in metadata and traceability; **§16** marks traceability scaffold **prepared**; human approval still **No**. **[`../README.md`](../README.md "Readme")** artifact index lists RTM. Minor **§16** fixes: **Partial** bolding, **FR-011** link title spelling.
+
+**Documentation:** [`../rtm.md`](../rtm.md "Rtm"), [`../LIFECYCLE.md`](../LIFECYCLE.md "Lifecycle"), [`../srs.md`](../srs.md "Srs").
 
 ---
 

@@ -11,7 +11,7 @@ Engineering record for how MyLib is specified, designed, tested, and traced.
 | DD | `dd.md` (planned) | TBD |
 | Test plan | `test-plan.md` (planned) | TBD |
 | Test suite | `tests/` or linked suite (planned) | TBD |
-| RTM | `rtm.md` (planned) | TBD |
+| RTM | [rtm.md](rtm.md "Rtm") | Draft v0.1 (scaffold; HLA/DD/tests TBD) |
 | Packaging & deployment | `packaging-plan.md` (planned) | TBD |
 
 **Process / meta:** [`_process/`](_process/ " Process") (primer, discussion log, license notes).  

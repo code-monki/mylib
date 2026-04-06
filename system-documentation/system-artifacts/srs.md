@@ -27,7 +27,7 @@ They **SHALL** NOT encode architecture or implementation.
 
 **Project Primer Version Reference:** 1.0 (`_process/project-primer.md`)
 
-**RTM Scaffold Version:** N/A (RTM not yet instantiated)
+**RTM Version Reference:** 0.1 ([`rtm.md`](rtm.md "Rtm") draft; scaffold rows for all FR/NFR IDs)
 
 ---
 
@@ -1094,7 +1094,7 @@ The **shell UI** **SHALL** provide a user-discoverable Help affordance (e.g. Hel
 - **[FR-001](#fr-001--catalog-records "FR-001 Catalog Records")–[FR-041](#fr-041--concurrent-metadata-updates "FR-041 Concurrent Metadata Updates") and [NFR-001](#nfr-001--corpus-scale-qualitative "NFR-001 Corpus Scale Qualitative")–[NFR-009](#nfr-009--transport-security-remote-access "NFR-009 Transport Security (Remote Access)") assigned in this revision:** Yes
 - **Acceptance criteria present per item:** Yes (subject to refinement)
 - **Architecture embedded:** Avoided** (no stack mandates)
-- **RTM:** Not yet populated — **SHALL** be created before implementation phase per LIFECYCLE.md
+- **RTM:** Draft **[`rtm.md`](rtm.md "Rtm")** v0.1 — one row per FR/NFR; architecture/design/test/packaging columns **TBD** until HLA, DD, and test plan land
 - **Waiting room separated:** Yes
 - **Probabilistic** bounds for OCR:** Yes ([§6](#6-deterministicprobabilistic-requirements "6. Deterministic Probablistic Requirements"))
 - **FR numerical order matches document headers ([§4](#4-functional-requirements "4. Functional Requirements") index):** Yes as of Last revised
@@ -1105,13 +1105,13 @@ The **shell UI** **SHALL** provide a user-discoverable Help affordance (e.g. Hel
 
 Confirm readiness to proceed to **High-Level Architecture**:
 
-- **Requirements stable?** Partial** — revision **0.9** (2026-04-11) updates [FR-002](#fr-002--metadata-fields "FR-002 Metadata Fields") (publication/acquisition dates), [FR-004](#fr-004--deliberate-import "FR-004 Deliberate Import") (admin-only import), [FR-010](#fr-010--duplicate-detection-digest "FR-010 Duplicate Detection Digest") (digest persistence), [FR-011](#fr-011--missing-file-detection-and-relink "FR-011 MIssing File Detection and Relink") (solo vs multi-user missing file), [FR-013](#fr-013--server-authority-for-security "FR-013 Server Authority for Security") Notes, [FR-038](#fr-038--search-query-semantics-and-results "FR-038 Search Query Semantics and Results") (nested query examples); stakeholder pass still recommended before Architecture
+- **Requirements stable?** **Partial** — revision **0.9** (2026-04-11) updates [FR-002](#fr-002--metadata-fields "FR-002 Metadata Fields") (publication/acquisition dates), [FR-004](#fr-004--deliberate-import "FR-004 Deliberate Import") (admin-only import), [FR-010](#fr-010--duplicate-detection-digest "FR-010 Duplicate Detection Digest") (digest persistence), [FR-011](#fr-011--missing-file-detection-and-relink "FR-011 Missing File Detection and Relink") (solo vs multi-user missing file), [FR-013](#fr-013--server-authority-for-security "FR-013 Server Authority for Security") Notes, [FR-038](#fr-038--search-query-semantics-and-results "FR-038 Search Query Semantics and Results") (nested query examples); stakeholder pass still recommended before Architecture
 - **NFRs measurable?** Partial — [NFR-001](#nfr-001--corpus-scale-qualitative "NFR-001 Corpus Scale Qualitative") gates on Test Plan; [NFR-009](#nfr-009--transport-security-remote-access "NFR-009 Transport Security (Remote Access)") on security checklist
 - **Scope boundaries explicit?** Yes
-- **Traceability scaffold prepared?** No — RTM next
-- **Human approval granted?** No — required after final SRS review and RTM draft
+- **Traceability scaffold prepared?** **Yes** — RTM draft v0.1 ([`rtm.md`](rtm.md "Rtm")); downstream columns **TBD** until HLA, DD, and test plan
+- **Human approval granted?** **No** — required after final SRS review (and any targeted SRS tweaks) per **LIFECYCLE.md**
 
-**Action:** Remain in **Requirements** until RTM draft, any targeted SRS tweaks, and recorded human approval to Architecture per **LIFECYCLE.md**.
+**Action:** Remain in **Requirements** until stakeholder/final SRS pass as needed, **recorded human approval** to Architecture, and RTM updates when HLA maps components to requirement rows.
 
 ---
 

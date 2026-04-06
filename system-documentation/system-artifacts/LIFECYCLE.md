@@ -48,7 +48,8 @@ If scope, requirements, architecture, design boundaries, packaging, tests, or tr
 ## 5. Current status
 
 - **Ideation** closed **2026-04-05**; **Requirements** phase **in progress**.  
-- **SRS:** [`srs.md`](srs.md "Srs") **draft** (v0.1); **not** approved for Architecture until **§16** gate satisfied.  
+- **SRS:** [`srs.md`](srs.md "Srs") **draft** (**v0.9**); **not** approved for Architecture until **§16** gate satisfied (including recorded human approval).  
+- **RTM:** [`rtm.md`](rtm.md "Rtm") **draft** (**v0.1**); one row per SRS requirement (FR-001–FR-041, NFR-001–NFR-009); HLA, DD, test, packaging, and orchestration columns **TBD** until those artifacts exist.  
 - See [`_process/project-primer.md`](_process/project-primer.md "Project Primer") **§12 — Gate Declaration** for the Ideation→Requirements authorization.
 
 ---
