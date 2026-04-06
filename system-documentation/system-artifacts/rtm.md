@@ -19,7 +19,7 @@ columns remain TBD until HLA and DD are drafted and approved.
 **Maintained By:** Charles McKnight (draft; maintainers may revise)  
 **Status:** Draft  
 **Requirement Version Reference:** SRS v0.9 **Approved** ([`srs.md`](srs.md "Srs"); header dated 2026-04-11; approved 2026-04-06)  
-**Architecture Version Reference:** HLA v0.1 **Draft** ([`hla.md`](hla.md "Hla"))  
+**Architecture Version Reference:** HLA v0.1.1 **Draft** ([`hla.md`](hla.md "Hla"))  
 **Design Version Reference:** N/A (DD not yet drafted)  
 **Test Plan Version Reference:** N/A (test plan not yet drafted)  
 
@@ -241,6 +241,7 @@ Untracked change invalidates lifecycle integrity.
 | 2026-04-03 | Initial RTM v0.1: full FR-001–FR-041 and NFR-001–NFR-009 rows; downstream TBD | All | N/A |
 | 2026-04-06 | SRS v0.9 **Approved**; Architecture phase authorized; §1 authority rows updated | — | N/A |
 | 2026-04-06 | **HLA** v0.1 **draft**; §3 HLA Component ID column populated; §4–§5 updated | FR-001–FR-041, NFR-001–NFR-009 | N/A |
+| 2026-04-06 | **HLA** v0.1.1 — SRS `srs.md#…` cross-links for GitHub; metadata only | — | N/A |
 
 ---
 
