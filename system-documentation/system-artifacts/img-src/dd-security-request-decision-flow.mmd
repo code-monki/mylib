@@ -1,0 +1,24 @@
+%%{init: {"theme": "base", "themeVariables": {"background": "#ffffff", "primaryColor": "#ffffff", "primaryTextColor": "#111111", "primaryBorderColor": "#333333", "lineColor": "#333333", "secondaryColor": "#f7f7f7", "tertiaryColor": "#ffffff", "clusterBkg": "#ffffff", "clusterBorder": "#777777", "edgeLabelBackground": "#ffffff"}}}%%
+flowchart TB
+  subgraph Diagram["HLA-SECURITY request decision flow"]
+    direction TB
+    Request["Protected request"]
+    Session["Validate session"]
+    Principal["Resolve principal and tenant context"]
+    Policy["Evaluate RBAC and tenant policy"]
+    Decision{"Authorized?"}
+    Domain["Domain service executes"]
+    Deny["Reject before domain service"]
+    Audit["Emit audit event when required"]
+    Obs["Emit minimized diagnostic event when needed"]
+
+    Request --> Session
+    Session --> Principal
+    Principal --> Policy
+    Policy --> Decision
+    Decision -->|yes| Domain
+    Decision -->|no| Deny
+    Decision --> Audit
+    Deny --> Obs
+  end
+  style Diagram fill:#ffffff,stroke:#ffffff,color:#111111

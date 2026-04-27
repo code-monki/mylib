@@ -1,0 +1,25 @@
+%%{init: {"theme": "base", "themeVariables": {"background": "#ffffff", "primaryColor": "#ffffff", "primaryTextColor": "#111111", "primaryBorderColor": "#333333", "lineColor": "#333333", "secondaryColor": "#f7f7f7", "tertiaryColor": "#ffffff", "clusterBkg": "#ffffff", "clusterBorder": "#777777", "edgeLabelBackground": "#ffffff"}}}%%
+flowchart TB
+  subgraph Diagram["HLA-SERVER-HOST internal structure"]
+    direction TB
+    Entry["Process entry"]
+    Config["Configuration loader"]
+    Listener["Listener manager"]
+    Router["Request router"]
+    Policy["Policy gateway adapter"]
+    Services["Domain service adapters"]
+    Obs["Observability adapter"]
+    Audit["Audit adapter"]
+    Lifecycle["Lifecycle coordinator"]
+
+    Entry --> Config
+    Config --> Listener
+    Config --> Lifecycle
+    Listener --> Router
+    Router --> Policy
+    Policy --> Services
+    Router --> Obs
+    Policy --> Audit
+    Lifecycle --> Obs
+  end
+  style Diagram fill:#ffffff,stroke:#ffffff,color:#111111

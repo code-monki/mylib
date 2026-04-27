@@ -1,5 +1,5 @@
 <!--
-File: system-documentation/system-artifacts/_templates/dd.md
+File: 04-templates/system/detailed-design-template.md
 
 Purpose:
   Provide enforceable Detailed Design (DD) structure aligned with
@@ -7,7 +7,7 @@ Purpose:
   deterministic–probabilistic systems.
 
 Lifecycle authority resides in:
-  system-documentation/system-artifacts/LIFECYCLE.md
+  02-governance/00-lifecycle-bootstrap.md
 
 Detailed Design refines structure.
 It does not authorize architectural modification or implementation.
@@ -70,22 +70,6 @@ Confirm:
 
 If alteration is required, halt and escalate.
 
-Detailed Design artifacts SHALL include diagrams where they materially clarify component decomposition, sequence flows, state transitions, deployment/configuration topology, data movement, or failure handling.
-
-Mermaid is the authoring format; SVG is the publication format for broad Markdown viewer compatibility.
-
-Diagram sources SHALL be stored in `img-src/` and rendered to `img/`.
-
-Vertical orientation is the default: `flowchart TB` and `direction TB` unless a documented exception is justified.
-
-Mermaid source diagrams SHALL set a white-background base theme and wrap the diagram in a top-level white panel so arrows and lines remain readable in dark-mode renderers:
-
-Detailed Design SHALL prefer established design and architecture patterns where applicable (for example, SOLID-oriented component design, Gang of Four object patterns, layering, ports-and-adapters, and similar well-understood approaches) instead of ad-hoc reinvention.
-
-If a custom pattern or deviation is selected, the DD SHALL document rationale, alternatives, and trade-offs and record the decision in `_process/discussion-log.md` before implementation proceeds.
-
-If no suitable established pattern exists for a specific problem, DD MAY define a project-specific pattern or issue an explicit waiver. The definition or waiver SHALL document scope, constraints, rationale, risks, and revisit triggers, and SHALL be recorded in `_process/discussion-log.md`.
-
 ---
 
 # 4. Component Decomposition
@@ -98,10 +82,6 @@ For each Architectural Component:
 
 Component ID:  
 Associated Requirement ID(s):  
-Pattern selection (established pattern(s) applied):  
-Pattern rationale and fit to requirements/NFRs:  
-Alternatives considered and rejection rationale:  
-If waived or custom-defined: scope, constraints, risks, and revisit trigger:  
 
 ---
 
@@ -127,12 +107,6 @@ Define explicitly:
 - Data structures  
 - Validation logic  
 - Error semantics  
-- Status-class taxonomy (required for any non-trivial operation state model), including:
-  - status class names  
-  - required meaning per class  
-  - typical examples  
-  - required follow-up/response fields per class  
-  - explicit rules separating nonterminal `deferred` from terminal `failed` states  
 - Preconditions  
 - Postconditions  
 - Determinism expectations  
@@ -172,8 +146,6 @@ Describe:
 
 Implementation SHALL conform to this structure.
 
-Include Mermaid class, flowchart, or sequence diagrams where useful to show module relationships, call flow, lifecycle, or concurrency boundaries.
-
 ---
 
 # 5. Data Design
@@ -191,8 +163,6 @@ Define:
 
 Hidden data movement is prohibited.
 
-Include Mermaid ER, flowchart, or sequence diagrams where useful to show schemas, ownership, transformations, persistence paths, and cross-component data movement.
-
 ---
 
 # 6. Failure Semantics
@@ -206,11 +176,8 @@ Document explicitly:
 - Degradation posture  
 - Recovery strategy  
 - Escalation paths  
-- Deferred-state escalation policy (when unresolved deferred transitions to failed and who owns that transition)  
 
 Undefined failure behavior SHALL block advancement.
-
-Include Mermaid state or sequence diagrams where failure handling depends on state transitions, retries, compensation, degradation, or escalation paths.
 
 ---
 

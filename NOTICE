@@ -1,9 +1,10 @@
 MyLib
 Copyright 2026 Charles McKnight
 
-This product is licensed under the Apache License, Version 2.0.
-See the LICENSE file in this repository for the full license text.
+This product is licensed under the GNU General Public License v3.0
+or any later version (GPL-3.0-or-later), unless a file states otherwise.
+See the `LICENSE` file in this repository for the full license text.
 
-Third-party notices required by bundled dependencies (Apache-2.0 §4d)
-should be recorded here or in accompanying documentation as those
-dependencies are incorporated.
+Third-party notices required by bundled dependencies should be recorded
+in `licenses/` (and summarized here) as those dependencies are incorporated
+into distributable artifacts.

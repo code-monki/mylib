@@ -17,10 +17,10 @@ This primer defines intent. It does not authorize architecture or implementation
 
 Project Name: MyLib  
 Initiation Date (YYYY-MM-DD): 2026-04-03  
-Author(s): Charles McKnight
-Lifecycle Phase: High-Level Architecture (SRS v0.9 approved 2026-04-06)  
-Version: 1.1  
-RTM Scaffold Created? Yes ([`../rtm.md`](../rtm.md "Rtm") v0.1 draft)  
+Author(s): Charles McKnight  
+Lifecycle Phase: Detailed Design (HLA v0.1.2 approved 2026-04-25)  
+Version: 1.3  
+RTM Scaffold Created? Yes ([`../rtm.md`](../rtm.md "Rtm") v0.1 draft; HLA mapped, DD/test/package columns pending)  
 
 ---
 
@@ -80,7 +80,7 @@ Outcomes describe **results**, not system structure.
 # 4. Context and Environment
 
 - **Business context**  
-  **Non-commercial open-source** intent; **not** competing directly with **SharePoint-class** enterprise stacks for v1. **License:** **Apache-2.0** (root `LICENSE`); **counsel sign-off** pending before treating publication as final.
+  **Non-commercial open-source** intent; **not** competing directly with **SharePoint-class** enterprise stacks for v1. **License:** **GPL-3.0-or-later** (root `LICENSE`); **counsel sign-off** pending before treating publication as final.
 
 - **Existing systems**  
   Documents originate from **many sources** and formats; users already rely on **OS file storage** and **native/desktop readers**.
@@ -277,6 +277,49 @@ Version incremented to **primer 1.1** upon this gate record.
 
 ---
 
+# 14. Architecture completion and Detailed Design authorization
+
+**HLA** [`../hla.md`](../hla.md "Hla") **v0.1.2** reviewed and **Approved** by the **sole stakeholder** on **2026-04-25**. The approved HLA records:
+
+- Client-server authority and trust boundaries.
+- Major HLA components and dependency direction.
+- Data architecture, deployment topology, failure posture, and NFR mechanisms.
+- **HLA-BOUND-OCR** as the deterministic-probabilistic boundary.
+- DD-carried decisions for UI stack, solo IPC, notifications, index rebuild mode, search engine model, and OCR engine model.
+
+Approved to proceed to **Detailed Design** phase:
+
+**Name:** Charles McKnight  
+**Role:** Project owner / sole stakeholder  
+**Date (YYYY-MM-DD):** 2026-04-25  
+**Signature (if applicable):** *Recorded in repository (electronic authorization).*  
+
+**DD scaffold:** [`../dd.md`](../dd.md "Dd") **v0.1** created **2026-04-25**. DD is active; component decomposition, interface contracts, data design, failure semantics, NFR derivation, and test intent remain pending. **Implementation remains blocked** until approved DD and RTM readiness per [`../LIFECYCLE.md`](../LIFECYCLE.md "Lifecycle").
+
+**RTM status:** [`../rtm.md`](../rtm.md "Rtm") **v0.1** maps SRS requirements to HLA components. DD, test, packaging, and orchestration columns remain **TBD** until downstream artifacts land.
+
+Version incremented to **primer 1.2** upon this gate record.
+
+---
+
+# 15. Documentation Diagram Decisions (Mermaid and SVG)
+
+Date logged: **2026-04-26**
+
+To keep architecture/design documentation readable and portable across Markdown viewers, the following documentation-rendering decisions are recorded for active Detailed Design work:
+
+- **Authoring and publication split:** Mermaid is the source format; SVG is the published diagram format.
+- **Storage convention:** Mermaid sources live in `img-src/`; rendered assets live in `img/`.
+- **Layout default:** Use vertical flow orientation (`flowchart TB` with `direction TB`) unless a documented exception is required.
+- **Render/readability policy:** Render with white background and include a top-level white panel in Mermaid source so arrows and connectors remain legible in dark-mode viewers.
+- **Rendering path:** Regenerate diagram assets via `scripts/render-mermaid.sh`.
+
+References: [`../hla.md`](../hla.md "Hla"), [`../dd.md`](../dd.md "Dd"), [`../README.md`](../README.md "Readme"), [`discussion-log.md`](discussion-log.md "Discussion Log").
+
+Version incremented to **primer 1.3** upon this decision log addition.
+
+---
+
 # Governance Notes
 
 The Project Primer:
@@ -286,6 +329,7 @@ The Project Primer:
 - Prevents premature architecture  
 - Prevents solution-first thinking  
 - Anchors lifecycle discipline  
+- Uses Markdown link hygiene for portability: same-document links use bare anchors (`#section-anchor`), cross-document links use file+anchor (`./file.md#section-anchor`)  
 
 It SHALL NOT:
 

@@ -3,13 +3,13 @@
 Structured Ideation record (template-aligned): [Project Primer](_process/project-primer.md "Project Primer").  
 Timestamped discussion and decisions: [Discussion log](_process/discussion-log.md "Discussion Log").
 
-**Lifecycle (this cycle):** **Ideation** closed **2026-04-05** (see [Project Primer §12](_process/project-primer.md#12-gate-declaration "12. Gate Declaration")). **SRS v0.9** **Approved** **2026-04-06** ([srs.md](srs.md "Srs")); **Architecture** authorized; **HLA** draft **[hla.md](hla.md "Hla")** **v0.1**. Further discovery may trigger **phase rollback** per [LIFECYCLE.md](LIFECYCLE.md "Lifecycle").
+**Lifecycle (this cycle):** **Ideation** closed **2026-04-05** (see [Project Primer §12](_process/project-primer.md#12-gate-declaration "12. Gate Declaration")). **SRS v0.9** **Approved** **2026-04-06** ([srs.md](srs.md "Srs")); **HLA v0.1.2** **Approved** **2026-04-25** ([hla.md](hla.md "Hla")); **DD v0.1** draft scaffold created ([dd.md](dd.md "Dd")); **Detailed Design** active. Further discovery may trigger **phase rollback** per [LIFECYCLE.md](LIFECYCLE.md "Lifecycle").
 
 ## Overview
 
 MyLib addresses the need to manage a **large corpus** of electronic documents in **heterogeneous formats** (including PDF, word-processing formats such as DOCX, and EPUB). It aims to provide a **unified library**: consistent **cataloging**, **metadata**, **full-text search**, **tag-based filtering**, and **access control**, while **display and printing** are delegated to **native reader applications** where practical so rendering fidelity and reader-specific features (including bookmarks) stay with those tools.
 
-The product is **open source** under the **Apache License 2.0** (see repository root `LICENSE` and `NOTICE`); **final confirmation with counsel** is expected before wide publication. Primary delivery is a **desktop client** for **Windows, macOS, and Linux**. The system is **client–server** in nature: **authentication and authorization are enforced by a server component**. In a **solo / desktop deployment**, that server runs on the **same machine** (e.g. loopback), but remains the **authority** for credentials and RBAC—so remote multi-user deployments do not rely on **UI-only** hiding of admin features. A **web client** is **deferred**; the initial assumption is that **installing a desktop application** is acceptable for the target audience (individuals, families, and small teams—not a substitute for enterprise suites such as SharePoint).
+The product is **open source** under the **GNU General Public License v3.0** or any later version (**GPL-3.0-or-later**; see repository root `LICENSE` and `NOTICE`); **final confirmation with counsel** is expected before wide publication. Primary delivery is a **desktop client** for **Windows, macOS, and Linux**. The system is **client–server** in nature: **authentication and authorization are enforced by a server component**. In a **solo / desktop deployment**, that server runs on the **same machine** (e.g. loopback), but remains the **authority** for credentials and RBAC—so remote multi-user deployments do not rely on **UI-only** hiding of admin features. A **web client** is **deferred**; the initial assumption is that **installing a desktop application** is acceptable for the target audience (individuals, families, and small teams—not a substitute for enterprise suites such as SharePoint).
 
 **Personal motivation for the project:** the author maintains on the order of **~10,000** electronic publications from **many sources**, which drives the emphasis on **scale**, **metadata normalization**, and **search quality** across formats.
 
@@ -140,7 +140,7 @@ Electronic documents appear in many formats, some proprietary or layout-heavy. A
 
 ## Legal, privacy, and operator responsibility (concept-level)
 
-- **Apache License 2.0** applies to this project (see `LICENSE`); **maintain** `NOTICE` and dependency attributions as the stack grows. **Counsel review** (IP lawyer) is **pending** for final sign-off before broad publication—especially if **EU or enterprise** adoption appears.
+- **GPL-3.0-or-later** applies to this project (see `LICENSE`); **maintain** `NOTICE` and `licenses/` third-party attributions as the stack grows. **Counsel review** (IP lawyer) is **pending** for final sign-off before broad publication—especially if **EU or enterprise** adoption appears.
 - The product should **not** center features whose **primary purpose** is **circumventing DRM** on copyrighted works; **relying on native readers** for display reduces that surface.
 - **Personal data** is expected to be **minimal** (e.g. **account identifiers**; **passwords** stored only as **strong one-way hashes**, never in clear text). **Audit logs** (e.g. user + timestamp + document access) may still be **personal data** under privacy regimes and should be **purpose-limited**, **minimized**, and **retained** according to operator policy. **Encryption** and **self-hosted** deployment help **security** but are **not** a substitute for **clear documentation** of what is processed and **operator obligations**.
 - **Users and operators** are responsible for **lawful use** and **compliance with applicable regulations** in their jurisdiction.
@@ -149,7 +149,7 @@ Electronic documents appear in many formats, some proprietary or layout-heavy. A
 
 ## Open decisions (carry into requirements phase)
 
-- **License:** **Apache-2.0** **chosen** (root `LICENSE` + `NOTICE`); **counsel sign-off** pending.
+- **License:** **GPL-3.0-or-later** **chosen** (root `LICENSE` + `NOTICE` + `licenses/`); **counsel sign-off** pending.
 - **Bulk import** UX and **review queue** shape.
 - **Game system** (and similar) as **tag vs structured field**.
 - **Desktop technology** direction (e.g. **Electron vs Qt** or other)—**not** decided in this document.

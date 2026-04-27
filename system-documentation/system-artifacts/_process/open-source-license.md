@@ -1,64 +1,29 @@
 # Open source license selection (MyLib)
 
-**This document is not legal advice.** It records engineering-oriented notes. **Apache License 2.0** is **selected** for MyLib (see repository root `LICENSE` and `NOTICE`); **counsel sign-off** is **pending** before treating publication as final.
+**This document is not legal advice.** It records engineering-oriented notes.
 
----
+## Recorded decision (current)
+
+**Chosen project license:** **GNU General Public License v3.0** or any later version (**GPL-3.0-or-later**).
+
+- Root **`LICENSE`**: verbatim GPLv3 text.
+- Root **`NOTICE`**: project copyright + pointer to `licenses/` for third-party notices.
+- Rationale: reduce native-dependency license friction (notably around PDF/print extraction stacks) by aligning the product license with a common copyleft option when GPL-family components are central to shipped binaries. See `licenses/README.md` for the living notice policy.
 
 ## Context
 
 MyLib is intended as an **open-source** project: a tool for cataloging and indexing **electronic publications the user owns**, without rewriting PDFs for redistribution, without DRM circumvention, and with indexing as a **lookup aid** rather than a substitute for the readable document. See [`../concept.md`](../concept.md "Concept") for product intent.
 
----
+## Alternatives considered (and why not selected now)
 
-## Primary recommendation: **Apache License 2.0**
+- **Apache-2.0 / MIT (permissive):** great adoption characteristics, but higher ongoing compatibility work when the implementation intentionally bundles **GPL-family** third-party runtimes in the main distributable.
+- **AGPL-3.0:** stronger network-distribution obligations than desired for a desktop-first v1; revisit only if product shape changes materially.
 
-**Why it often fits a desktop (and possible server) application:**
+## Engineering obligations (independent of license family)
 
-- **Permissive:** Broad use, modification, and distribution; fewer strategic barriers than strong copyleft.
-- **Patent language:** Includes an **explicit patent grant** and related terms that many teams prefer for **non-trivial applications**.
-- **NOTICE file:** Encourages clear **third-party attribution** (relevant with many dependencies).
+- Maintain a **dependency license audit** that tracks what ships in each platform artifact.
+- Keep **reproducible builds** in CI; release artifacts should include license texts where required and a discoverable `licenses/` directory.
 
-**Caveat:** Combining Apache-2.0 code with other licenses in one deliverable requires **compatibility checks** (common issue is dependency license mix, not Apache vs MIT alone).
+## History
 
----
-
-## Simpler alternative: **MIT**
-
-- **Very short** and **widely accepted** by corporate legal review.
-- **No** explicit patent section (some organizations care; many still choose MIT).
-
-Choose MIT if the priority is **maximum simplicity**; choose Apache-2.0 if the priority is **permissive + explicit patent grant + established app ecosystem practice**.
-
----
-
-## When **not** to default to permissive: **GPL-3.0** / **AGPL-3.0**
-
-- **GPL-3.0:** Appropriate if the goal is that **distributed derivatives** of the project (or linked works, per GPL interpretation) **remain** under **copyleft** terms. That can **discourage** proprietary forks and can **complicate** stacks that include non-GPL-friendly components.
-
-- **AGPL-3.0:** Relevant mainly when **networked** use of **modified** versions must also **share source**—a **deliberate** policy choice. Often **heavier** for adoption than Apache/MIT for application-style projects.
-
-Neither is implied by current MyLib intent unless **copyleft** becomes an explicit product goal.
-
----
-
-## Middle ground (optional): **MPL-2.0**
-
-- **File-level weak copyleft** for MPL-covered files. Common for **libraries**; less often the default for a **whole application** than Apache/MIT.
-
----
-
-## Before locking a choice
-
-1. **Consult counsel** (even briefly) when the project is public or has **commercial** or **enterprise** adopters.
-2. **Audit dependencies:** Real friction often comes from **incompatible** or **surprising** dependency licenses, not only from picking MIT vs Apache-2.0.
-3. Align **README** and **contributing** docs with the chosen license and **attribution** expectations.
-
----
-
-## Recorded decision
-
-**Chosen license:** **Apache License 2.0** (aligned with prior counsel recommendation on similar projects).
-
-**Repository:** Root **`LICENSE`** contains the **verbatim** Apache-2.0 text; **`NOTICE`** holds **project copyright** and a reminder to append **third-party** notices as dependencies are added (**Apache-2.0 §4d**).
-
-**Pending:** **Final review/sign-off** with IP counsel before wide publication; **dependency license audit** as implementation proceeds.
+- Earlier notes preferred Apache-2.0 before the native dependency plan hardened; the project relicensed to **GPL-3.0-or-later** while no public application code was released, to keep repository truth aligned with the intended stack.

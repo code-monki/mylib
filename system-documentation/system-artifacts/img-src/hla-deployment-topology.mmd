@@ -1,0 +1,25 @@
+%%{init: {"theme": "base", "themeVariables": {"background": "#ffffff", "primaryColor": "#ffffff", "primaryTextColor": "#111111", "primaryBorderColor": "#333333", "lineColor": "#333333", "secondaryColor": "#f7f7f7", "tertiaryColor": "#ffffff", "clusterBkg": "#ffffff", "clusterBorder": "#777777", "edgeLabelBackground": "#ffffff"}}}%%
+flowchart TB
+  subgraph Diagram["Deployment topology"]
+    direction TB
+    subgraph Solo["Solo deployment"]
+      direction TB
+      SoloShell["Desktop shell"]
+      SoloServer["Co-located library server"]
+      SoloCorpus["Local corpus"]
+      SoloShell <-->|"loopback or local IPC"| SoloServer
+      SoloServer --> SoloCorpus
+    end
+
+    subgraph Multi["Small-team deployment"]
+      direction TB
+      ClientA["Desktop shell A"]
+      ClientB["Desktop shell B"]
+      RemoteServer["Library server host"]
+      RemoteCorpus["Server-accessible corpus"]
+      ClientA -->|"TLS or equivalent"| RemoteServer
+      ClientB -->|"TLS or equivalent"| RemoteServer
+      RemoteServer --> RemoteCorpus
+    end
+  end
+  style Diagram fill:#ffffff,stroke:#ffffff,color:#111111

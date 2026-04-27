@@ -1,0 +1,49 @@
+%%{init: {"theme": "base", "themeVariables": {"background": "#ffffff", "primaryColor": "#ffffff", "primaryTextColor": "#111111", "primaryBorderColor": "#333333", "lineColor": "#333333", "secondaryColor": "#f7f7f7", "tertiaryColor": "#ffffff", "clusterBkg": "#ffffff", "clusterBorder": "#777777", "edgeLabelBackground": "#ffffff"}}}%%
+flowchart TB
+  subgraph Diagram["Component organization"]
+    direction TB
+
+    subgraph ClientLayer["Client layer"]
+      direction TB
+      Shell["HLA-SHELL\nDesktop UI"]
+      ClientAccess["HLA-CLIENT-ACCESS\nAPI client / session / TLS"]
+    end
+
+    subgraph ServerHostLayer["Server host layer"]
+      direction TB
+      ServerHost["HLA-SERVER-HOST\nProcess / listener / routing"]
+    end
+
+    subgraph ServerDomain["Server-side domain services"]
+      direction TB
+      Security["HLA-SECURITY\nAuth / RBAC / tenant / session"]
+      Domain["HLA-DOMAIN\nCatalog / metadata / tags"]
+      Ingest["HLA-INGEST\nImport / digest / format handling"]
+      OCR["HLA-OCR\nExtraction / OCR boundary"]
+      Search["HLA-SEARCH\nIndex / query / index admin"]
+      Storage["HLA-STORAGE\nCorpus path and file access"]
+      Audit["HLA-AUDIT\nSecurity audit events"]
+      ObsLog["HLA-OBSLOG\nOperational / diagnostic logs"]
+      Release["HLA-RELEASE\nVersion / build identity"]
+    end
+
+    Shell --> ClientAccess
+    ClientAccess --> ServerHost
+    ServerHost --> Security
+    ServerHost --> Domain
+    ServerHost --> Ingest
+    ServerHost --> Search
+    ServerHost --> Storage
+    Domain --> Security
+    Ingest --> Storage
+    Ingest --> Domain
+    Ingest --> OCR
+    OCR --> Search
+    Search --> Domain
+    Security --> Audit
+    Domain --> Audit
+    ServerHost --> ObsLog
+    Shell --> Release
+    ServerHost --> Release
+  end
+  style Diagram fill:#ffffff,stroke:#ffffff,color:#111111

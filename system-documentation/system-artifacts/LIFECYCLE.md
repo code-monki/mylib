@@ -45,20 +45,30 @@ If scope, requirements, architecture, design boundaries, packaging, tests, or tr
 
 ---
 
-## 5. Current status
+## 5. Decision and discussion logging
+
+Significant design decisions, framework/library choices, architecture choices, packaging choices, orchestration choices, risk-bearing deferrals, and changes to deterministic-probabilistic boundaries **SHALL** be recorded in [`_process/discussion-log.md`](_process/discussion-log.md "Discussion Log") using the decision-log structure defined by [`_templates/project/decision-log.md`](_templates/project/decision-log.md "Decision Log Template").
+
+Routine implementation details do not require full decision-log entries unless they alter architecture, DD, tests, packaging, orchestration, NFR posture, risk posture, or traceability.
+
+---
+
+## 6. Current status
 
 - **Ideation** closed **2026-04-05**. **Requirements** phase **complete** for baseline **SRS v0.9** (approved **2026-04-06**).  
 - **SRS:** [`srs.md`](srs.md "Srs") **Approved** (**v0.9**); **High-Level Architecture** phase **authorized** **2026-04-06** (see SRS **§16**, **§Approval**, and primer **§13**).  
-- **HLA:** [`hla.md`](hla.md "Hla") **draft** (**v0.1.1**); **not** approved for Detailed Design until **§15** gate and **§Approval** satisfied.  
-- **RTM:** [`rtm.md`](rtm.md "Rtm") **draft** (**v0.1**); **HLA Component ID** column populated from HLA draft; **DD**, test, packaging, and orchestration columns **TBD**.  
-- **Next deliverable:** review and **approve** **`hla.md`**; then **DD** (`dd.md`). **Implementation** remains blocked until **approved DD** and RTM readiness per project rules.  
+- **HLA:** [`hla.md`](hla.md "Hla") **Approved** (**v0.1.2**, **2026-04-25**); **Detailed Design** phase authorized.  
+- **DD:** [`dd.md`](dd.md "Dd") **draft** (**v0.1**); component decomposition, interface contracts, data design, failure semantics, NFR derivation, and test intent **pending**.  
+- **RTM:** [`rtm.md`](rtm.md "Rtm") **draft** (**v0.1**); **HLA Component ID** column populated from approved HLA; **DD**, test, packaging, and orchestration columns **TBD**.  
+- **Next deliverable:** complete **DD** component decomposition and continue RTM alignment. **Implementation** remains blocked until **approved DD** and RTM readiness per project rules.  
 - See [`_process/project-primer.md`](_process/project-primer.md "Project Primer") **§12** (Ideation→Requirements) and **§13** (Requirements→Architecture).
 
 ---
 
-## 6. Agent / contributor behavior
+## 7. Agent / contributor behavior
 
 - Identify the **current lifecycle phase** before substantive implementation work.  
 - **Refuse** premature implementation (e.g. before approved DD and RTM readiness per project rules).  
 - **Surface** violations; silence is not compliance.  
 - **Requirement IDs**, **test mapping**, and **RTM** apply once the SRS and RTM exist.
+- Record significant design/framework/library decisions in [`_process/discussion-log.md`](_process/discussion-log.md "Discussion Log") before relying on them in downstream artifacts.

@@ -13,7 +13,14 @@ This directory holds **product and process documentation** for the MyLib reposit
 
 ## Markdown link convention
 
-Use inline links with a **quoted title** (hover text and consistent tooling), in the form **`[text](url "Title")`**. Examples: same-document `[§2.2](#22-scope "2.2 Scope")`, cross-file [`concept.md`](system-artifacts/concept.md "Concept"), requirement `[FR-004](#fr-004--deliberate-import "FR-004 Deliberate Import")`.
+Use inline links with a **quoted title** (hover text and consistent tooling), in the form **`[text](url "Title")`**.
+
+For in-document section links, use explicit file+anchor form (not bare `#fragment`) to avoid editor-resolution issues:
+
+- Preferred: **`[§2.2](./README.md#22-scope "2.2 Scope")`**
+- Avoid: **`[§2.2](#22-scope "2.2 Scope")`**
+
+Examples: same-document `[§2.2](./README.md#22-scope "2.2 Scope")`, cross-file [`concept.md`](system-artifacts/concept.md "Concept"), requirement `[FR-004](./README.md#fr-004--deliberate-import "FR-004 Deliberate Import")`.
 
 To add missing titles only on targets that contain **no** `"` yet (safe when titles include parentheses), run:
 

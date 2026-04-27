@@ -1,0 +1,49 @@
+%%{init: {"theme": "base", "themeVariables": {"background": "#ffffff", "primaryColor": "#ffffff", "primaryTextColor": "#111111", "primaryBorderColor": "#333333", "lineColor": "#333333", "secondaryColor": "#f7f7f7", "tertiaryColor": "#ffffff", "clusterBkg": "#ffffff", "clusterBorder": "#777777", "edgeLabelBackground": "#ffffff"}}}%%
+flowchart TB
+  subgraph Diagram["Data architecture"]
+    direction TB
+    User["User"]
+    Shell["HLA-SHELL"]
+    ClientAccess["HLA-CLIENT-ACCESS"]
+    ServerHost["HLA-SERVER-HOST"]
+    Security["HLA-SECURITY"]
+    Domain["HLA-DOMAIN\nCatalog store"]
+    Storage["HLA-STORAGE\nCorpus references / files"]
+    Ingest["HLA-INGEST"]
+    OCR["HLA-OCR\nProbabilistic boundary"]
+    Search["HLA-SEARCH\nRebuildable index"]
+    Audit["HLA-AUDIT"]
+    ObsLog["HLA-OBSLOG"]
+    Reader["Native reader"]
+
+    User -->|"browse / search / import / admin"| Shell
+    Shell --> ClientAccess
+    ClientAccess -->|"loopback or TLS API"| ServerHost
+
+    subgraph ServerData["Server data path"]
+      direction TB
+      Security
+      Domain
+      Storage
+      Ingest
+      OCR
+      Search
+      Audit
+      ObsLog
+    end
+
+    ServerHost -->|"authorize sensitive operations"| Security
+    Security --> Audit
+    ServerHost -->|"catalog CRUD / search context"| Domain
+    ServerHost -->|"import / relink / open requests"| Storage
+    Storage -->|"document bytes / references"| Ingest
+    Ingest -->|"digest + metadata candidates"| Domain
+    Ingest -->|"extract / OCR when allowed"| OCR
+    OCR -->|"derived text + provenance"| Search
+    Search -->|"record context"| Domain
+    ServerHost -->|"operational / diagnostic events"| ObsLog
+
+    Shell -->|"open / handoff"| Reader
+    Reader -->|"operator-visible file access"| Storage
+  end
+  style Diagram fill:#ffffff,stroke:#ffffff,color:#111111

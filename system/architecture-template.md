@@ -1,5 +1,5 @@
 <!--
-File: system-documentation/system-artifacts/_templates/hla.md
+File: 04-templates/system/architecture-template.md
 
 Purpose:
   Provide enforceable High-Level Architecture (HLA) structure
@@ -7,7 +7,7 @@ Purpose:
   for hybrid deterministic–probabilistic systems.
 
 Lifecycle authority resides in:
-  system-documentation/system-artifacts/LIFECYCLE.md
+  02-governance/00-lifecycle-bootstrap.md
 
 Architecture encodes structural constraints.
 It does not authorize implementation.
@@ -83,22 +83,6 @@ Document:
 
 Include diagram where appropriate.
 
-Use Mermaid diagrams where they materially clarify:
-
-- System context and trust boundaries
-- Component organization
-- Data flow
-- Deployment topology
-- Probabilistic containment boundaries
-
-Mermaid is the authoring format; SVG is the publication format for broad Markdown viewer compatibility.
-
-Diagram sources SHALL be stored in `img-src/` and rendered to `img/`.
-
-Vertical orientation is the default: `flowchart TB` and `direction TB` unless a documented exception is justified.
-
-Mermaid source diagrams SHALL set a white-background base theme and wrap the diagram in a top-level white panel so arrows and lines remain readable in dark-mode renderers:
-
 ---
 
 ## 3.2 System Scope Boundaries
@@ -111,8 +95,6 @@ Define explicitly:
 - Responsibility demarcation  
 
 Boundary ambiguity SHALL block advancement.
-
-Mermaid diagrams SHALL be included when prose or tables alone would obscure a boundary or flow.
 
 ---
 
@@ -155,8 +137,6 @@ Framework-first design is prohibited.
 
 Structure SHALL derive from Requirements and NFRs.
 
-Include a Mermaid component/layering diagram when more than three major components or boundaries are present.
-
 ---
 
 # 6. Major Components
@@ -190,8 +170,6 @@ Document:
 Data movement SHALL be explicit.
 
 Hidden data flows are prohibited.
-
-Include a Mermaid data-flow diagram for cross-boundary flows, especially where security, audit, OCR/probabilistic processing, or external storage is involved.
 
 ---
 

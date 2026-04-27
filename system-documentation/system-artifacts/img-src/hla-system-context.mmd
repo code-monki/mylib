@@ -1,0 +1,18 @@
+%%{init: {"theme": "base", "themeVariables": {"background": "#ffffff", "primaryColor": "#ffffff", "primaryTextColor": "#111111", "primaryBorderColor": "#333333", "lineColor": "#333333", "secondaryColor": "#f7f7f7", "tertiaryColor": "#ffffff", "clusterBkg": "#ffffff", "clusterBorder": "#777777", "edgeLabelBackground": "#ffffff"}}}%%
+flowchart TB
+  subgraph Diagram["System context"]
+    direction TB
+    subgraph operator["Operator environment"]
+      Corp["Document corpus (files)"]
+    end
+    User["User"]
+    Shell["MyLib shell (desktop)"]
+    Server["Library server"]
+    Reader["Native reader (OS)"]
+    User --> Shell
+    Shell <-->|"API: loopback or TLS"| Server
+    Server --> Corp
+    Shell -->|"Open / handoff"| Reader
+    Reader --> Corp
+  end
+  style Diagram fill:#ffffff,stroke:#ffffff,color:#111111
