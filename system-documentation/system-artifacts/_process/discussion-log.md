@@ -8,13 +8,21 @@
 Timestamped record of **discussions**, **decisions**, **technology choices**, framework/library choices, and explicit **deferrals**.  
 **Newest entries first.** Append new blocks after updating the “Last updated” line below.
 
-**Last updated:** 2026-04-28 (shell UI/UX: baseline IA §4, inventory §5, flows §6.1–§6.6, QML map §8) UTC  
+**Last updated:** 2026-04-29 (M1-M7 complete; release checklist/evidence + deferred diagram cleanup carryover) UTC  
 
 **Not legal advice** where legal topics appear; see [`open-source-license.md`](open-source-license.md "Open Source License").
 
 **Decision-log conformance:** New structural entries SHALL follow the active decision-log template in [`../_templates/project/decision-log.md`](../_templates/project/decision-log.md "Decision Log Template"). Significant decisions include architecture choices, design choices, framework/library selections, packaging choices, orchestration choices, risk-bearing deferrals, changes to deterministic-probabilistic boundaries, and changes to NFR posture. Routine implementation details do not require full decision entries unless they affect these areas.
 
 **Archival note:** Older entries before this conformance rule may use summary format and may cite superseded FR numbers from SRS revisions prior to v0.6; the current [`../srs.md`](../srs.md "Srs") section headers are authoritative for IDs. When an older summary entry is reused as decision authority, normalize it to the template or create a superseding decision entry.
+
+---
+
+## 2026-04-29 — Release closeout artifacts and deferred diagram cleanup reaffirmed
+
+**Summary:** Added release-candidate closeout artifacts for post-M7 readiness: [`../release-checklist.md`](../release-checklist.md "Release Checklist") and [`../release-evidence.md`](../release-evidence.md "Release Evidence"), plus rollback runbook/drill alignment through release metadata checks. Reaffirmed manual Omnigraffle diagram refresh as intentionally deferred end-of-cycle cleanup and non-blocking for release-candidate readiness.
+
+**Documentation:** [`../README.md`](../README.md "Readme"), [`../LIFECYCLE.md`](../LIFECYCLE.md "Lifecycle"), [`../release-checklist.md`](../release-checklist.md "Release Checklist"), [`../release-evidence.md`](../release-evidence.md "Release Evidence"), [`discussion-log.md`](discussion-log.md "Discussion Log").
 
 ---
 

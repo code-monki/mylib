@@ -60,11 +60,13 @@ Routine implementation details do not require full decision-log entries unless t
 - **HLA:** [`hla.md`](hla.md "Hla") **Approved** (**v0.1.2**, **2026-04-25**); **Detailed Design** phase authorized.  
 - **DD:** [`dd.md`](dd.md "Dd") **Approved** (**v0.1**, **2026-04-28**); component **§4.x** decomposition; data/API contracts **§5.1.3**, **§5.2**, **§5.3.8**–**§5.3.19**.  
 - **Test Plan:** [`test-plan.md`](test-plan.md "Test Plan") **Approved** (**v0.1**, **2026-04-28**).  
-- **RTM:** [`rtm.md`](rtm.md "Rtm") **Approved** (**v0.1**, **2026-04-28**); requirement→HLA→DD **§4.x** rows populated; **§2.1** points to DD **§5** contracts; test **execution evidence**, packaging, and orchestration columns remain lifecycle-gated.  
+- **RTM:** [`rtm.md`](rtm.md "Rtm") **Approved** (**v0.1**, **2026-04-28**); requirement→HLA→DD **§4.x** rows populated; **§2.1** points to DD **§5** contracts; test **execution evidence** and release-hardening trace entries now populated through M7 baseline.  
 - **Shell UI/UX:** [`shell-ui-ux-design.md`](shell-ui-ux-design.md "Shell UI/UX Design") (**Draft**) — iterative screen/flow/wireframe record for **HLA-SHELL**; mature per document gate before shell UI coding so implementation stays specification-driven.  
 - **Implementation gate decision:** **Approved and cleared** by maintainer/project owner (**2026-04-29**). Implementation phase is authorized to begin under approved DD/Test Plan/RTM artifacts.  
 - **Non-blocking cleanup carryover:** Manual Omnigraffle refresh/re-export of selected diagrams is accepted as post-gate cleanup and does not block implementation start.  
-- **Next deliverable:** **implementation** and **test execution** under approved DD/Test Plan; **HLA-SHELL** UI follows **`shell-ui-ux-design.md`** baseline. Packaging/orchestration when that phase starts. Continue updating RTM evidence columns as implementation/tests land.  
+- **Implementation status:** Milestones **M1-M7** completed with build-integrated tests, complexity gate, performance harness, and rollback drill evidence captured.  
+- **Next deliverable:** release-candidate closure artifacts (tag/checksum/manual acceptance) and documentation alignment closeout.  
+- **Deferred cleanup:** Omnigraffle-based diagram refresh remains intentionally deferred to end-of-cycle cleanup and is non-blocking for release-candidate preparation.  
 - See [`_process/project-primer.md`](_process/project-primer.md "Project Primer") **§12** (Ideation→Requirements) and **§13** (Requirements→Architecture).
 
 ---
