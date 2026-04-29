@@ -1,5 +1,6 @@
 #include "ingest/import_service.hpp"
 
+#include "ingest/metadata_providers.hpp"
 #include "ingest/pdf_probe.hpp"
 
 #include <filesystem>
@@ -30,14 +31,11 @@ std::optional<ImportDraft> ImportService::create_draft(
     draft.source_fingerprint = fingerprint_hex_fnv1a64(bytes);
 
     const auto stem = std::filesystem::path(source_path).stem().string();
-    if (!stem.empty()) {
-        draft.hints.push_back({"title", stem, "filename"});
-    }
-
     const auto signals = probe_pdf_signals(bytes);
-    if (signals.has_title_metadata) {
-        draft.hints.push_back({"title", stem, "pdf-title-marker"});
-    }
+    if (!stem.empty()) draft.hints.push_back({"title", stem, "filename"});
+    if (signals.has_title_metadata) draft.hints.push_back({"title", stem, "pdf-title-marker"});
+    const auto provider_hints = collect_provider_hints(source_path, stem, signals);
+    draft.hints.insert(draft.hints.end(), provider_hints.begin(), provider_hints.end());
 
     for (const auto& record : repository_.list_all()) {
         if (!record.source_fingerprint.empty() &&

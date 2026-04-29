@@ -2,19 +2,251 @@
 
 **Project Name:** MyLib  
 **Maintainer:** Charles McKnight  
-**RTM Version Reference:** [`../rtm.md`](../rtm.md "Rtm") v0.1 draft  
+**RTM Version Reference:** [`../rtm.md`](../rtm.md "Rtm") v0.1 approved  
 **Lifecycle Authority:** [`../LIFECYCLE.md`](../LIFECYCLE.md "Lifecycle")  
 
 Timestamped record of **discussions**, **decisions**, **technology choices**, framework/library choices, and explicit **deferrals**.  
 **Newest entries first.** Append new blocks after updating the “Last updated” line below.
 
-**Last updated:** 2026-04-26 (Logging sink and field-partition questions closed) UTC  
+**Last updated:** 2026-04-28 (shell UI/UX: baseline IA §4, inventory §5, flows §6.1–§6.6, QML map §8) UTC  
 
 **Not legal advice** where legal topics appear; see [`open-source-license.md`](open-source-license.md "Open Source License").
 
 **Decision-log conformance:** New structural entries SHALL follow the active decision-log template in [`../_templates/project/decision-log.md`](../_templates/project/decision-log.md "Decision Log Template"). Significant decisions include architecture choices, design choices, framework/library selections, packaging choices, orchestration choices, risk-bearing deferrals, changes to deterministic-probabilistic boundaries, and changes to NFR posture. Routine implementation details do not require full decision entries unless they affect these areas.
 
 **Archival note:** Older entries before this conformance rule may use summary format and may cite superseded FR numbers from SRS revisions prior to v0.6; the current [`../srs.md`](../srs.md "Srs") section headers are authoritative for IDs. When an older summary entry is reused as decision authority, normalize it to the template or create a superseding decision entry.
+
+---
+
+## 2026-04-28 — Shell UI/UX baseline: navigation, screens, flows, QML map
+
+**Summary:** Expanded [`../shell-ui-ux-design.md`](../shell-ui-ux-design.md "Shell UI/UX Design") with v1 **sidebar + top search strip + content stack** IA, default **Library** landing, **Import** placement, full **S-01–S-12** purposes, detailed flows **§6.1–§6.6** (login, search→open, import/duplicate, metadata conflict, admin, rebuild), QML file naming sketch **§8**, theme/accessibility hooks **§9**, terminology **§10**, decisions/open items **§11**; adjusted **§1** gate to require wireframes for **S-01/S-03/S-05** (or **§11** waiver). **Status** line reflects **baseline text without pixels**.
+
+**Documentation:** [`../shell-ui-ux-design.md`](../shell-ui-ux-design.md "Shell UI/UX Design"), [`discussion-log.md`](discussion-log.md "Discussion Log").
+
+---
+
+## 2026-04-28 — Seeded iterative Shell UI/UX design document (HLA-SHELL)
+
+**Summary:** Added [`../shell-ui-ux-design.md`](../shell-ui-ux-design.md "Shell UI/UX Design") as a **living, non-template** UI/UX record (screen inventory S-xx, critical flows, wireframe log, open questions) subordinate to DD **§4.1**, with an explicit **implementation gate** before **HLA-SHELL** UI work. Linked from DD **§4.1**, [`../README.md`](../README.md "Readme"), and **LIFECYCLE.md** §6.
+
+**Documentation:** [`../shell-ui-ux-design.md`](../shell-ui-ux-design.md "Shell UI/UX Design"), [`../dd.md`](../dd.md "Dd"), [`../LIFECYCLE.md`](../LIFECYCLE.md "Lifecycle"), [`discussion-log.md`](discussion-log.md "Discussion Log").
+
+---
+
+## 2026-04-28 — Full documentation set synchronized (approved DD/TP/RTM baseline)
+
+**Summary:** Brought **LIFECYCLE.md** §6, **README.md**, **project-primer.md**, **SRS** §15–§16 + **Last revised**, **DD** (§4 intro, §8, §10 traceability, §13 gate, §4.8.10 ID mapping, approval date, global `TP-*` pointer), **RTM** §10 intro + §12 Approval + footer, and **HLA** (authority §1, DD/Test Plan header refs) into alignment with **Approved** **DD** / **Test Plan** / **RTM** v0.1 (2026-04-28). No SRS requirement narrative changed except traceability metadata.
+
+**Documentation:** [`../LIFECYCLE.md`](../LIFECYCLE.md "Lifecycle"), [`../README.md`](../README.md "Readme"), [`../_process/project-primer.md`](../_process/project-primer.md "Project Primer"), [`../srs.md`](../srs.md "Srs"), [`../dd.md`](../dd.md "Dd"), [`../rtm.md`](../rtm.md "Rtm"), [`../hla.md`](../hla.md "Hla"), [`discussion-log.md`](discussion-log.md "Discussion Log").
+
+---
+
+## 2026-04-28 — Test Plan and RTM approved; DD §5 contract alignment
+
+**Summary:** Set [`../test-plan.md`](../test-plan.md "Test Plan") to **Approved** (2026-04-28): **§2** now cites DD **`§5.1.3`**, **`§5.2`**, **`§5.3.8`–`§5.3.19`**; **§4.3**, **§8**, **§12**, **§14** clarification, **Approval** filled. Set [`../rtm.md`](../rtm.md "Rtm") to **Approved**, added **§2.1** DD §5 cross-cutting layer, refreshed authority block and version references. Synced [`../dd.md`](../dd.md "Dd") RTM reference; [`../srs.md`](../srs.md "Srs") / [`../hla.md`](../hla.md "Hla") headers updated only for RTM/DD/Test Plan version-reference consistency (no requirement text changes).
+
+**Documentation:** [`../test-plan.md`](../test-plan.md "Test Plan"), [`../rtm.md`](../rtm.md "Rtm"), [`../dd.md`](../dd.md "Dd"), [`../srs.md`](../srs.md "Srs"), [`../hla.md`](../hla.md "Hla"), [`discussion-log.md`](discussion-log.md "Discussion Log").
+
+---
+
+## 2026-04-28 — DD §5.1.3 logical persistence schema for identity/RBAC/tenant
+
+**Summary:** Documented that **§5.3.12** tables describe API/policy vocabulary, not SQL; added **§5.1.3** with logical tables `user_account`, `user_role`, `tenant`, `tenant_membership`, column baselines, PK rules, permission-resolution posture (code-expanded from stored roles per **§5.3.12**), and cross-links to session/JWT durability (**§4.8.5**). Updated **§5.3.12** intro and **§4.13** format-baseline row to reference **§5.1.3**.
+
+**Documentation:** [`../dd.md`](../dd.md "Dd"), [`discussion-log.md`](discussion-log.md "Discussion Log").
+
+---
+
+## 2026-04-28 — DD §5.3 completed REST wire schemas (auth refresh/logout, search rebuild, OCR reprocess, ops/release/JWKS, duplicate decision, storage remove, bootstrap) and C++ §5.3.19
+
+**Summary:** Finished parity between **§5.3** endpoint tables and concrete JSON: expanded **§5.3.8** with **`auth/refresh`** and **`auth/logout`**; added **§5.3.13**–**§5.3.18** for rebuild/reprocess, **`GET /ops/health`**, **`GET /release/metadata`**, **`GET /security/jwks`**, ingest **`duplicate-decision`**, **`POST /storage/remove`**, and **`auth/bootstrap/*`**; indexed **§5.3.1**/**§5.3.4**/**§5.3.5** for bootstrap, duplicate-decision, and remove routes; extended **§5.3.19** C++ with **`IAuthService`** bootstrap methods, **`IIngestService::submitDuplicateDecision`**, **`IStorageService::removeReference`**, and **`IOpsReleaseService`**. **§4.13** format baseline row points at **§5.3.8**–**§5.3.18** and **§5.3.19**.
+
+**Documentation:** [`../dd.md`](../dd.md "Dd"), [`discussion-log.md`](discussion-log.md "Discussion Log").
+
+---
+
+## 2026-04-28 — DD §5.3 RBAC, tenant, admin JSON schemas and C++ admin/security interface
+
+**Summary:** Closed the gap where RBAC was only narrative (**§4.8.6**) and admin routes lacked wire examples: added **§5.3.12** with role/permission IDs, default role-to-permission expansion, validated access-JWT claim shape, `GET /api/v1/auth/session` payload, `rejected_forbidden` authorization detail schema, and admin user **POST**/**PATCH**/**GET** JSON; indexed **§5.3.1** and **§5.3.6** with `GET /auth/session` and `GET /admin/users/{user_id}`; extended later §5.3 C++ baseline (`RequestContext` roles and **`IAdminSecurityService`**; subsequently consolidated under **§5.3.19**). **§4.13** format baseline row updated accordingly.
+
+**Documentation:** [`../dd.md`](../dd.md "Dd"), [`discussion-log.md`](discussion-log.md "Discussion Log").
+
+---
+
+## 2026-04-28 — DD §5.3 catalog, ingest, storage concrete schemas and C++ interfaces
+
+**Summary:** Extended [`../dd.md`](../dd.md "Dd") **§5.3** so catalog, ingest, and storage align with the same wire-level depth as auth/search/OCR: query-parameter table and JSON examples for catalog list/patch/delete, ingest import and job status, storage resolve/relink/open; extended the **§5.3** C++ interface baseline with `ICatalogService`, `IIngestService`, and `IStorageService` virtual interfaces alongside existing auth/search shapes.
+
+**Documentation:** [`../dd.md`](../dd.md "Dd"), [`discussion-log.md`](discussion-log.md "Discussion Log").
+
+---
+
+## 2026-04-28 — Deepened DD with concrete API/protocol/interface specifications
+
+**Summary:** Addressed DD depth gap by extending [`../dd.md`](../dd.md "Dd") **§5.3** with concrete implementation-facing interface detail: HTTP/S packet/header model, canonical response envelope packet schema, concrete JSON request/response payload examples for auth/search/OCR flows, and C++ service interface signature baselines for auth/search services. Updated DD-carried format decision wording to reflect that per-endpoint schema/detail is now defined at DD level, leaving only OpenAPI generation and final DTO class realization as implementation-phase refinements.
+
+**Documentation:** [`../dd.md`](../dd.md "Dd"), [`discussion-log.md`](discussion-log.md "Discussion Log").
+
+---
+
+## 2026-04-28 — Normalized DD/TP header consistency metadata
+
+**Summary:** Per review pass, normalized header metadata consistency in [`../dd.md`](../dd.md "Dd") and [`../test-plan.md`](../test-plan.md "Test Plan"): set DD header status to **Approved** with current date alignment, corrected DD approval footer wording from draft-baseline phrasing, and aligned Test Plan reference headers to explicitly mark SRS/HLA/DD authority documents as **Approved**.
+
+**Documentation:** [`../dd.md`](../dd.md "Dd"), [`../test-plan.md`](../test-plan.md "Test Plan"), [`discussion-log.md`](discussion-log.md "Discussion Log").
+
+---
+
+## 2026-04-28 — Added Qt Quick bridge implementation guidance
+
+**Summary:** Extended [`../dd.md`](../dd.md "Dd") **§4.1** with implementation guidance for the selected Qt Quick/QML stack: recommended `QObject` C++ bridge pattern, UI DTO mapping boundaries, intent-level signal/slot contracts, UI-thread isolation, normalized error/status mapping, and testability expectations that keep policy authority out of QML.
+
+**Documentation:** [`../dd.md`](../dd.md "Dd"), [`discussion-log.md`](discussion-log.md "Discussion Log").
+
+---
+
+## 2026-04-28 — Refined UI stack to Qt Quick/QML with C++ bridge guardrails
+
+**Summary:** Updated [`../dd.md`](../dd.md "Dd") **§4.1** to refine the UI stack decision from generic Qt to **Qt Quick/QML + C++ bridge**, added explicit guardrails that keep security/business authority outside QML, and extended shell testing/risk language to enforce boundary discipline. Updated [`../hla.md`](../hla.md "Hla") DD-carried UI stack row to record this as resolved in DD, and extended [`../test-plan.md`](../test-plan.md "Test Plan") with `TP-NFR-004` to validate QML presentation non-authority and preserved server/C++ security enforcement.
+
+**Documentation:** [`../dd.md`](../dd.md "Dd"), [`../hla.md`](../hla.md "Hla"), [`../test-plan.md`](../test-plan.md "Test Plan"), [`discussion-log.md`](discussion-log.md "Discussion Log").
+
+---
+
+## 2026-04-26 — Completed OPS/NFR executable specs and TP quick-map appendix
+
+**Summary:** Finalized the next executable-spec expansion in [`../test-plan.md`](../test-plan.md "Test Plan") by adding `OPS` and `NFR` suite specifications (preconditions, steps, expected outcomes, evidence requirements) and appended a compact `TP-*` to requirement quick-map appendix to accelerate review and traceability verification.
+
+**Documentation:** [`../test-plan.md`](../test-plan.md "Test Plan"), [`discussion-log.md`](discussion-log.md "Discussion Log").
+
+---
+
+## 2026-04-26 — Expanded executable specs for SEARCH/INGEST/STORAGE/ADMIN
+
+**Summary:** Extended [`../test-plan.md`](../test-plan.md "Test Plan") executable specification section to include `SEARCH`, `INGEST`, `STORAGE`, and `ADMIN` high-priority suites with concrete preconditions, step flows, expected outcomes, and evidence requirements, bringing the draft closer to review-ready execution planning.
+
+**Documentation:** [`../test-plan.md`](../test-plan.md "Test Plan"), [`discussion-log.md`](discussion-log.md "Discussion Log").
+
+---
+
+## 2026-04-26 — Added executable AUTH/OCR/PKG test specifications
+
+**Summary:** Expanded [`../test-plan.md`](../test-plan.md "Test Plan") with executable high-risk suite specifications in **§5.2** for `AUTH`, `OCR`, and `PKG` families, including preconditions, step sequences, expected outcomes, and required evidence artifacts for immediate test authoring and implementation-parallel validation work.
+
+**Documentation:** [`../test-plan.md`](../test-plan.md "Test Plan"), [`discussion-log.md`](discussion-log.md "Discussion Log").
+
+---
+
+## 2026-04-26 — Seeded canonical TP IDs and mapped SEC provisional IDs
+
+**Summary:** Expanded [`../test-plan.md`](../test-plan.md "Test Plan") with an initial canonical test case catalog (`TP-*`) spanning auth, catalog, search, ingest, OCR, storage, admin, ops, packaging, and NFR suites. Updated [`../rtm.md`](../rtm.md "Rtm") **§10 Provisional-to-Canonical Test ID Mapping** to map prior `SEC-*` provisional IDs to canonical `TP-*` IDs with `Mapped` status and target dates.
+
+**Documentation:** [`../test-plan.md`](../test-plan.md "Test Plan"), [`../rtm.md`](../rtm.md "Rtm"), [`discussion-log.md`](discussion-log.md "Discussion Log").
+
+---
+
+## 2026-04-26 — Initiated Test Plan v0.1 draft and aligned RTM references
+
+**Summary:** Created [`../test-plan.md`](../test-plan.md "Test Plan") as the initial Test Plan v0.1 draft using approved DD API/data/message contracts (`§5.2`/`§5.3`) and endpoint-family coverage expectations. Updated [`../rtm.md`](../rtm.md "Rtm") header/authority references to reflect DD approval and Test Plan draft initiation while preserving implementation gate restrictions until test execution evidence is complete.
+
+**Documentation:** [`../test-plan.md`](../test-plan.md "Test Plan"), [`../rtm.md`](../rtm.md "Rtm"), [`discussion-log.md`](discussion-log.md "Discussion Log").
+
+---
+
+## 2026-04-26 — DD approved for implementation entry
+
+**Summary:** Following maintainer review and confirmation of readiness, updated [`../dd.md`](../dd.md "Dd") **§13 Phase Gate Declaration** and **Approval** to record human approval, mark Detailed Design approved for implementation entry, and preserve explicit lifecycle follow-ons for Test Plan authoring and Packaging/Orchestration implementation details.
+
+**Documentation:** [`../dd.md`](../dd.md "Dd"), [`discussion-log.md`](discussion-log.md "Discussion Log").
+
+---
+
+## 2026-04-26 — Closure pass: detailed API specs and phase-gate normalization
+
+**Summary:** Extended [`../dd.md`](../dd.md "Dd") with a detailed v1 API specification sheet (**§5.3**) covering representative endpoint contracts (request/response minima and required error/status coverage) across auth, catalog, search, ingest/OCR, storage, admin/security, and ops/release families. Completed closure-pass normalization in **§10**, **§12**, and **§13** by converting remaining unresolved items into explicit lifecycle-deferred follow-ons, marking DD-level interface/NFR/deterministic-probabilistic coverage complete, and clarifying that only human approval plus later lifecycle artifacts remain before implementation authorization.
+
+**Documentation:** [`../dd.md`](../dd.md "Dd"), [`discussion-log.md`](discussion-log.md "Discussion Log").
+
+---
+
+## 2026-04-26 — Added endpoint contract matrix for test-plan seeding
+
+**Summary:** Extended [`../dd.md`](../dd.md "Dd") **§5.2** with an endpoint-family contract matrix baseline (`§5.2.5`) defining minimum request fields, response payload fields, and required status/error coverage across auth, catalog, search, ingest, OCR, storage, admin/security, and ops/release APIs. Added explicit test-plan seeding rules and updated **§8 Testing Alignment** to require matrix-based contract coverage.
+
+**Documentation:** [`../dd.md`](../dd.md "Dd"), [`discussion-log.md`](discussion-log.md "Discussion Log").
+
+---
+
+## 2026-04-26 — Defined canonical API/data/message format baseline
+
+**Summary:** Updated [`../dd.md`](../dd.md "Dd") with a new **§5.2** contract baseline for v1 data/message/API formats: canonical JSON serialization posture, schema evolution and unknown-field handling, common response envelope + error object, request-envelope guardrails (idempotency/pagination/version tokens), and route-family API version namespace map. Updated DD-carried decisions to include this cross-cutting format baseline and added testing-alignment language for schema/envelope/error-code/version compatibility contract tests.
+
+**Documentation:** [`../dd.md`](../dd.md "Dd"), [`discussion-log.md`](discussion-log.md "Discussion Log").
+
+---
+
+## 2026-04-26 — Locked v1 platform package target families
+
+**Summary:** Updated [`../dd.md`](../dd.md "Dd") **§9** to lock v1 platform packaging targets as `.dmg` (macOS), `.msi` (Windows), and `.deb`/`.rpm`/`AppImage` (Linux). Clarified that package-family targets are now part of DD contract scope while packaging toolchains, signing/notarization mechanics, service registration, update channels, and post-install automation remain packaging/orchestration implementation decisions.
+
+**Documentation:** [`../dd.md`](../dd.md "Dd"), [`discussion-log.md`](discussion-log.md "Discussion Log").
+
+---
+
+## 2026-04-26 — Added OCR sidecar schema sketch and validation baseline
+
+**Summary:** Extended [`../dd.md`](../dd.md "Dd") **§4.9** with a minimal v1 OCR/extracted-text sidecar schema sketch (required fields, lineage metadata, threshold-profile capture, and payload contract) plus import/export validation rules (schema compatibility checks, source fingerprint validation, stale-sidecar handling, and portability constraints). Serialization format choice remains deferred to packaging/orchestration, while field semantics are now fixed at DD level.
+
+**Documentation:** [`../dd.md`](../dd.md "Dd"), [`discussion-log.md`](discussion-log.md "Discussion Log").
+
+---
+
+## 2026-04-26 — Added portable OCR/extracted-text sidecar baseline
+
+**Summary:** Updated [`../dd.md`](../dd.md "Dd") **§4.9** to add a v1 baseline for persisted/exportable OCR/extracted-text sidecar artifacts so multi-site library replicas can carry derived text and provenance without mandatory immediate re-OCR. Added sidecar content/versioning/integrity/portability rules and reuse-vs-reprocess posture, and updated the DD-carried OCR decision row to include the sidecar baseline.
+
+**Documentation:** [`../dd.md`](../dd.md "Dd"), [`discussion-log.md`](discussion-log.md "Discussion Log").
+
+---
+
+## 2026-04-26 — Closed OCR pipeline profile and retry/defer baseline question
+
+**Summary:** Updated [`../dd.md`](../dd.md "Dd") **§4.9.8** with concrete v1 OCR/extraction processing profiles (`extract_only`, `ocr_quick`, `ocr_robust`), deterministic profile-selection rules, quality-class posture (`high`, `review_required`, `insufficient`), reproducibility/threshold-capture requirements, and bounded retry/defer escalation rules. Updated the DD-carried OCR decision row and removed the corresponding OCR profile question from **§12 Open Questions**.
+
+**Documentation:** [`../dd.md`](../dd.md "Dd"), [`discussion-log.md`](discussion-log.md "Discussion Log").
+
+---
+
+## 2026-04-26 — Defined search transition protocol and deferred numeric thresholds
+
+**Summary:** Updated [`../dd.md`](../dd.md "Dd") **§4.6.9** to formalize the search-engine transition decision protocol now (required metrics, workload-shape documentation, sustained-observation gate, and SLO-breach trigger) while explicitly deferring numeric thresholds/sample-size minimums until baseline telemetry is captured. Updated the DD-carried search-engine decision row accordingly and narrowed the **§12 Open Questions** item to threshold finalization only.
+
+**Documentation:** [`../dd.md`](../dd.md "Dd"), [`discussion-log.md`](discussion-log.md "Discussion Log").
+
+---
+
+## 2026-04-26 — Closed remote certificate/trust runbook-depth question
+
+**Summary:** Expanded [`../dd.md`](../dd.md "Dd") **§4.3** with a concrete remote certificate/trust runbook baseline covering allowed issuance paths (public CA/ACME, private CA, constrained self-signed), install/activation sequence, renewal and expiry warning thresholds, trust distribution requirements, minimum failure playbooks, and verification checklist. Updated the **§4.3.11** checklist runbook item to complete and removed the corresponding certificate/trust item from **§12 Open Questions**.
+
+**Documentation:** [`../dd.md`](../dd.md "Dd"), [`discussion-log.md`](discussion-log.md "Discussion Log").
+
+---
+
+## 2026-04-26 — Locked Qt v1 shell stack with fallback handoff posture
+
+**Summary:** Updated [`../dd.md`](../dd.md "Dd") to close the UI stack decision in favor of **Qt** for v1, recorded Electron+Vue as a revisit-only fallback path, added shell-policy language for deterministic server-mediated open handoff when in-app PDF search/highlight precision is insufficient, updated the corresponding DD-carried decision/risk wording, and removed the UI framework question from **§12 Open Questions**.
+
+**Documentation:** [`../dd.md`](../dd.md "Dd"), [`discussion-log.md`](discussion-log.md "Discussion Log").
+
+---
+
+## 2026-04-26 — Refined HLA-RELEASE and aligned sections 5-9 consistency
+
+**Summary:** Added a **§4.12.8 ready-for-approval checklist** for release metadata contracts, updated **§4.13 DD-Carried Decisions** to reflect resolved security pin/policy decisions and remaining narrow deferrals, and rewrote **§6 Failure Semantics** from a placeholder list into a cross-component closure rule that references defined §4.x contracts and explicit remaining escalation-policy obligations.
+
+**Documentation:** [`../dd.md`](../dd.md "Dd"), [`discussion-log.md`](discussion-log.md "Discussion Log").
 
 ---
 
@@ -327,6 +559,16 @@ Timestamped record of **discussions**, **decisions**, **technology choices**, fr
 **Summary:** Added [`../dd.md`](../dd.md "Dd") **§4.6 HLA-SEARCH** initial decomposition covering query semantics ownership, index lifecycle/rebuild administration, fallback behavior, and explicit status-class contracts for query/admin outcomes. The section follows the strengthened status taxonomy standard (including nonterminal `deferred` constraints) from first draft.
 
 **Documentation:** [`../dd.md`](../dd.md "Dd"), [`../rtm.md`](../rtm.md "Rtm").
+
+---
+
+## 2026-04-29 — Implementation phase gate approved and cleared
+
+**Summary:** Maintainer/project owner approved and cleared implementation start after review of current artifacts. Remaining manual Omnigraffle diagram rework is explicitly treated as non-blocking cleanup and does not prevent implementation from starting.
+
+**Gate decision:** Implementation phase authorized effective 2026-04-29 under approved [`../srs.md`](../srs.md "Srs"), [`../hla.md`](../hla.md "Hla"), [`../dd.md`](../dd.md "Dd"), [`../test-plan.md`](../test-plan.md "Test Plan"), and [`../rtm.md`](../rtm.md "Rtm").
+
+**Documentation:** [`../LIFECYCLE.md`](../LIFECYCLE.md "Lifecycle"), [`../rtm.md`](../rtm.md "Rtm"), [`../README.md`](../README.md "Readme").
 
 ---
 

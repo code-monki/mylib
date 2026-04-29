@@ -8,7 +8,7 @@
 
 **Date (YYYY-MM-DD):** 2026-04-11
 
-**Last revised (UTC):** 2026-04-06
+**Last revised (UTC):** 2026-04-28 (artifact cross-reference sync; requirement text unchanged from 2026-04-06 baseline)
 
 **Author(s):** Charles McKnight (maintainers may revise via change control)
 
@@ -16,9 +16,10 @@
 
 **Project Primer Version Reference:** 1.0 (`_process/project-primer.md`)
 
-**RTM Version Reference:** 0.1 (`[rtm.md](rtm.md "Rtm")` draft; HLA column populated from approved `[hla.md](hla.md "Hla")` v0.1.2)  
-**HLA Version Reference:** 0.1.2 (`[hla.md](hla.md "Hla")` approved — Detailed Design authorized)  
-**DD Version Reference:** 0.1 (`[dd.md](dd.md "Dd")` draft scaffold)
+**RTM Version Reference:** 0.1 **Approved** (`[rtm.md](rtm.md "Rtm")`; approved 2026-04-28)  
+**HLA Version Reference:** 0.1.2 (`[hla.md](hla.md "Hla")` approved)  
+**DD Version Reference:** 0.1 **Approved** (`[dd.md](dd.md "Dd")`; approved 2026-04-28)  
+**Test Plan Version Reference:** 0.1 **Approved** (`[test-plan.md](test-plan.md "Test Plan")`; approved 2026-04-28)
 
 ---
 
@@ -184,7 +185,7 @@ Stakeholders managing large, heterogeneous electronic document collections (e.g.
 
 **Constraints:** —
 
-**Notes:** Bulk import with review queue is deferred (waiting room).
+**Notes:** Bulk import with review queue is deferred (waiting room). Optional **bibliographic enrichment** during import (for example hints from embedded PDF metadata, then layered lookups against external catalogs) **SHALL NOT** auto-commit catalog fields: the user **SHALL** explicitly confirm any values applied before import completes. Provider choices, ordering, and deployment enablement are detailed in **DD §4.1.2.1** and [`shell-ui-ux-design.md`](shell-ui-ux-design.md "Shell UI/UX Design").
 
 ---
 
@@ -1085,7 +1086,7 @@ The **shell UI** **SHALL** provide a user-discoverable Help affordance (e.g. Hel
 - **[FR-001](./srs.md#fr-001--catalog-records)–[FR-041](./srs.md#fr-041--concurrent-metadata-updates) and [NFR-001](./srs.md#nfr-001--corpus-scale-qualitative)–[NFR-009](./srs.md#nfr-009--transport-security-remote-access) assigned in this revision:** Yes
 - **Acceptance criteria present per item:** Yes (subject to refinement)
 - **Architecture embedded:** Avoided** (no stack mandates)
-- **RTM:** Draft `**[rtm.md](rtm.md "Rtm")`** v0.1 — one row per FR/NFR; architecture/design/test/packaging columns **TBD** until HLA, DD, and test plan land
+- **RTM:** **`[rtm.md](rtm.md "Rtm")`** v0.1 **Approved** (2026-04-28) — one row per FR/NFR; HLA and DD **§4.x** populated; DD **§5** contracts per RTM **§2.1**; [`test-plan.md`](test-plan.md "Test Plan") **Approved**; implementation/package evidence columns lifecycle-gated
 - **Waiting room separated:** Yes
 - **Probabilistic** bounds for OCR:** Yes ([§6](./srs.md#6-deterministicprobabilistic-requirements))
 - **FR numerical order matches document headers ([§4](./srs.md#4-functional-requirements) index):** Yes as of Last revised
@@ -1099,10 +1100,12 @@ Confirm readiness to proceed to **High-Level Architecture**:
 - **Requirements stable?** **Yes** — **v0.9** baseline reviewed by **project owner** (sole stakeholder), **2026-04-06**, including the revision items in [FR-002](./srs.md#fr-002--metadata-fields), [FR-004](./srs.md#fr-004--deliberate-import), [FR-010](./srs.md#fr-010--duplicate-detection-digest), [FR-011](./srs.md#fr-011--missing-file-detection-and-relink), [FR-013](./srs.md#fr-013--server-authority-for-security) Notes, and [FR-038](./srs.md#fr-038--search-query-semantics-and-results); further changes via **change control** and **LIFECYCLE.md** rollback rules if scope shifts materially
 - **NFRs measurable?** **Partial** — **accepted for Architecture entry**: quantitative fixtures and checklist binding deferred to **Test Plan** and design artifacts ([NFR-001](./srs.md#nfr-001--corpus-scale-qualitative), [NFR-009](./srs.md#nfr-009--transport-security-remote-access), and related NFRs); stakeholder recorded **2026-04-06**
 - **Scope boundaries explicit?** **Yes**
-- **Traceability scaffold prepared?** **Yes** — RTM draft v0.1 (`[rtm.md](rtm.md "Rtm")`); downstream columns **TBD** until HLA, DD, and test plan
+- **Traceability scaffold prepared?** **Yes** — RTM v0.1 (`[rtm.md](rtm.md "Rtm")`) **Approved** with HLA/DD mapping; Test Plan v0.1 **Approved**; downstream execution/package evidence **lifecycle-gated** (see **LIFECYCLE.md** §6)
 - **Human approval granted?** **Yes** — **Charles McKnight**, project owner / sole stakeholder, **2026-04-06** (see [§Approval](./srs.md#approval))
 
-**Action:** Proceed to **High-Level Architecture** — draft `**hla.md`**, obtain **approval** per **LIFECYCLE.md**, then populate **RTM** HLA component columns and continue the mandatory sequence toward **DD** and **test planning** (no implementation before approved DD and RTM readiness per project rules).
+**Action (historical, 2026-04-06):** Proceed to **High-Level Architecture** — draft **`hla.md`**, obtain **approval** per **LIFECYCLE.md**, then populate **RTM** HLA component columns and continue toward **DD** and **test planning**.
+
+**As of 2026-04-28:** **HLA** v0.1.2, **DD** v0.1, **RTM** v0.1, and **Test Plan** v0.1 are **Approved**; authoritative status is in each artifact header and **[`LIFECYCLE.md`](LIFECYCLE.md "Lifecycle") §6**. Implementation entry follows lifecycle gates and test execution evidence, not this section alone.
 
 ---
 

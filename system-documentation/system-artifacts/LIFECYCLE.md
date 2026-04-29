@@ -58,9 +58,13 @@ Routine implementation details do not require full decision-log entries unless t
 - **Ideation** closed **2026-04-05**. **Requirements** phase **complete** for baseline **SRS v0.9** (approved **2026-04-06**).  
 - **SRS:** [`srs.md`](srs.md "Srs") **Approved** (**v0.9**); **High-Level Architecture** phase **authorized** **2026-04-06** (see SRS **§16**, **§Approval**, and primer **§13**).  
 - **HLA:** [`hla.md`](hla.md "Hla") **Approved** (**v0.1.2**, **2026-04-25**); **Detailed Design** phase authorized.  
-- **DD:** [`dd.md`](dd.md "Dd") **draft** (**v0.1**); component decomposition, interface contracts, data design, failure semantics, NFR derivation, and test intent **pending**.  
-- **RTM:** [`rtm.md`](rtm.md "Rtm") **draft** (**v0.1**); **HLA Component ID** column populated from approved HLA; **DD**, test, packaging, and orchestration columns **TBD**.  
-- **Next deliverable:** complete **DD** component decomposition and continue RTM alignment. **Implementation** remains blocked until **approved DD** and RTM readiness per project rules.  
+- **DD:** [`dd.md`](dd.md "Dd") **Approved** (**v0.1**, **2026-04-28**); component **§4.x** decomposition; data/API contracts **§5.1.3**, **§5.2**, **§5.3.8**–**§5.3.19**.  
+- **Test Plan:** [`test-plan.md`](test-plan.md "Test Plan") **Approved** (**v0.1**, **2026-04-28**).  
+- **RTM:** [`rtm.md`](rtm.md "Rtm") **Approved** (**v0.1**, **2026-04-28**); requirement→HLA→DD **§4.x** rows populated; **§2.1** points to DD **§5** contracts; test **execution evidence**, packaging, and orchestration columns remain lifecycle-gated.  
+- **Shell UI/UX:** [`shell-ui-ux-design.md`](shell-ui-ux-design.md "Shell UI/UX Design") (**Draft**) — iterative screen/flow/wireframe record for **HLA-SHELL**; mature per document gate before shell UI coding so implementation stays specification-driven.  
+- **Implementation gate decision:** **Approved and cleared** by maintainer/project owner (**2026-04-29**). Implementation phase is authorized to begin under approved DD/Test Plan/RTM artifacts.  
+- **Non-blocking cleanup carryover:** Manual Omnigraffle refresh/re-export of selected diagrams is accepted as post-gate cleanup and does not block implementation start.  
+- **Next deliverable:** **implementation** and **test execution** under approved DD/Test Plan; **HLA-SHELL** UI follows **`shell-ui-ux-design.md`** baseline. Packaging/orchestration when that phase starts. Continue updating RTM evidence columns as implementation/tests land.  
 - See [`_process/project-primer.md`](_process/project-primer.md "Project Primer") **§12** (Ideation→Requirements) and **§13** (Requirements→Architecture).
 
 ---

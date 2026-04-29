@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1100" height="460" viewBox="0 0 1100 460">
+  <defs>
+    <style>
+      .box { fill: #ffffff; stroke: #000000; stroke-width: 2; }
+      .text { fill: #000000; font-family: "Trebuchet MS", Verdana, Arial, sans-serif; font-size: 20px; }
+      .title { fill: #000000; font-family: "Trebuchet MS", Verdana, Arial, sans-serif; font-size: 24px; font-weight: 700; }
+      .line { fill: none; stroke: #000000; stroke-width: 2; }
+      .note { fill: #000000; font-family: "Trebuchet MS", Verdana, Arial, sans-serif; font-size: 16px; }
+    </style>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#000000"/>
+    </marker>
+  </defs>
+
+  <rect x="0" y="0" width="1100" height="460" fill="#ffffff"/>
+  <text class="title" x="550" y="42" text-anchor="middle">DD Server Host Internal Structure - Bootstrap Path</text>
+
+  <rect class="box" x="390" y="84" width="320" height="64"/>
+  <text class="text" x="550" y="123" text-anchor="middle">Process entry</text>
+
+  <rect class="box" x="390" y="204" width="320" height="64"/>
+  <text class="text" x="550" y="243" text-anchor="middle">Configuration loader</text>
+
+  <rect class="box" x="390" y="324" width="320" height="64"/>
+  <text class="text" x="550" y="363" text-anchor="middle">Listener manager</text>
+
+  <line class="line" x1="550" y1="148" x2="550" y2="204" marker-end="url(#arrow)"/>
+  <line class="line" x1="550" y1="268" x2="550" y2="324" marker-end="url(#arrow)"/>
+  <text class="note" x="550" y="434" text-anchor="middle">Output connector: Listener manager -> Request Path diagram</text>
+</svg>

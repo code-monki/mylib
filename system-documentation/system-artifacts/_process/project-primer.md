@@ -18,9 +18,9 @@ This primer defines intent. It does not authorize architecture or implementation
 Project Name: MyLib  
 Initiation Date (YYYY-MM-DD): 2026-04-03  
 Author(s): Charles McKnight  
-Lifecycle Phase: Detailed Design (HLA v0.1.2 approved 2026-04-25)  
+Lifecycle Phase: Implementation preparation (DD v0.1, Test Plan v0.1, RTM v0.1 approved 2026-04-28; see [`../LIFECYCLE.md`](../LIFECYCLE.md "Lifecycle") §6)  
 Version: 1.3  
-RTM Scaffold Created? Yes ([`../rtm.md`](../rtm.md "Rtm") v0.1 draft; HLA mapped, DD/test/package columns pending)  
+RTM Scaffold Created? Yes ([`../rtm.md`](../rtm.md "Rtm") v0.1 **Approved**; HLA + DD §4.x mapped; DD §5 contracts per RTM §2.1; execution/package columns lifecycle-gated)  
 
 ---
 

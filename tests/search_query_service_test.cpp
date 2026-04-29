@@ -31,6 +31,14 @@ void seed(mylib::storage::InMemoryCatalogRepository& repo) {
         .source_fingerprint = "22222222bbbbbbb2",
         .version = 1,
     });
+    repo.create(mylib::domain::CatalogRecord{
+        .id = "s-3",
+        .title = "Operations Weekly",
+        .tags = {"security"},
+        .source_path = "/tmp/s3.pdf",
+        .source_fingerprint = "33333333ccccccc3",
+        .version = 1,
+    });
 }
 
 void test_query_grammar() {
@@ -40,12 +48,14 @@ void test_query_grammar() {
 
     auto q1 = search.execute("security OR distributed");
     expect(q1.status == mylib::search::QueryStatus::ok, "or query should parse");
-    expect(q1.matches.size() == 2, "or query should match both records");
+    expect(q1.matches.size() == 3, "or query should match all eligible records");
+    expect(q1.matches[2].id == "s-3", "tag-only hit should rank after title hits");
+    expect(!q1.diagnostics.empty(), "query diagnostics should be emitted");
 
     auto q2 = search.execute("security AND NOT distributed");
     expect(q2.status == mylib::search::QueryStatus::ok, "and/not query should parse");
-    expect(q2.matches.size() == 1, "and/not query should match one record");
-    expect(q2.matches[0].id == "s-2", "and/not query should match security record");
+    expect(q2.matches.size() == 2, "and/not query should match security records without distributed");
+    expect(q2.matches[0].id == "s-2", "title hit should rank before tag-only hit");
 
     auto bad = search.execute("(security AND distributed");
     expect(bad.status == mylib::search::QueryStatus::invalid_query, "unbalanced query should fail");

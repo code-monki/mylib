@@ -3,7 +3,7 @@
 Structured Ideation record (template-aligned): [Project Primer](_process/project-primer.md "Project Primer").  
 Timestamped discussion and decisions: [Discussion log](_process/discussion-log.md "Discussion Log").
 
-**Lifecycle (this cycle):** **Ideation** closed **2026-04-05** (see [Project Primer §12](_process/project-primer.md#12-gate-declaration "12. Gate Declaration")). **SRS v0.9** **Approved** **2026-04-06** ([srs.md](srs.md "Srs")); **HLA v0.1.2** **Approved** **2026-04-25** ([hla.md](hla.md "Hla")); **DD v0.1** draft scaffold created ([dd.md](dd.md "Dd")); **Detailed Design** active. Further discovery may trigger **phase rollback** per [LIFECYCLE.md](LIFECYCLE.md "Lifecycle").
+**Lifecycle (this cycle):** **Ideation** closed **2026-04-05** (see [Project Primer §12](_process/project-primer.md#12-gate-declaration "12. Gate Declaration")). **SRS v0.9** **Approved** **2026-04-06** ([srs.md](srs.md "Srs")); **HLA v0.1.2** **Approved** **2026-04-25** ([hla.md](hla.md "Hla")); **DD v0.1** **Approved** **2026-04-28** ([dd.md](dd.md "Dd")); **Test Plan v0.1** **Approved** **2026-04-28** ([test-plan.md](test-plan.md "Test Plan")); **RTM v0.1** **Approved** **2026-04-28** ([rtm.md](rtm.md "Rtm")). Current focus: **implementation and test execution** per [LIFECYCLE.md](LIFECYCLE.md "Lifecycle") §6; scope shifts may trigger **rollback** per lifecycle rules.
 
 ## Overview
 
@@ -100,6 +100,7 @@ Electronic documents appear in many formats, some proprietary or layout-heavy. A
 
 ## Metadata, tags, and organization
 
+- Optional **catalog lookups** (for example Open Library, Crossref, Library of Congress APIs) may **suggest** bibliographic fields during import; **automatic overwrite without explicit user confirmation is out of scope**—see **FR-004** Notes and **DD §4.1.2.1**.
 - Prefer **Dublin Core–inspired** fields where appropriate, plus practical bibliographic fields such as **author**, **publisher**, and **series**.
 - **Tags** (multi-valued) support **grouping** and **search filters**; **v1** favors **free-form** tags. **Tighter governance** (controlled vocabularies) can follow if needed (e.g. archival workflows).
 - **DRM-protected EPUB** (and similar): **no index built without lawful access to content**. Where full-text indexing is **not** possible, allow the user to associate a **keyword list** with the document **separate from tags**—**keywords** aid **discovery** without conflating curated tags with ad hoc search terms for locked content.

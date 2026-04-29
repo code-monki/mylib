@@ -27,14 +27,24 @@ void test_metadata_shape() {
 void test_packaging_baseline_files_present() {
     mylib::release::ReleaseMetadataService svc;
     const auto check = svc.verify_required_artifacts(MYLIB_REPO_ROOT);
-    expect(check.ok, "LICENSE/NOTICE should exist for packaging baseline");
+    expect(check.ok, "required packaging artifacts should exist for baseline");
     expect(check.missing.empty(), "no required artifacts should be missing");
+}
+
+void test_rollback_drill_evidence() {
+    mylib::release::ReleaseMetadataService svc;
+    const auto evidence = svc.run_rollback_drill(MYLIB_REPO_ROOT);
+    expect(evidence.ok, "rollback drill should pass");
+    expect(evidence.failed_steps.empty(), "rollback drill should have no failed steps");
+    expect(evidence.completed_steps.size() >= 4, "rollback drill should report completed steps");
+    expect(!evidence.report.empty(), "rollback drill should include report text");
 }
 }  // namespace
 
 int main() {
     test_metadata_shape();
     test_packaging_baseline_files_present();
+    test_rollback_drill_evidence();
     if (failures > 0) {
         std::cerr << failures << " release metadata test(s) failed\n";
         return 1;

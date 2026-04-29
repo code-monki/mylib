@@ -1,6 +1,7 @@
 #include "config/bootstrap.hpp"
 
 #include <cstdlib>
+#include <filesystem>
 #include <sstream>
 
 namespace mylib::config {
@@ -38,6 +39,32 @@ bool parse_bool(const char* value, bool fallback) {
     return fallback;
 }
 
+std::string parse_repository_backend(const char* value) {
+    if (value == nullptr) {
+        return "in_memory";
+    }
+    const std::string candidate(value);
+    if (candidate == "in_memory" || candidate == "file") {
+        return candidate;
+    }
+    return "in_memory";
+}
+
+std::string parse_repository_file(const char* value, const std::string& backend) {
+    if (backend != "file") {
+        return {};
+    }
+
+    std::string candidate;
+    if (value != nullptr) {
+        candidate = value;
+    }
+    if (candidate.empty()) {
+        candidate = "data/catalog.db";
+    }
+    return candidate;
+}
+
 }  // namespace
 
 RuntimeConfig load_config_from_env() {
@@ -52,6 +79,15 @@ RuntimeConfig load_config_from_env() {
         std::getenv("MYLIB_ENABLE_STRUCTURED_LOGS"),
         cfg.enable_structured_logs
     );
+    cfg.repository_backend = parse_repository_backend(std::getenv("MYLIB_REPOSITORY_BACKEND"));
+    cfg.repository_file = parse_repository_file(
+        std::getenv("MYLIB_REPOSITORY_FILE"),
+        cfg.repository_backend
+    );
+
+    if (cfg.repository_backend == "file" && cfg.repository_file.empty()) {
+        cfg.repository_backend = "in_memory";
+    }
 
     return cfg;
 }
@@ -60,7 +96,11 @@ std::string describe(const RuntimeConfig& cfg) {
     std::ostringstream oss;
     oss << "environment=" << cfg.environment
         << ", api_port=" << cfg.api_port
-        << ", structured_logs=" << (cfg.enable_structured_logs ? "on" : "off");
+        << ", structured_logs=" << (cfg.enable_structured_logs ? "on" : "off")
+        << ", repository_backend=" << cfg.repository_backend;
+    if (cfg.repository_backend == "file") {
+        oss << ", repository_file=" << std::filesystem::path(cfg.repository_file).string();
+    }
     return oss.str();
 }
 

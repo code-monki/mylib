@@ -1,0 +1,12 @@
+# Mermaid base names to skip during rendering.
+# One name per line, without .mmd or .svg.
+# Example:
+# hla-system-context
+
+hla-system-context
+hla-component-organization
+hla-data-architecture
+hla-deployment-topology
+dd-refinement-flow
+dd-server-host-internal-structure
+dd-security-request-decision-flow

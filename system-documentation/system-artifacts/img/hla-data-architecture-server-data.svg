@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1500" height="860" viewBox="0 0 1500 860">
+  <defs>
+    <style>
+      .box { fill: #ffffff; stroke: #000000; stroke-width: 2; }
+      .text { fill: #000000; font-family: "Trebuchet MS", Verdana, Arial, sans-serif; font-size: 19px; }
+      .title { fill: #000000; font-family: "Trebuchet MS", Verdana, Arial, sans-serif; font-size: 24px; font-weight: 700; }
+      .note { fill: #000000; font-family: "Trebuchet MS", Verdana, Arial, sans-serif; font-size: 16px; }
+      .line { fill: none; stroke: #000000; stroke-width: 2; }
+    </style>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#000000"/>
+    </marker>
+  </defs>
+
+  <rect x="0" y="0" width="1500" height="860" fill="#ffffff"/>
+  <text class="title" x="750" y="42" text-anchor="middle">HLA Data Architecture - Server Data Flows</text>
+
+  <rect class="box" x="560" y="80" width="380" height="64"/>
+  <text class="text" x="750" y="120" text-anchor="middle">HLA-SERVER-HOST</text>
+
+  <rect class="box" x="80" y="230" width="260" height="64"/>
+  <text class="text" x="210" y="270" text-anchor="middle">HLA-SECURITY</text>
+  <rect class="box" x="390" y="230" width="260" height="64"/>
+  <text class="text" x="520" y="270" text-anchor="middle">HLA-STORAGE</text>
+  <rect class="box" x="700" y="230" width="260" height="64"/>
+  <text class="text" x="830" y="270" text-anchor="middle">HLA-INGEST</text>
+  <rect class="box" x="1010" y="230" width="260" height="64"/>
+  <text class="text" x="1140" y="270" text-anchor="middle">HLA-DOMAIN</text>
+
+  <rect class="box" x="450" y="430" width="260" height="64"/>
+  <text class="text" x="580" y="470" text-anchor="middle">HLA-OCR</text>
+  <rect class="box" x="790" y="430" width="260" height="64"/>
+  <text class="text" x="920" y="470" text-anchor="middle">HLA-SEARCH</text>
+
+  <line class="line" x1="750" y1="144" x2="210" y2="230" marker-end="url(#arrow)"/>
+  <line class="line" x1="750" y1="144" x2="520" y2="230" marker-end="url(#arrow)"/>
+  <line class="line" x1="750" y1="144" x2="830" y2="230" marker-end="url(#arrow)"/>
+  <line class="line" x1="750" y1="144" x2="1140" y2="230" marker-end="url(#arrow)"/>
+  <line class="line" x1="520" y1="294" x2="830" y2="230" marker-end="url(#arrow)"/>
+  <line class="line" x1="830" y1="294" x2="1140" y2="230" marker-end="url(#arrow)"/>
+  <line class="line" x1="830" y1="294" x2="580" y2="430" marker-end="url(#arrow)"/>
+  <line class="line" x1="580" y1="494" x2="920" y2="430" marker-end="url(#arrow)"/>
+  <line class="line" x1="920" y1="494" x2="1140" y2="230" marker-end="url(#arrow)"/>
+
+  <text class="note" x="750" y="814" text-anchor="middle">Input connector: HLA-SERVER-HOST from User and Access Path diagram</text>
+  <text class="note" x="750" y="838" text-anchor="middle">Output connectors: HLA-SECURITY and HLA-SERVER-HOST -> Audit and Reader Handoff diagram</text>
+</svg>

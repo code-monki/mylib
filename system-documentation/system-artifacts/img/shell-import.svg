@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="700" viewBox="0 0 960 700">
+  <title>MyLib Shell - Import dialog (S-06) wireframe</title>
+  <defs>
+    <style><![CDATA[
+      .bg { fill: #f0f0f0; }
+      .app { fill: #ffffff; stroke: #999999; stroke-width: 1; }
+      .overlay { fill: #000000; fill-opacity: 0.2; }
+      .dialog { fill: #ffffff; stroke: #333333; stroke-width: 1.5; }
+      .field { fill: #ffffff; stroke: #888888; stroke-width: 1.2; }
+      .panel { fill: #fafafa; stroke: #bbbbbb; stroke-width: 1; }
+      .btn { fill: #333333; }
+      .btn-secondary { fill: #f7f7f7; stroke: #666666; stroke-width: 1; }
+      .title { font-family: system-ui, -apple-system, sans-serif; font-size: 16px; font-weight: 600; fill: #111111; }
+      .label { font-family: system-ui, -apple-system, sans-serif; font-size: 12px; fill: #222222; }
+      .hint { font-family: system-ui, -apple-system, sans-serif; font-size: 11px; fill: #666666; }
+      .btn-text { font-family: system-ui, -apple-system, sans-serif; font-size: 12px; font-weight: 600; fill: #ffffff; }
+      .btn-text-dark { font-family: system-ui, -apple-system, sans-serif; font-size: 12px; font-weight: 600; fill: #222222; }
+      .wire-caption { font-family: system-ui, -apple-system, sans-serif; font-size: 11px; fill: #444444; font-style: italic; }
+    ]]></style>
+  </defs>
+  <rect class="bg" width="960" height="700"/>
+  <!-- App shell behind modal -->
+  <rect class="app" x="24" y="24" width="912" height="652" rx="6"/>
+  <rect class="overlay" x="24" y="24" width="912" height="652" rx="6"/>
+
+  <!-- Import dialog -->
+  <rect class="dialog" x="120" y="60" width="720" height="600" rx="8"/>
+  <text class="title" x="148" y="94">Import PDF</text>
+  <text class="hint" x="812" y="94" text-anchor="end">S-06 wireframe (modal)</text>
+
+  <!-- File chooser -->
+  <text class="label" x="148" y="128">Source file</text>
+  <rect class="field" x="148" y="136" width="520" height="34" rx="4"/>
+  <text class="hint" x="160" y="157">/path/to/document.pdf</text>
+  <rect class="btn-secondary" x="680" y="136" width="132" height="34" rx="4"/>
+  <text class="btn-text-dark" x="746" y="157" text-anchor="middle">Browse...</text>
+
+  <!-- Metadata fields -->
+  <text class="label" x="148" y="200">Bibliographic metadata</text>
+  <rect class="panel" x="148" y="208" width="664" height="258" rx="6"/>
+
+  <text class="label" x="164" y="234">Title</text>
+  <rect class="field" x="164" y="240" width="632" height="30" rx="4"/>
+
+  <text class="label" x="164" y="286">Author(s)</text>
+  <rect class="field" x="164" y="292" width="308" height="30" rx="4"/>
+  <text class="label" x="488" y="286">Publisher</text>
+  <rect class="field" x="488" y="292" width="308" height="30" rx="4"/>
+
+  <text class="label" x="164" y="338">Publication date</text>
+  <rect class="field" x="164" y="344" width="148" height="30" rx="4"/>
+  <text class="label" x="328" y="338">Edition</text>
+  <rect class="field" x="328" y="344" width="144" height="30" rx="4"/>
+  <text class="label" x="488" y="338">ISBN</text>
+  <rect class="field" x="488" y="344" width="308" height="30" rx="4"/>
+
+  <text class="label" x="164" y="390">Tags</text>
+  <rect class="field" x="164" y="396" width="632" height="30" rx="4"/>
+  <text class="hint" x="164" y="444">Missing fields are allowed; user can save minimal metadata and edit later.</text>
+
+  <!-- Optional lookup section -->
+  <text class="label" x="148" y="494">Optional metadata lookup (candidates - user must apply)</text>
+  <rect class="panel" x="148" y="502" width="664" height="78" rx="6"/>
+  <text class="hint" x="164" y="526">Open Library / Crossref / LoC (layered). No Google in default build.</text>
+  <text class="hint" x="164" y="542">Results are suggestions only; user edits form, then Start import.</text>
+  <text class="hint" x="164" y="558">If network or provider fails, manual entry still works.</text>
+
+  <!-- Action row -->
+  <rect class="btn-secondary" x="544" y="598" width="128" height="36" rx="6"/>
+  <text class="btn-text-dark" x="608" y="621" text-anchor="middle">Cancel</text>
+  <rect class="btn" x="684" y="598" width="128" height="36" rx="6"/>
+  <text class="btn-text" x="748" y="621" text-anchor="middle">Start import</text>
+
+  <text class="wire-caption" x="480" y="684" text-anchor="middle">Wireframe S-06 - file picker + metadata fields + optional external lookup block</text>
+</svg>

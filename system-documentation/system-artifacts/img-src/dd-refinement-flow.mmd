@@ -1,13 +1,13 @@
-%%{init: {"theme": "base", "themeVariables": {"background": "#ffffff", "primaryColor": "#ffffff", "primaryTextColor": "#111111", "primaryBorderColor": "#333333", "lineColor": "#333333", "secondaryColor": "#f7f7f7", "tertiaryColor": "#ffffff", "clusterBkg": "#ffffff", "clusterBorder": "#777777", "edgeLabelBackground": "#ffffff"}}}%%
+%%{init: {"theme": "base", "flowchart": {"htmlLabels": false}, "themeVariables": {"background": "#ffffff", "primaryColor": "#ffffff", "primaryTextColor": "#111111", "primaryBorderColor": "#333333", "lineColor": "#333333", "secondaryColor": "#f7f7f7", "tertiaryColor": "#ffffff", "clusterBkg": "#ffffff", "clusterBorder": "#777777", "edgeLabelBackground": "#ffffff"}}}%%
 flowchart TB
   subgraph Diagram["DD refinement flow"]
     direction TB
     SRS["Approved SRS v0.9"]
     HLA["Approved HLA v0.1.2"]
-    DD["DD v0.1 draft"]
-    RTM["RTM v0.1 draft"]
-    TestPlan["Future test plan"]
-    Impl["Implementation blocked"]
+    DD["Approved DD v0.1"]
+    RTM["Approved RTM v0.1"]
+    TestPlan["Approved Test Plan v0.1"]
+    Impl["Implementation entry via lifecycle gates"]
 
     SRS --> HLA
     HLA --> DD

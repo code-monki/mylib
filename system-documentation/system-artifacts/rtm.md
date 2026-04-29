@@ -9,20 +9,20 @@ Lifecycle authority:
 
 This artifact is populated from SRS requirement IDs. Architectural columns are
 populated from approved HLA v0.1.2; design columns are mapped to DD v0.1
-component sections and continue to be refined until DD approval.
+component sections (**§4.x**) and cross-cutting data/API contracts (**§5.1.3**, **§5.2**, **§5.3.8**–**§5.3.19**).
 -->
 
 # Requirements Traceability Matrix (RTM)
 
 **Project Name:** MyLib  
 **Version:** 0.1  
-**Date (YYYY-MM-DD):** 2026-04-26  
-**Maintained By:** Charles McKnight (draft; maintainers may revise)  
-**Status:** Draft  
+**Date (YYYY-MM-DD):** 2026-04-28  
+**Maintained By:** Charles McKnight (maintainers may revise)  
+**Status:** Approved  
 **Requirement Version Reference:** SRS v0.9 **Approved** ([`srs.md`](srs.md "Srs"); header dated 2026-04-11; approved 2026-04-06)  
 **Architecture Version Reference:** HLA v0.1.2 **Approved** ([`hla.md`](hla.md "Hla"); approved 2026-04-25)  
-**Design Version Reference:** DD v0.1 **Draft** ([`dd.md`](dd.md "Dd"))  
-**Test Plan Version Reference:** N/A (test plan not yet drafted)  
+**Design Version Reference:** DD v0.1 **Approved** ([`dd.md`](dd.md "Dd"); approved 2026-04-28; data/API contracts **§5.1.3**, **§5.2**, **§5.3.8**–**§5.3.19**)  
+**Test Plan Version Reference:** Test Plan v0.1 **Approved** ([`test-plan.md`](test-plan.md "Test Plan"); approved 2026-04-28)  
 
 ---
 
@@ -32,13 +32,13 @@ Confirm:
 
 - Requirements approved? **Yes** — SRS **v0.9**, **2026-04-06**  
 - Architecture approved? **Yes** — **[`hla.md`](hla.md "Hla")** **v0.1.2**, approved **2026-04-25**  
-- Detailed Design approved? **No** — [`dd.md`](dd.md "Dd") v0.1 draft with initial component decomposition (**§4.1–§4.12**)  
-- Test Plan aligned? **No**  
+- Detailed Design approved? **Yes** — [`dd.md`](dd.md "Dd") v0.1 approved **2026-04-28** (component **§4.x**; contracts **§5.1.3** / **§5.2** / **§5.3.8**–**§5.3.19**)  
+- Test Plan aligned? **Yes (Approved)** — [`test-plan.md`](test-plan.md "Test Plan") v0.1 approved **2026-04-28**  
 - Advancement to **High-Level Architecture** work authorized? **Yes** — **2026-04-06** (SRS **§16** / **§Approval**; **LIFECYCLE.md** §5)  
 - Advancement to **Detailed Design** authorized? **Yes** — HLA **v0.1.2** approved **2026-04-25**  
-- Advancement to **implementation** authorized? **No** — per **LIFECYCLE.md** until **DD** is approved and RTM readiness is satisfied  
+- Advancement to **implementation** authorized? **Yes** — maintainer/project-owner phase-gate approval recorded **2026-04-29**; Omnigraffle diagram refresh is non-blocking cleanup per **LIFECYCLE.md**  
 
-If any answer is “No” where a phase requires a “Yes,” traceability validation is incomplete for that phase. This matrix is a **scaffold**: every SRS requirement has a row; downstream IDs are filled as HLA, DD, and tests land.
+If any answer is “No” where a phase requires a “Yes,” traceability validation is incomplete for that phase. This matrix is a **scaffold**: every SRS requirement has a row; downstream IDs are filled as HLA, DD, and tests land. **Per-row `DD` links** in §3.1 point to **component** design (**§4.x**). **HTTP/JSON, logical persistence, and service-interface contracts** are authoritative in **DD §5.1.3**, **§5.2**, and **§5.3.8**–**§5.3.19** (see **§2.1**).
 
 ---
 
@@ -56,6 +56,10 @@ The RTM SHALL ensure:
 
 Traceability SHALL be bidirectional and complete.
 
+## 2.1 DD §5 data and API contract layer (cross-cutting)
+
+The §3.1 **DD** column lists **HLA-faithful component sections** (**DD §4.1**–**§4.12**). Cross-cutting **data design and v1 API contracts** (durable identity/RBAC model, message envelope, route index, wire JSON, C++ service shapes) are defined in **DD `§5.1.3`**, **`§5.2`**, **`§5.3.1`–`§5.3.6`**, **`§5.3.7`**, **`§5.3.8`–`§5.3.18`**, and **`§5.3.19`**. Test and implementation validation SHALL use those subsections as the **contract authority** for automated contract tests, per **Test Plan §2** and **§4.3**.
+
 ---
 
 # 3. Core Traceability Matrix
@@ -69,7 +73,7 @@ Traceability SHALL be bidirectional and complete.
 | <nobr>[FR-001](./srs.md#fr-001--catalog-records "FR-001")</nobr> | FR | <nobr>[HLA-DOMAIN](./hla.md#6-major-components "HLA-DOMAIN")</nobr> | <nobr>[DD §4.4](./dd.md#44-hla-domain "DD §4.4")</nobr> | <nobr>Planned</nobr> |
 | <nobr>[FR-002](./srs.md#fr-002--metadata-fields "FR-002")</nobr> | FR | <nobr>[HLA-DOMAIN](./hla.md#6-major-components "HLA-DOMAIN")</nobr> | <nobr>[DD §4.4](./dd.md#44-hla-domain "DD §4.4")</nobr> | <nobr>Planned</nobr> |
 | <nobr>[FR-003](./srs.md#fr-003--tags "FR-003")</nobr> | FR | <nobr>[HLA-DOMAIN](./hla.md#6-major-components "HLA-DOMAIN")</nobr> | <nobr>[DD §4.4](./dd.md#44-hla-domain "DD §4.4")</nobr> | <nobr>Planned</nobr> |
-| <nobr>[FR-004](./srs.md#fr-004--deliberate-import "FR-004")</nobr> | FR | <nobr>[HLA-INGEST](./hla.md#6-major-components "HLA-INGEST")</nobr>, <nobr>[HLA-SECURITY](./hla.md#6-major-components "HLA-SECURITY")</nobr> | <nobr>[DD §4.5](./dd.md#45-hla-ingest "DD §4.5")</nobr>, <nobr>[DD §4.8](./dd.md#48-hla-security "DD §4.8")</nobr> | <nobr>Planned</nobr> |
+| <nobr>[FR-004](./srs.md#fr-004--deliberate-import "FR-004")</nobr> | FR | <nobr>[HLA-INGEST](./hla.md#6-major-components "HLA-INGEST")</nobr>, <nobr>[HLA-SHELL](./hla.md#6-major-components "HLA-SHELL")</nobr>, <nobr>[HLA-SECURITY](./hla.md#6-major-components "HLA-SECURITY")</nobr> | <nobr>[DD §4.1.2.1](./dd.md#dd-4121-metadata-enrichment "DD §4.1.2.1")</nobr>, <nobr>[DD §4.5](./dd.md#45-hla-ingest "DD §4.5")</nobr>, <nobr>[DD §4.8](./dd.md#48-hla-security "DD §4.8")</nobr> | <nobr>Planned</nobr> |
 | <nobr>[FR-005](./srs.md#fr-005--supported-document-types-v1 "FR-005")</nobr> | FR | <nobr>[HLA-INGEST](./hla.md#6-major-components "HLA-INGEST")</nobr> | <nobr>[DD §4.5](./dd.md#45-hla-ingest "DD §4.5")</nobr> | <nobr>Planned</nobr> |
 | <nobr>[FR-006](./srs.md#fr-006--full-text-indexing-when-permitted "FR-006")</nobr> | FR | <nobr>[HLA-SEARCH](./hla.md#6-major-components "HLA-SEARCH")</nobr> | <nobr>[DD §4.6](./dd.md#46-hla-search "DD §4.6")</nobr> | <nobr>Planned</nobr> |
 | <nobr>[FR-007](./srs.md#fr-007--full-text-search "FR-007")</nobr> | FR | <nobr>[HLA-SEARCH](./hla.md#6-major-components "HLA-SEARCH")</nobr> | <nobr>[DD §4.6](./dd.md#46-hla-search "DD §4.6")</nobr> | <nobr>Planned</nobr> |
@@ -244,11 +248,11 @@ Detailed traceability is provided as collapsible cards to improve readability in
       <td align="left"><strong>Type</strong></td>
       <td align="left">FR</td>
       <td align="left"><strong>HLA ID(s)</strong></td>
-      <td align="left"><nobr>[HLA-INGEST](./hla.md#6-major-components "HLA-INGEST")</nobr>, <nobr>[HLA-SECURITY](./hla.md#6-major-components "HLA-SECURITY")</nobr></td>
+      <td align="left"><nobr>[HLA-INGEST](./hla.md#6-major-components "HLA-INGEST")</nobr>, <nobr>[HLA-SHELL](./hla.md#6-major-components "HLA-SHELL")</nobr>, <nobr>[HLA-SECURITY](./hla.md#6-major-components "HLA-SECURITY")</nobr></td>
     </tr>
     <tr>
       <td align="left"><strong>DD Ref(s)</strong></td>
-      <td align="left"><nobr>[DD §4.5](./dd.md#45-hla-ingest "DD §4.5")</nobr>, <nobr>[DD §4.8](./dd.md#48-hla-security "DD §4.8")</nobr></td>
+      <td align="left"><nobr>[DD §4.1.2.1](./dd.md#dd-4121-metadata-enrichment "DD §4.1.2.1")</nobr>, <nobr>[DD §4.5](./dd.md#45-hla-ingest "DD §4.5")</nobr>, <nobr>[DD §4.8](./dd.md#48-hla-security "DD §4.8")</nobr></td>
       <td align="left"><strong>Validation Status</strong></td>
       <td align="left"><nobr>Planned</nobr></td>
     </tr>
@@ -256,7 +260,7 @@ Detailed traceability is provided as collapsible cards to improve readability in
       <td align="left"><strong>Implementation Unit</strong></td>
       <td align="left"><nobr>TBD</nobr></td>
       <td align="left"><strong>Test Case ID</strong></td>
-      <td align="left"><nobr>TBD</nobr></td>
+      <td align="left"><nobr>TP-INGEST-001, TP-INGEST-004</nobr></td>
     </tr>
     <tr>
       <td align="left"><strong>Packaging Ref</strong></td>
@@ -266,7 +270,7 @@ Detailed traceability is provided as collapsible cards to improve readability in
     </tr>
     <tr>
       <td align="left"><strong>Evidence</strong></td>
-      <td align="left" colspan="3">Ingest and security decomposition in progress</td>
+      <td align="left" colspan="3">Ingest and security decomposition in progress; import dialog metadata assist per <nobr>[DD §4.1.2.1](./dd.md#dd-4121-metadata-enrichment "DD §4.1.2.1")</nobr> (see <nobr>[`shell-ui-ux-design.md`](shell-ui-ux-design.md "Shell UI/UX Design")</nobr> <strong>S-06</strong>)</td>
     </tr>
   </tbody>
 </table>
@@ -978,7 +982,7 @@ Detailed traceability is provided as collapsible cards to improve readability in
       <td align="left"><strong>Implementation Unit</strong></td>
       <td align="left"><nobr>TBD</nobr></td>
       <td align="left"><strong>Test Case ID</strong></td>
-      <td align="left"><nobr>TBD</nobr></td>
+      <td align="left"><nobr>TP-INGEST-003, TP-OCR-001, TP-OCR-003</nobr></td>
     </tr>
     <tr>
       <td align="left"><strong>Packaging Ref</strong></td>
@@ -1206,7 +1210,7 @@ Detailed traceability is provided as collapsible cards to improve readability in
       <td align="left"><strong>Implementation Unit</strong></td>
       <td align="left"><nobr>TBD</nobr></td>
       <td align="left"><strong>Test Case ID</strong></td>
-      <td align="left"><nobr>TBD</nobr></td>
+      <td align="left"><nobr>TP-OPS-002</nobr></td>
     </tr>
     <tr>
       <td align="left"><strong>Packaging Ref</strong></td>
@@ -1548,7 +1552,7 @@ Detailed traceability is provided as collapsible cards to improve readability in
       <td align="left"><strong>Implementation Unit</strong></td>
       <td align="left"><nobr>TBD</nobr></td>
       <td align="left"><strong>Test Case ID</strong></td>
-      <td align="left"><nobr>TBD</nobr></td>
+      <td align="left"><nobr>TP-SEARCH-001</nobr></td>
     </tr>
     <tr>
       <td align="left"><strong>Packaging Ref</strong></td>
@@ -1586,7 +1590,7 @@ Detailed traceability is provided as collapsible cards to improve readability in
       <td align="left"><strong>Implementation Unit</strong></td>
       <td align="left"><nobr>TBD</nobr></td>
       <td align="left"><strong>Test Case ID</strong></td>
-      <td align="left"><nobr>TBD</nobr></td>
+      <td align="left"><nobr>TP-SEARCH-003, TP-OCR-002</nobr></td>
     </tr>
     <tr>
       <td align="left"><strong>Packaging Ref</strong></td>
@@ -1662,7 +1666,7 @@ Detailed traceability is provided as collapsible cards to improve readability in
       <td align="left"><strong>Implementation Unit</strong></td>
       <td align="left"><nobr>TBD</nobr></td>
       <td align="left"><strong>Test Case ID</strong></td>
-      <td align="left"><nobr>TBD</nobr></td>
+      <td align="left"><nobr>TP-CATALOG-003</nobr></td>
     </tr>
     <tr>
       <td align="left"><strong>Packaging Ref</strong></td>
@@ -1814,7 +1818,7 @@ Detailed traceability is provided as collapsible cards to improve readability in
       <td align="left"><strong>Implementation Unit</strong></td>
       <td align="left"><nobr>TBD</nobr></td>
       <td align="left"><strong>Test Case ID</strong></td>
-      <td align="left"><nobr>TBD</nobr></td>
+      <td align="left"><nobr>TP-PKG-001, TP-PKG-002</nobr></td>
     </tr>
     <tr>
       <td align="left"><strong>Packaging Ref</strong></td>
@@ -1928,7 +1932,7 @@ Detailed traceability is provided as collapsible cards to improve readability in
       <td align="left"><strong>Implementation Unit</strong></td>
       <td align="left"><nobr>TBD</nobr></td>
       <td align="left"><strong>Test Case ID</strong></td>
-      <td align="left"><nobr>TBD</nobr></td>
+      <td align="left"><nobr>TP-NFR-003</nobr></td>
     </tr>
     <tr>
       <td align="left"><strong>Packaging Ref</strong></td>
@@ -1966,7 +1970,7 @@ Detailed traceability is provided as collapsible cards to improve readability in
       <td align="left"><strong>Implementation Unit</strong></td>
       <td align="left"><nobr>TBD</nobr></td>
       <td align="left"><strong>Test Case ID</strong></td>
-      <td align="left"><nobr>SEC-LOG-001 (DD provisional)</nobr></td>
+      <td align="left"><nobr>TP-OPS-002</nobr></td>
     </tr>
     <tr>
       <td align="left"><strong>Packaging Ref</strong></td>
@@ -1976,7 +1980,7 @@ Detailed traceability is provided as collapsible cards to improve readability in
     </tr>
     <tr>
       <td align="left"><strong>Evidence</strong></td>
-      <td align="left" colspan="3">Security/audit/obslog/server-host decomposition in progress; provisional test-ID mapping tracked in §10</td>
+      <td align="left" colspan="3">Security/audit/obslog/server-host decomposition in progress; mapped to approved Test Plan v0.1 case TP-OPS-002</td>
     </tr>
   </tbody>
 </table>
@@ -2004,7 +2008,7 @@ Detailed traceability is provided as collapsible cards to improve readability in
       <td align="left"><strong>Implementation Unit</strong></td>
       <td align="left"><nobr>TBD</nobr></td>
       <td align="left"><strong>Test Case ID</strong></td>
-      <td align="left"><nobr>TBD</nobr></td>
+      <td align="left"><nobr>TP-PKG-002</nobr></td>
     </tr>
     <tr>
       <td align="left"><strong>Packaging Ref</strong></td>
@@ -2125,7 +2129,7 @@ Each NFR SHALL explicitly map to architectural mechanism, design enforcement, te
     </tr>
     <tr>
       <td align="left"><strong>Test</strong></td>
-      <td align="left"><nobr>TBD</nobr></td>
+      <td align="left"><nobr>TP-PKG-001, TP-PKG-002</nobr></td>
       <td align="left"><strong>Pkg Impact</strong></td>
       <td align="left"><nobr>TBD</nobr></td>
     </tr>
@@ -2203,7 +2207,7 @@ Each NFR SHALL explicitly map to architectural mechanism, design enforcement, te
     </tr>
     <tr>
       <td align="left"><strong>Test</strong></td>
-      <td align="left"><nobr>TBD</nobr></td>
+      <td align="left"><nobr>TP-PKG-001, TP-PKG-002</nobr></td>
       <td align="left"><strong>Pkg Impact</strong></td>
       <td align="left"><nobr>TBD</nobr></td>
     </tr>
@@ -2281,7 +2285,7 @@ Each NFR SHALL explicitly map to architectural mechanism, design enforcement, te
     </tr>
     <tr>
       <td align="left"><strong>Test</strong></td>
-      <td align="left"><nobr>TBD</nobr></td>
+      <td align="left"><nobr>TP-NFR-003</nobr></td>
       <td align="left"><strong>Pkg Impact</strong></td>
       <td align="left"><nobr>TBD</nobr></td>
     </tr>
@@ -2307,7 +2311,7 @@ Each NFR SHALL explicitly map to architectural mechanism, design enforcement, te
     </tr>
     <tr>
       <td align="left"><strong>Test</strong></td>
-      <td align="left"><nobr>TBD</nobr></td>
+      <td align="left"><nobr>TP-OPS-002</nobr></td>
       <td align="left"><strong>Pkg Impact</strong></td>
       <td align="left"><nobr>TBD</nobr></td>
     </tr>
@@ -2333,7 +2337,7 @@ Each NFR SHALL explicitly map to architectural mechanism, design enforcement, te
     </tr>
     <tr>
       <td align="left"><strong>Test</strong></td>
-      <td align="left"><nobr>TBD</nobr></td>
+      <td align="left"><nobr>TP-PKG-002</nobr></td>
       <td align="left"><strong>Pkg Impact</strong></td>
       <td align="left"><nobr>TBD</nobr></td>
     </tr>
@@ -2649,28 +2653,28 @@ Failure blocks advancement.
 
 # 10. Provisional-to-Canonical Test ID Mapping
 
-Use this table to track one-to-one remapping from DD provisional IDs to canonical test-plan IDs when the formal test plan is published.
+Use this table to track one-to-one remapping from DD provisional IDs to canonical **`TP-*`** IDs in the approved [`test-plan.md`](test-plan.md "Test Plan") (seed catalog **§5.1**).
 
 | DD Provisional ID | Canonical Test Plan ID | Mapping Status | Owner | Target Date | Notes |
 | --- | --- | --- | --- | --- | --- |
-| `SEC-AUTH-001` | `TBD` | `Pending` | `Security Lead` | `By test-plan draft approval` | Trace target: `FR-016` |
-| `SEC-AUTH-002` | `TBD` | `Pending` | `Security Lead` | `By test-plan draft approval` | Trace target: `FR-016` |
-| `SEC-AUTH-003` | `TBD` | `Pending` | `Security Lead` | `By test-plan draft approval` | Trace targets: `FR-016`, `NFR-002` |
-| `SEC-JWKS-001` | `TBD` | `Pending` | `Security Lead` | `By test-plan draft approval` | Trace target: `FR-035` |
-| `SEC-JWKS-002` | `TBD` | `Pending` | `Security Lead` | `By test-plan draft approval` | Trace target: `FR-035` |
-| `SEC-JWKS-003` | `TBD` | `Pending` | `Security Lead` | `By test-plan draft approval` | Trace target: `FR-035` |
-| `SEC-JWKS-004` | `TBD` | `Pending` | `Security Lead` | `By test-plan draft approval` | Trace target: `FR-035` |
-| `SEC-REFRESH-001` | `TBD` | `Pending` | `Security Lead` | `By test-plan draft approval` | Trace target: `FR-035` |
-| `SEC-REFRESH-002` | `TBD` | `Pending` | `Security Lead` | `By test-plan draft approval` | Trace target: `FR-035` |
-| `SEC-PASS-001` | `TBD` | `Pending` | `Security Lead` | `By test-plan draft approval` | Trace target: `FR-027` |
-| `SEC-PASS-002` | `TBD` | `Pending` | `Security Lead` | `By test-plan draft approval` | Trace target: `FR-027` |
-| `SEC-PASS-003` | `TBD` | `Pending` | `Security Lead` | `By test-plan draft approval` | Trace target: `FR-033` |
-| `SEC-STATE-001` | `TBD` | `Pending` | `Security Lead` | `By test-plan draft approval` | Trace target: `FR-018` |
-| `SEC-RBAC-001` | `TBD` | `Pending` | `Security Lead` | `By test-plan draft approval` | Trace targets: `FR-017`, `FR-018`, `FR-031`, `NFR-002` |
-| `SEC-ADMIN-001` | `TBD` | `Pending` | `Security Lead` | `By test-plan draft approval` | Trace target: `FR-031` |
-| `SEC-BOOT-001` | `TBD` | `Pending` | `Security Lead` | `By test-plan draft approval` | Trace target: `FR-032` |
-| `SEC-THROTTLE-001` | `TBD` | `Pending` | `Security Lead` | `By test-plan draft approval` | Trace target: `FR-034` |
-| `SEC-LOG-001` | `TBD` | `Pending` | `QA Lead` | `By test-plan draft approval` | Trace target: `NFR-008` |
+| `SEC-AUTH-001` | `TP-AUTH-001` | `Mapped` | `Security Lead` | `2026-04-26` | Trace target: `FR-016` |
+| `SEC-AUTH-002` | `TP-AUTH-002` | `Mapped` | `Security Lead` | `2026-04-26` | Trace target: `FR-016` |
+| `SEC-AUTH-003` | `TP-AUTH-003` | `Mapped` | `Security Lead` | `2026-04-26` | Trace targets: `FR-016`, `NFR-002` |
+| `SEC-JWKS-001` | `TP-AUTH-007` | `Mapped` | `Security Lead` | `2026-04-26` | Trace target: `FR-035` |
+| `SEC-JWKS-002` | `TP-AUTH-008` | `Mapped` | `Security Lead` | `2026-04-26` | Trace target: `FR-035` |
+| `SEC-JWKS-003` | `TP-AUTH-007` | `Mapped` | `Security Lead` | `2026-04-26` | Trace target: `FR-035` |
+| `SEC-JWKS-004` | `TP-AUTH-008` | `Mapped` | `Security Lead` | `2026-04-26` | Trace target: `FR-035` |
+| `SEC-REFRESH-001` | `TP-AUTH-005` | `Mapped` | `Security Lead` | `2026-04-26` | Trace target: `FR-035` |
+| `SEC-REFRESH-002` | `TP-AUTH-005` | `Mapped` | `Security Lead` | `2026-04-26` | Trace target: `FR-035` |
+| `SEC-PASS-001` | `TP-AUTH-002` | `Mapped` | `Security Lead` | `2026-04-26` | Trace target: `FR-027` |
+| `SEC-PASS-002` | `TP-AUTH-006` | `Mapped` | `Security Lead` | `2026-04-26` | Trace target: `FR-027` |
+| `SEC-PASS-003` | `TP-AUTH-006` | `Mapped` | `Security Lead` | `2026-04-26` | Trace target: `FR-033` |
+| `SEC-STATE-001` | `TP-ADMIN-003` | `Mapped` | `Security Lead` | `2026-04-26` | Trace target: `FR-018` |
+| `SEC-RBAC-001` | `TP-ADMIN-003` | `Mapped` | `Security Lead` | `2026-04-26` | Trace targets: `FR-017`, `FR-018`, `FR-031`, `NFR-002` |
+| `SEC-ADMIN-001` | `TP-ADMIN-001` | `Mapped` | `Security Lead` | `2026-04-26` | Trace target: `FR-031` |
+| `SEC-BOOT-001` | `TP-ADMIN-002` | `Mapped` | `Security Lead` | `2026-04-26` | Trace target: `FR-032` |
+| `SEC-THROTTLE-001` | `TP-AUTH-004` | `Mapped` | `Security Lead` | `2026-04-26` | Trace target: `FR-034` |
+| `SEC-LOG-001` | `TP-OPS-002` | `Mapped` | `QA Lead` | `2026-04-26` | Trace target: `NFR-008` |
 
 Mapping status conventions:
 
@@ -2698,9 +2702,11 @@ Release without finalized RTM snapshot is prohibited.
 
 # 12. Approval
 
-Approved By: *— pending —*  
-Role:  
-Date:  
+The RTM **document** is **Approved** as the traceability baseline; per-row **Validation Status** and **Evidence** cells advance with implementation and test execution.
+
+Approved By: Charles McKnight  
+Role: Maintainer  
+Date (YYYY-MM-DD): 2026-04-28  
 Version Incremented: No  
 
 RTM validation required before:
@@ -2712,4 +2718,4 @@ RTM validation required before:
 
 ---
 
-End of Requirements Traceability Matrix (draft)
+End of Requirements Traceability Matrix

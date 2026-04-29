@@ -2,6 +2,7 @@
 #include "storage/in_memory_catalog_repository.hpp"
 
 #include <iostream>
+#include <set>
 #include <string>
 
 namespace {
@@ -51,6 +52,14 @@ void test_metadata_hints_are_user_gated() {
     const auto draft = service.create_draft("imp-003", fixture_path("tests/fixtures/pdfs/normal.pdf"));
     expect(draft.has_value(), "draft should be created");
     expect(!draft->hints.empty(), "draft should include metadata hints");
+    std::set<std::string> sources;
+    for (const auto& hint : draft->hints) {
+        sources.insert(hint.source);
+    }
+    expect(sources.contains("open-library"), "draft should include Open Library suggestion source");
+    expect(sources.contains("crossref"), "draft should include Crossref suggestion source");
+    expect(sources.contains("library-of-congress"), "draft should include Library of Congress source");
+    expect(!sources.contains("google-books"), "draft should not include Google Books source");
 
     auto no_hint = service.commit_draft(*draft, true, false);
     expect(no_hint.status == mylib::ingest::ImportCommitStatus::imported, "import without hints should succeed");

@@ -1,4 +1,4 @@
-%%{init: {"theme": "base", "themeVariables": {"background": "#ffffff", "primaryColor": "#ffffff", "primaryTextColor": "#111111", "primaryBorderColor": "#333333", "lineColor": "#333333", "secondaryColor": "#f7f7f7", "tertiaryColor": "#ffffff", "clusterBkg": "#ffffff", "clusterBorder": "#777777", "edgeLabelBackground": "#ffffff"}}}%%
+%%{init: {"theme": "base", "flowchart": {"htmlLabels": false}, "themeVariables": {"background": "#ffffff", "primaryColor": "#ffffff", "primaryTextColor": "#111111", "primaryBorderColor": "#333333", "lineColor": "#333333", "secondaryColor": "#f7f7f7", "tertiaryColor": "#ffffff", "clusterBkg": "#ffffff", "clusterBorder": "#777777", "edgeLabelBackground": "#ffffff"}}}%%
 flowchart TB
   subgraph Diagram["HLA-SECURITY request decision flow"]
     direction TB
@@ -18,7 +18,7 @@ flowchart TB
     Policy --> Decision
     Decision -->|yes| Domain
     Decision -->|no| Deny
-    Decision --> Audit
+    Decision -->|if required| Audit
     Deny --> Obs
   end
   style Diagram fill:#ffffff,stroke:#ffffff,color:#111111

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="640" viewBox="0 0 960 640">
+  <title>MyLib Shell - Library browse S-03 collapsed sidebar wireframe</title>
+  <defs>
+    <style><![CDATA[
+      .bg { fill: #f0f0f0; }
+      .sidebar { fill: #e4e4e4; stroke: #333333; stroke-width: 1.5; }
+      .topbar { fill: #ffffff; stroke: #333333; stroke-width: 1.5; }
+      .content { fill: #ffffff; stroke: #333333; stroke-width: 1.5; }
+      .nav-item { fill: none; stroke: #888888; stroke-width: 1; }
+      .nav-sel { fill: #d8d8d8; stroke: #333333; stroke-width: 1.5; }
+      .label { font-family: system-ui, -apple-system, sans-serif; font-size: 12px; fill: #222222; }
+      .nav-glyph { font-family: system-ui, -apple-system, sans-serif; font-size: 14px; font-weight: 600; fill: #111111; }
+      .hint { font-family: system-ui, -apple-system, sans-serif; font-size: 11px; fill: #666666; }
+      .toolbar { fill: #fafafa; stroke: #bbbbbb; stroke-width: 1; }
+      .row { fill: none; stroke: #cccccc; stroke-width: 1; }
+      .wire-caption { font-family: system-ui, -apple-system, sans-serif; font-size: 11px; fill: #444444; font-style: italic; }
+    ]]></style>
+  </defs>
+  <rect class="bg" width="960" height="640"/>
+  <!-- Icon rail 64px -->
+  <rect class="sidebar" x="0" y="0" width="64" height="640"/>
+  <text class="label" x="32" y="28" text-anchor="middle" font-size="10" font-weight="600">M</text>
+  <rect class="toolbar" x="38" y="8" width="18" height="18" rx="3"/>
+  <text class="hint" x="47" y="21" text-anchor="middle" font-size="9">&gt;</text>
+  <rect class="nav-sel" x="8" y="44" width="48" height="48" rx="8"/>
+  <rect x="22" y="58" width="20" height="16" rx="2" fill="none" stroke="#111111" stroke-width="1.5"/>
+  <line x1="32" y1="58" x2="32" y2="74" stroke="#111111" stroke-width="1.5"/>
+  <rect class="nav-item" x="8" y="100" width="48" height="48" rx="8"/>
+  <circle cx="29" cy="121" r="7" fill="none" stroke="#111111" stroke-width="1.5"/>
+  <line x1="34" y1="126" x2="40" y2="132" stroke="#111111" stroke-width="1.5"/>
+  <rect class="nav-item" x="8" y="156" width="48" height="48" rx="8"/>
+  <line x1="24" y1="184" x2="40" y2="184" stroke="#111111" stroke-width="1.5"/>
+  <line x1="32" y1="168" x2="32" y2="186" stroke="#111111" stroke-width="1.5"/>
+  <rect class="nav-item" x="8" y="212" width="48" height="48" rx="8"/>
+  <rect x="24" y="230" width="16" height="12" rx="2" fill="none" stroke="#111111" stroke-width="1.5"/>
+  <path d="M26,230 Q32,222 38,230" fill="none" stroke="#111111" stroke-width="1.5"/>
+  <line x1="10" y1="274" x2="54" y2="274" stroke="#bbbbbb" stroke-width="1"/>
+  <rect class="nav-item" x="8" y="282" width="48" height="48" rx="8"/>
+  <circle cx="32" cy="306" r="7" fill="none" stroke="#111111" stroke-width="1.5"/>
+  <line x1="32" y1="295" x2="32" y2="299" stroke="#111111" stroke-width="1.2"/>
+  <line x1="32" y1="313" x2="32" y2="317" stroke="#111111" stroke-width="1.2"/>
+  <line x1="21" y1="306" x2="25" y2="306" stroke="#111111" stroke-width="1.2"/>
+  <line x1="39" y1="306" x2="43" y2="306" stroke="#111111" stroke-width="1.2"/>
+  <rect class="nav-item" x="8" y="338" width="48" height="48" rx="8"/>
+  <text class="hint" x="32" y="368" text-anchor="middle" font-size="13">?</text>
+  <line x1="10" y1="490" x2="54" y2="490" stroke="#bbbbbb" stroke-width="1"/>
+  <rect class="toolbar" x="8" y="502" width="48" height="56" rx="6"/>
+  <text class="hint" x="32" y="536" text-anchor="middle">i</text>
+  <text class="hint" x="32" y="552" text-anchor="middle" font-size="9">...</text>
+  <!-- Top bar -->
+  <rect class="topbar" x="64" y="0" width="896" height="52"/>
+  <rect class="toolbar" x="80" y="12" width="400" height="28" rx="4"/>
+  <text class="hint" x="92" y="30">Quick search...</text>
+  <text class="hint" x="944" y="32" text-anchor="end">Account</text>
+  <!-- Content -->
+  <rect class="content" x="64" y="52" width="896" height="588"/>
+  <text class="label" x="84" y="84" font-size="18" font-weight="600">Library</text>
+  <text class="hint" x="944" y="118" text-anchor="end">Sort | Filters | View: List (Grid deferred)</text>
+  <rect class="toolbar" x="84" y="148" width="856" height="32"/>
+  <text class="label" x="96" y="168">Title</text>
+  <text class="label" x="520" y="168">Tags</text>
+  <text class="label" x="800" y="168">Updated</text>
+  <line class="row" x1="84" y1="196" x2="940" y2="196"/>
+  <line class="row" x1="84" y1="228" x2="940" y2="228"/>
+  <line class="row" x1="84" y1="260" x2="940" y2="260"/>
+  <line class="row" x1="84" y1="292" x2="940" y2="292"/>
+  <rect x="96" y="204" width="240" height="8" fill="#cccccc" rx="2"/>
+  <rect x="520" y="204" width="88" height="8" fill="#aaaaaa" rx="2"/>
+  <rect x="800" y="204" width="80" height="8" fill="#aaaaaa" rx="2"/>
+  <rect x="96" y="236" width="196" height="8" fill="#cccccc" rx="2"/>
+  <rect x="520" y="236" width="78" height="8" fill="#aaaaaa" rx="2"/>
+  <rect x="800" y="236" width="72" height="8" fill="#aaaaaa" rx="2"/>
+  <rect x="96" y="268" width="252" height="8" fill="#cccccc" rx="2"/>
+  <rect x="520" y="268" width="96" height="8" fill="#aaaaaa" rx="2"/>
+  <rect x="800" y="268" width="84" height="8" fill="#aaaaaa" rx="2"/>
+  <text class="wire-caption" x="480" y="612" text-anchor="middle">Wireframe S-03b - collapsed sidebar (~64px icon rail) with simple icon glyph placeholders.</text>
+  <text class="wire-caption" x="480" y="628" text-anchor="middle">A shown only when Admin permitted; i = selection summary (full biblio when sidebar expanded).</text>
+</svg>

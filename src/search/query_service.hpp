@@ -18,6 +18,7 @@ struct QueryResult {
     QueryStatus status = QueryStatus::ok;
     std::vector<mylib::domain::CatalogRecord> matches;
     std::string message;
+    std::string diagnostics;
 };
 
 enum class RebuildState {

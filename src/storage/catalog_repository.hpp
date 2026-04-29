@@ -14,6 +14,7 @@ enum class SaveStatus {
     already_exists,
     not_found,
     version_conflict,
+    io_error,
 };
 
 struct SaveResult {
@@ -24,6 +25,7 @@ struct SaveResult {
 enum class DeleteStatus {
     deleted,
     not_found,
+    io_error,
 };
 
 struct DeleteResult {

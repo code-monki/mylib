@@ -20,13 +20,15 @@ It does not replace Detailed Design (interfaces, schemas, algorithms).
 **Author(s):** Charles McKnight (maintainers may revise via change control)  
 **Status:** Approved  
 **Requirement Version Reference:** SRS v0.9 **Approved** ([`srs.md`](srs.md "Srs"))  
-**RTM Version Reference:** 0.1 ([`rtm.md`](rtm.md "Rtm") draft)  
+**RTM Version Reference:** 0.1 **Approved** ([`rtm.md`](rtm.md "Rtm"); approved 2026-04-28)  
+**DD Version Reference:** 0.1 **Approved** ([`dd.md`](dd.md "Dd"); approved 2026-04-28)  
+**Test Plan Version Reference:** 0.1 **Approved** ([`test-plan.md`](test-plan.md "Test Plan"); approved 2026-04-28)  
 
 **Rendered viewing (e.g. GitHub):** Links to the SRS use **relative** URLs of the form [`srs.md#heading-anchor`](./srs.md#fr-023--ocr-for-searchability "FR-023 OCR for Searchability") with a **quoted title** for hover text. Fragment slugs match **GitHub’s heading anchor algorithm** (same as in-repo links inside [`srs.md`](srs.md "Srs")). From the repository root, the same targets are `system-documentation/system-artifacts/srs.md#…`.
 
 **Decision log:** Significant architecture, design, framework/library, packaging, orchestration, and explicit deferral decisions are recorded in [`_process/discussion-log.md`](_process/discussion-log.md "Discussion Log") using the decision-log structure.
 
-**Diagram rendering policy:** Mermaid source for HLA diagrams is maintained in [`img-src/`](img-src/ "Mermaid Sources") and rendered to SVG files in [`img/`](img/ "Diagram Assets") for broad Markdown viewer compatibility. Vertical orientation (`flowchart TB` with `direction TB`) is the default unless a documented exception is needed.
+**Diagram rendering policy:** Mermaid source for HLA diagrams is maintained in [`img-src/`](img-src/ "Mermaid Sources") and rendered to SVG files in [`img/`](img/ "Diagram Assets") for broad Markdown viewer compatibility. Vertical orientation (`flowchart TB` with `direction TB`) is the default unless a documented exception is needed. Complex diagrams MAY be hand-authored/exported from external tools (including Omnigraffle) when readability or renderer compatibility requires manual layout control; those diagrams SHALL be treated as authoritative and protected from automated overwrite.
 
 ---
 
@@ -39,7 +41,7 @@ Confirm:
 - NFRs defined and measurable? **Partial** — quantitative test binding deferred to **Test Plan** / DD; **accepted** at Architecture entry per SRS [**§16**](./srs.md#16-phase-gate-declaration "16. Phase Gate Declaration")  
 - Advancement to Architecture authorized? **Yes** — **2026-04-06**  
 
-If any mandatory “No” appears for a phase, architectural definition for that phase is prohibited. This document is a **draft** until [**§15**](./hla.md#15-phase-gate-declaration "15. Phase Gate Declaration") and [**§Approval**](./hla.md#approval "Approval") are satisfied.
+If any mandatory “No” appears for a phase, architectural definition for that phase is prohibited. This document is **Approved**; see [**§15**](./hla.md#15-phase-gate-declaration "15. Phase Gate Declaration") and [**§Approval**](./hla.md#approval "Approval").
 
 ---
 
@@ -83,7 +85,7 @@ Unjustified components are prohibited; **[§13](./hla.md#13-traceability-summary
 
 ![Hla System Context](img/hla-system-context.svg)
 
-Source: [`img-src/hla-system-context.mmd`](img-src/hla-system-context.mmd "Hla System Context Mermaid Source")
+Source: [`img/hla-system-context.svg`](img/hla-system-context.svg "Hla System Context Hand Authored Svg")
 
 ## 3.2 System Scope Boundaries
 
@@ -127,9 +129,17 @@ Silent blending of probabilistic outputs with deterministic catalog invariants i
 
 **Dependency direction:** Shell → Client-Access → Server-Host → domain services. **Security** checks apply at **API boundary** (and internally for defense in depth—DD). **No** “framework-first” mandate: **UI toolkit** and **language/runtime** are **DD** choices compatible with NFRs.
 
-![Hla Component Organization](img/hla-component-organization.svg)
+![Hla Component Organization Entry](img/hla-component-organization-entry.svg)
+![Hla Component Organization Domain](img/hla-component-organization-domain.svg)
+![Hla Component Organization Cross Cutting](img/hla-component-organization-cross-cutting.svg)
 
-Source: [`img-src/hla-component-organization.mmd`](img-src/hla-component-organization.mmd "Hla Component Organization Mermaid Source")
+Interim readability note: these split component-organization views are temporary hand-authored structural references. Planned Omnigraffle-routed replacements MAY supersede them without changing architectural intent.
+
+Sources:
+- [`img/hla-component-organization-entry.svg`](img/hla-component-organization-entry.svg "Hla Component Organization Entry")
+- [`img/hla-component-organization-domain.svg`](img/hla-component-organization-domain.svg "Hla Component Organization Domain")
+- [`img/hla-component-organization-cross-cutting.svg`](img/hla-component-organization-cross-cutting.svg "Hla Component Organization Cross Cutting")
+- decomposition reference: [`img-src/hla-component-organization.mmd`](img-src/hla-component-organization.mmd "Hla Component Organization Mermaid Source")
 
 **Alternatives considered (HLA level)**
 
@@ -175,9 +185,17 @@ Each component **maps** to at least one SRS requirement; **[`rtm.md`](rtm.md "Rt
 
 Hidden channels (undocumented file or network use) are prohibited at the architectural intent level; DD enumerates allowed paths.
 
-![Hla Data Architecture](img/hla-data-architecture.svg)
+![Hla Data Architecture Access](img/hla-data-architecture-user-access.svg)
+![Hla Data Architecture Server Data](img/hla-data-architecture-server-data.svg)
+![Hla Data Architecture Audit Reader](img/hla-data-architecture-audit-reader.svg)
 
-Source: [`img-src/hla-data-architecture.mmd`](img-src/hla-data-architecture.mmd "Hla Data Architecture Mermaid Source")
+Interim readability note: these split data-architecture views are temporary hand-authored structural references. Planned Omnigraffle-routed replacements MAY supersede them without changing architectural intent.
+
+Sources:
+- [`img/hla-data-architecture-user-access.svg`](img/hla-data-architecture-user-access.svg "Hla Data Architecture User Access")
+- [`img/hla-data-architecture-server-data.svg`](img/hla-data-architecture-server-data.svg "Hla Data Architecture Server Data")
+- [`img/hla-data-architecture-audit-reader.svg`](img/hla-data-architecture-audit-reader.svg "Hla Data Architecture Audit Reader")
+- decomposition reference: [`img-src/hla-data-architecture.mmd`](img-src/hla-data-architecture.mmd "Hla Data Architecture Mermaid Source")
 
 ---
 
@@ -263,7 +281,7 @@ The following items are **not HLA approval blockers** because the architectural 
 
 | Topic                                                                               | DD owner / component | HLA boundary already established | DD decision required |
 | ----------------------------------------------------------------------------------- | -------------------- | -------------------------------- | -------------------- |
-| Exact **UI stack** (e.g. Qt vs Electron vs native)                                  | **HLA-SHELL**        | Desktop shell owns UI, accessibility, theme, local preferences, and admin surfaces | Select stack and prove fit for [FR-024](./srs.md#fr-024--shell-accessibility "FR-024 Shell Accessibility"), [FR-022](./srs.md#fr-022--application-theme "FR-022 Application Theme"), cross-platform packaging |
+| Exact **UI stack** (e.g. Qt vs Electron vs native)                                  | **HLA-SHELL**        | Desktop shell owns UI, accessibility, theme, local preferences, and admin surfaces | **Resolved in DD:** Qt Quick/QML shell with C++ bridge layer; fallback/revisit criteria captured in [`dd.md`](dd.md "Dd") §4.1 and DD-carried decisions |
 | **IPC** mechanism for solo (loopback HTTP vs OS IPC)                                | **HLA-CLIENT-ACCESS**, **HLA-SERVER-HOST** | Solo uses the same server-authoritative model with loopback or documented local IPC | Select IPC/protocol mechanics while preserving [FR-014](./srs.md#fr-014--solo-co-located-deployment "FR-014 Solo Co-Located Deployment") and [NFR-009](./srs.md#nfr-009--transport-security-remote-access "NFR-009 Transport Security (Remote Access)") exception clarity |
 | **Notification** channels for [FR-011](./srs.md#fr-011--missing-file-detection-and-relink "FR-011 Missing File Detection and Relink") multi-user (in-app only vs optional email) | **HLA-SHELL**, **HLA-STORAGE**, **HLA-OBSLOG** | Missing-file detection and remediation are server-mediated, with admin notification/degraded access per SRS | Define notification channels, event payloads, and user/admin UX |
 | **Online vs maintenance** index rebuild default                                     | **HLA-SEARCH**       | Search owns rebuildable index artifacts; catalog remains authoritative | Define rebuild mode, locking/concurrency behavior, operator controls, and failure semantics for [FR-039](./srs.md#fr-039--full-text-index-administration "FR-039 Full-Text Index Administration") |

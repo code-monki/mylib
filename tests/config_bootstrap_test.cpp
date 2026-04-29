@@ -35,31 +35,43 @@ void test_defaults() {
     clear_env("MYLIB_ENV");
     clear_env("MYLIB_API_PORT");
     clear_env("MYLIB_ENABLE_STRUCTURED_LOGS");
+    clear_env("MYLIB_REPOSITORY_BACKEND");
+    clear_env("MYLIB_REPOSITORY_FILE");
 
     const auto cfg = mylib::config::load_config_from_env();
     expect(cfg.environment == "dev", "default environment should be dev");
     expect(cfg.api_port == 8080, "default port should be 8080");
     expect(cfg.enable_structured_logs, "default structured logs should be enabled");
+    expect(cfg.repository_backend == "in_memory", "default repository backend should be in_memory");
+    expect(cfg.repository_file.empty(), "default in-memory backend should not set repository file");
 }
 
 void test_overrides() {
     set_env("MYLIB_ENV", "test");
     set_env("MYLIB_API_PORT", "9000");
     set_env("MYLIB_ENABLE_STRUCTURED_LOGS", "false");
+    set_env("MYLIB_REPOSITORY_BACKEND", "file");
+    set_env("MYLIB_REPOSITORY_FILE", "/tmp/mylib-test.db");
 
     const auto cfg = mylib::config::load_config_from_env();
     expect(cfg.environment == "test", "environment should honor override");
     expect(cfg.api_port == 9000, "port should honor numeric override");
     expect(!cfg.enable_structured_logs, "structured log flag should parse false");
+    expect(cfg.repository_backend == "file", "repository backend should honor file override");
+    expect(cfg.repository_file == "/tmp/mylib-test.db", "repository file should honor override");
 }
 
 void test_invalid_fallbacks() {
     set_env("MYLIB_API_PORT", "not-a-number");
     set_env("MYLIB_ENABLE_STRUCTURED_LOGS", "not-a-bool");
+    set_env("MYLIB_REPOSITORY_BACKEND", "bogus");
+    set_env("MYLIB_REPOSITORY_FILE", "");
 
     const auto cfg = mylib::config::load_config_from_env();
     expect(cfg.api_port == 8080, "invalid port should fall back to default");
     expect(cfg.enable_structured_logs, "invalid bool should fall back to default");
+    expect(cfg.repository_backend == "in_memory", "invalid backend should fall back to in_memory");
+    expect(cfg.repository_file.empty(), "invalid backend fallback should clear repository file");
 }
 
 }  // namespace

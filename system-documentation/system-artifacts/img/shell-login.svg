@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="880" height="560" viewBox="0 0 880 560">
+  <title>MyLib Shell - Login (S-01) wireframe</title>
+  <defs>
+    <style><![CDATA[
+      .bg { fill: #f5f5f5; }
+      .panel { fill: #ffffff; stroke: #333333; stroke-width: 2; }
+      .chrome { fill: #e8e8e8; stroke: #333333; stroke-width: 1; }
+      .label { font-family: system-ui, -apple-system, sans-serif; font-size: 13px; fill: #222222; }
+      .title { font-family: system-ui, -apple-system, sans-serif; font-size: 15px; font-weight: 600; fill: #111111; }
+      .hint { font-family: system-ui, -apple-system, sans-serif; font-size: 11px; fill: #666666; }
+      .field { fill: #ffffff; stroke: #888888; stroke-width: 1.5; }
+      .btn { fill: #333333; }
+      .btn-text { font-family: system-ui, -apple-system, sans-serif; font-size: 13px; fill: #ffffff; font-weight: 600; }
+      .wire-caption { font-family: system-ui, -apple-system, sans-serif; font-size: 11px; fill: #444444; font-style: italic; }
+    ]]></style>
+  </defs>
+  <rect class="bg" width="880" height="560" rx="6"/>
+  <!-- Window chrome -->
+  <rect class="chrome" x="40" y="32" width="800" height="28" rx="4"/>
+  <text class="hint" x="52" y="50">MyLib</text>
+  <!-- Main card -->
+  <rect class="panel" x="260" y="120" width="360" height="360" rx="8"/>
+  <text class="title" x="440" y="168" text-anchor="middle">Sign in</text>
+  <text class="hint" x="440" y="192" text-anchor="middle">Connect to your library server</text>
+  <!-- Server profile -->
+  <text class="label" x="300" y="236">Server profile</text>
+  <rect class="field" x="300" y="244" width="280" height="36" rx="4"/>
+  <text class="hint" x="312" y="266">Default (loopback) ...</text>
+  <!-- Username -->
+  <text class="label" x="300" y="308">Username</text>
+  <rect class="field" x="300" y="316" width="280" height="36" rx="4"/>
+  <!-- Password -->
+  <text class="label" x="300" y="380">Password</text>
+  <rect class="field" x="300" y="388" width="280" height="36" rx="4"/>
+  <!-- Submit -->
+  <rect class="btn" x="300" y="452" width="280" height="40" rx="6"/>
+  <text class="btn-text" x="440" y="477" text-anchor="middle">Sign in</text>
+  <text class="hint" x="440" y="518" text-anchor="middle">Non-enumerating errors on failure; throttle countdown when applicable</text>
+  <text class="wire-caption" x="440" y="548" text-anchor="middle">Wireframe S-01 - not visual design</text>
+</svg>

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="640" viewBox="0 0 960 640">
+  <title>MyLib Shell - Search (S-05) wireframe</title>
+  <defs>
+    <style><![CDATA[
+      .bg { fill: #f0f0f0; }
+      .sidebar { fill: #e4e4e4; stroke: #333333; stroke-width: 1.5; }
+      .topbar { fill: #ffffff; stroke: #333333; stroke-width: 1.5; }
+      .content { fill: #ffffff; stroke: #333333; stroke-width: 1.5; }
+      .nav-item { fill: none; stroke: #888888; stroke-width: 1; }
+      .nav-sel { fill: #d8d8d8; stroke: #333333; stroke-width: 1.5; }
+      .toolbar { fill: #fafafa; stroke: #bbbbbb; stroke-width: 1; }
+      .label { font-family: system-ui, -apple-system, sans-serif; font-size: 12px; fill: #222222; }
+      .nav-text { font-family: system-ui, -apple-system, sans-serif; font-size: 13px; fill: #111111; }
+      .hint { font-family: system-ui, -apple-system, sans-serif; font-size: 11px; fill: #666666; }
+      .query { fill: #fafafa; stroke: #333333; stroke-width: 1.5; }
+      .badge { fill: #eeeeee; stroke: #888888; stroke-width: 1; }
+      .snippet { fill: #f5f5f5; stroke: #cccccc; stroke-width: 1; }
+      .banner { fill: #fff8e6; stroke: #cc9900; stroke-width: 1; }
+      .wire-caption { font-family: system-ui, -apple-system, sans-serif; font-size: 11px; fill: #444444; font-style: italic; }
+    ]]></style>
+  </defs>
+  <rect class="bg" width="960" height="640"/>
+  <rect class="sidebar" x="0" y="0" width="272" height="640"/>
+  <text class="label" x="16" y="36" font-weight="600">MyLib</text>
+  <rect class="nav-item" x="8" y="56" width="256" height="40" rx="6"/>
+  <text class="nav-text" x="24" y="80">Library</text>
+  <rect class="nav-sel" x="8" y="104" width="256" height="40" rx="6"/>
+  <text class="nav-text" x="24" y="128">Search</text>
+  <rect class="nav-item" x="8" y="152" width="256" height="40" rx="6"/>
+  <text class="nav-text" x="24" y="176">Import</text>
+  <rect class="nav-item" x="8" y="200" width="256" height="40" rx="6"/>
+  <text class="nav-text" x="24" y="224">Admin</text>
+  <text class="hint" x="24" y="238">(visible to admins only)</text>
+  <line x1="8" y1="260" x2="264" y2="260" stroke="#bbbbbb"/>
+  <rect class="nav-item" x="8" y="272" width="256" height="40" rx="6"/>
+  <text class="nav-text" x="24" y="296">Settings</text>
+  <rect class="nav-item" x="8" y="320" width="256" height="40" rx="6"/>
+  <text class="nav-text" x="24" y="344">Help</text>
+  <rect class="topbar" x="272" y="0" width="688" height="52"/>
+  <rect class="toolbar" x="288" y="12" width="360" height="28" rx="4"/>
+  <text class="hint" x="300" y="30">tag:history AND roman ...</text>
+  <text class="hint" x="820" y="32" text-anchor="end">Account</text>
+  <rect class="content" x="272" y="52" width="688" height="588"/>
+  <rect class="banner" x="292" y="68" width="648" height="36" rx="4"/>
+  <text class="hint" x="304" y="90">Search may be incomplete - index rebuilding (degraded example)</text>
+  <text class="label" x="292" y="132" font-size="18" font-weight="600">Search</text>
+  <rect class="query" x="292" y="144" width="520" height="40" rx="6"/>
+  <text class="hint" x="308" y="168">Full query ... Enter</text>
+  <text class="hint" x="820" y="168" text-anchor="end">Filters</text>
+  <text class="label" x="292" y="228" font-weight="600">The History of Rome ...</text>
+  <rect class="badge" x="520" y="210" width="88" height="22" rx="4"/>
+  <text class="hint" x="528" y="225">fulltext</text>
+  <rect class="snippet" x="292" y="238" width="648" height="48" rx="4"/>
+  <text class="hint" x="304" y="258">snippet, hit context ...</text>
+  <text class="hint" x="292" y="308" font-weight="600">Open</text>
+  <text class="label" x="292" y="352" font-weight="600">Another record</text>
+  <rect class="badge" x="460" y="334" width="96" height="22" rx="4"/>
+  <text class="hint" x="468" y="349">ocr_derived</text>
+  <rect class="snippet" x="292" y="362" width="648" height="40" rx="4"/>
+  <text class="hint" x="304" y="384">OCR-derived text - badge warns user</text>
+  <text class="wire-caption" x="616" y="630" text-anchor="middle">Wireframe S-05 - query + results + badges + banner</text>
+</svg>

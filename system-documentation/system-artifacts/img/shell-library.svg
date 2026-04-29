@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="640" viewBox="0 0 960 640">
+  <title>MyLib Shell - Library browse (S-03) wireframe</title>
+  <defs>
+    <style><![CDATA[
+      .bg { fill: #f0f0f0; }
+      .sidebar { fill: #e4e4e4; stroke: #333333; stroke-width: 1.5; }
+      .topbar { fill: #ffffff; stroke: #333333; stroke-width: 1.5; }
+      .content { fill: #ffffff; stroke: #333333; stroke-width: 1.5; }
+      .nav-item { fill: none; stroke: #888888; stroke-width: 1; }
+      .nav-sel { fill: #d8d8d8; stroke: #333333; stroke-width: 1.5; }
+      .label { font-family: system-ui, -apple-system, sans-serif; font-size: 12px; fill: #222222; }
+      .nav-text { font-family: system-ui, -apple-system, sans-serif; font-size: 13px; fill: #111111; }
+      .hint { font-family: system-ui, -apple-system, sans-serif; font-size: 11px; fill: #666666; }
+      .toolbar { fill: #fafafa; stroke: #bbbbbb; stroke-width: 1; }
+      .row { fill: none; stroke: #cccccc; stroke-width: 1; }
+      .wire-caption { font-family: system-ui, -apple-system, sans-serif; font-size: 11px; fill: #444444; font-style: italic; }
+    ]]></style>
+  </defs>
+  <rect class="bg" width="960" height="640"/>
+  <!-- Sidebar 236px (narrower default) -->
+  <rect class="sidebar" x="0" y="0" width="236" height="640"/>
+  <text class="label" x="16" y="36" font-weight="600">MyLib</text>
+  <rect class="toolbar" x="206" y="10" width="20" height="20" rx="4"/>
+  <text class="hint" x="216" y="24" text-anchor="middle">|&lt;</text>
+  <rect class="nav-sel" x="8" y="56" width="220" height="40" rx="6"/>
+  <text class="nav-text" x="24" y="80">Library</text>
+  <rect class="nav-item" x="8" y="104" width="220" height="40" rx="6"/>
+  <text class="nav-text" x="24" y="128">Search</text>
+  <rect class="nav-item" x="8" y="152" width="220" height="40" rx="6"/>
+  <text class="nav-text" x="24" y="176">Import</text>
+  <rect class="nav-item" x="8" y="200" width="220" height="40" rx="6"/>
+  <text class="nav-text" x="24" y="224">Admin</text>
+  <text class="hint" x="24" y="238">(visible to admins only)</text>
+  <line x1="8" y1="260" x2="228" y2="260" stroke="#bbbbbb" stroke-width="1"/>
+  <rect class="nav-item" x="8" y="272" width="220" height="40" rx="6"/>
+  <text class="nav-text" x="24" y="296">Settings</text>
+  <rect class="nav-item" x="8" y="320" width="220" height="40" rx="6"/>
+  <text class="nav-text" x="24" y="344">Help</text>
+  <!-- Optional bibliographic context panel -->
+  <line x1="8" y1="500" x2="228" y2="500" stroke="#bbbbbb" stroke-width="1"/>
+  <text class="label" x="16" y="522">Selected item</text>
+  <rect class="toolbar" x="8" y="532" width="220" height="92" rx="6"/>
+  <text class="hint" x="16" y="550">Author Last, First (1901)</text>
+  <text class="hint" x="16" y="566">Title of Book. Publisher.</text>
+  <text class="hint" x="16" y="582">Call no / tags / edition ...</text>
+  <!-- Top bar -->
+  <rect class="topbar" x="236" y="0" width="724" height="52"/>
+  <rect class="toolbar" x="252" y="12" width="360" height="28" rx="4"/>
+  <text class="hint" x="264" y="30">Quick search...</text>
+  <text class="hint" x="820" y="32" text-anchor="end">Account</text>
+  <!-- Content -->
+  <rect class="content" x="236" y="52" width="724" height="588"/>
+  <text class="label" x="256" y="84" font-size="18" font-weight="600">Library</text>
+  <text class="hint" x="820" y="118" text-anchor="end">Sort | Filters | View: List (Grid deferred)</text>
+  <!-- Table header -->
+  <rect class="toolbar" x="256" y="148" width="684" height="32"/>
+  <text class="label" x="268" y="168">Title</text>
+  <text class="label" x="500" y="168">Tags</text>
+  <text class="label" x="760" y="168">Updated</text>
+  <!-- Rows -->
+  <line class="row" x1="256" y1="196" x2="940" y2="196"/>
+  <line class="row" x1="256" y1="228" x2="940" y2="228"/>
+  <line class="row" x1="256" y1="260" x2="940" y2="260"/>
+  <line class="row" x1="256" y1="292" x2="940" y2="292"/>
+  <!-- Rows 1-3: same columns Title, Tags, Updated; gray bars = placeholder text lines -->
+  <rect x="268" y="204" width="220" height="8" fill="#cccccc" rx="2"/>
+  <rect x="500" y="204" width="84" height="8" fill="#aaaaaa" rx="2"/>
+  <rect x="760" y="204" width="76" height="8" fill="#aaaaaa" rx="2"/>
+  <rect x="268" y="236" width="180" height="8" fill="#cccccc" rx="2"/>
+  <rect x="500" y="236" width="76" height="8" fill="#aaaaaa" rx="2"/>
+  <rect x="760" y="236" width="70" height="8" fill="#aaaaaa" rx="2"/>
+  <rect x="268" y="268" width="236" height="8" fill="#cccccc" rx="2"/>
+  <rect x="500" y="268" width="92" height="8" fill="#aaaaaa" rx="2"/>
+  <rect x="760" y="268" width="80" height="8" fill="#aaaaaa" rx="2"/>
+  <text class="wire-caption" x="618" y="630" text-anchor="middle">Wireframe S-03 - narrower sidebar, collapse affordance, optional bibliographic panel</text>
+</svg>

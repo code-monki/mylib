@@ -2,7 +2,9 @@
 
 #include <algorithm>
 #include <cctype>
+#include <sstream>
 #include <string>
+#include <unordered_set>
 
 namespace mylib::search {
 
@@ -95,60 +97,121 @@ bool evaluate_rpn(const std::vector<std::string>& rpn, const std::string& haysta
     return stack.back();
 }
 
+std::vector<std::string> extract_terms(const std::vector<std::string>& tokens) {
+    std::vector<std::string> terms;
+    std::unordered_set<std::string> seen;
+    for (const auto& token : tokens) {
+        if (token == "(" || token == ")") continue;
+        const auto lowered = to_lower_copy(token);
+        if (is_operator(lowered)) continue;
+        if (seen.insert(lowered).second) {
+            terms.push_back(lowered);
+        }
+    }
+    return terms;
+}
+
+struct ScoredRecord {
+    mylib::domain::CatalogRecord record;
+    int score = 0;
+};
+
+int count_matches(const std::string& haystack, const std::vector<std::string>& terms) {
+    int hits = 0;
+    for (const auto& term : terms) {
+        if (haystack.find(term) != std::string::npos) ++hits;
+    }
+    return hits;
+}
+
+int score_record(const mylib::domain::CatalogRecord& record, const std::vector<std::string>& terms) {
+    const auto lower_title = to_lower_copy(record.title);
+    std::string lower_tags;
+    for (const auto& tag : record.tags) {
+        if (!lower_tags.empty()) lower_tags.push_back(' ');
+        lower_tags.append(to_lower_copy(tag));
+    }
+
+    const int title_hits = count_matches(lower_title, terms);
+    const int tag_hits = count_matches(lower_tags, terms);
+    return (title_hits * 3) + (tag_hits * 2);
+}
+
+std::string build_diagnostics(
+    const std::vector<std::string>& terms,
+    int title_boost,
+    int tag_boost,
+    std::size_t total_matches
+) {
+    std::ostringstream oss;
+    oss << "ranking=title*" << title_boost
+        << "+tags*" << tag_boost
+        << "; terms=" << terms.size()
+        << "; matches=" << total_matches;
+    return oss.str();
+}
+
+void stable_rank(std::vector<ScoredRecord>* records) {
+    std::stable_sort(records->begin(), records->end(), [](const ScoredRecord& lhs, const ScoredRecord& rhs) {
+        if (lhs.score != rhs.score) return lhs.score > rhs.score;
+        const auto lhs_title = to_lower_copy(lhs.record.title);
+        const auto rhs_title = to_lower_copy(rhs.record.title);
+        if (lhs_title != rhs_title) return lhs_title < rhs_title;
+        return lhs.record.id < rhs.record.id;
+    });
+}
+
 std::optional<std::vector<std::string>> to_rpn(const std::vector<std::string>& tokens) {
-    auto pop_until_left_paren = [](std::vector<std::string>& ops, std::vector<std::string>& output) -> bool {
+    std::vector<std::string> output;
+    std::vector<std::string> ops;
+
+    const auto pop_until_left_paren = [&](void) -> bool {
         while (!ops.empty()) {
             const auto op = ops.back();
             ops.pop_back();
-            if (op == "(") {
-                return true;
-            }
+            if (op == "(") return true;
             output.push_back(op);
         }
         return false;
     };
 
-    auto drain_ops_by_precedence = [](
-                                      std::vector<std::string>& ops,
-                                      std::vector<std::string>& output,
-                                      const std::string& lowered
-                                  ) {
+    const auto push_operator = [&](const std::string& lowered) {
         while (!ops.empty() && is_operator(ops.back()) &&
                precedence(ops.back()) >= precedence(lowered)) {
             output.push_back(ops.back());
             ops.pop_back();
         }
+        ops.push_back(lowered);
     };
 
-    auto flush_remaining_ops = [](std::vector<std::string>& ops, std::vector<std::string>& output) -> bool {
-        while (!ops.empty()) {
-            if (ops.back() == "(" || ops.back() == ")") {
-                return false;
-            }
-            output.push_back(ops.back());
-            ops.pop_back();
+    const auto push_token = [&](const std::string& token) -> bool {
+        if (token == "(") {
+            ops.push_back(token);
+            return true;
         }
+        if (token == ")") {
+            return pop_until_left_paren();
+        }
+
+        const auto lowered = to_lower_copy(token);
+        if (is_operator(lowered)) {
+            push_operator(lowered);
+            return true;
+        }
+
+        output.push_back(token);
         return true;
     };
 
-    std::vector<std::string> output;
-    std::vector<std::string> ops;
-
     for (const auto& token : tokens) {
-        const auto lowered = to_lower_copy(token);
-        if (token == "(") {
-            ops.push_back(token);
-        } else if (token == ")") {
-            if (!pop_until_left_paren(ops, output)) return std::nullopt;
-        } else if (is_operator(lowered)) {
-            drain_ops_by_precedence(ops, output, lowered);
-            ops.push_back(lowered);
-        } else {
-            output.push_back(token);
-        }
+        if (!push_token(token)) return std::nullopt;
     }
 
-    if (!flush_remaining_ops(ops, output)) return std::nullopt;
+    while (!ops.empty()) {
+        if (ops.back() == "(" || ops.back() == ")") return std::nullopt;
+        output.push_back(ops.back());
+        ops.pop_back();
+    }
     return output;
 }
 
@@ -160,16 +223,18 @@ QueryService::QueryService(mylib::storage::CatalogRepository& repository)
 QueryResult QueryService::execute(const std::string& query_text) const {
     const auto tokens = tokenize(query_text);
     if (tokens.empty()) {
-        return {QueryStatus::invalid_query, {}, "query is empty"};
+        return {QueryStatus::invalid_query, {}, "query is empty", "no tokens parsed"};
     }
 
     const auto rpn = to_rpn(tokens);
     if (!rpn.has_value()) {
-        return {QueryStatus::invalid_query, {}, "query has invalid grouping"};
+        return {QueryStatus::invalid_query, {}, "query has invalid grouping", "rpn conversion failed"};
     }
+    const auto terms = extract_terms(tokens);
 
     QueryResult result{};
     result.status = QueryStatus::ok;
+    std::vector<ScoredRecord> scored_matches;
 
     for (const auto& record : repository_.list_all()) {
         std::string searchable = to_lower_copy(record.title);
@@ -179,11 +244,18 @@ QueryResult QueryService::execute(const std::string& query_text) const {
 
         bool ok = false;
         if (evaluate_rpn(*rpn, searchable, &ok) && ok) {
-            result.matches.push_back(record);
+            scored_matches.push_back({record, score_record(record, terms)});
         } else if (!ok) {
-            return {QueryStatus::invalid_query, {}, "query expression is invalid"};
+            return {QueryStatus::invalid_query, {}, "query expression is invalid", "rpn evaluation failed"};
         }
     }
+
+    stable_rank(&scored_matches);
+    result.matches.reserve(scored_matches.size());
+    for (const auto& scored : scored_matches) {
+        result.matches.push_back(scored.record);
+    }
+    result.diagnostics = build_diagnostics(terms, 3, 2, result.matches.size());
     return result;
 }
 
